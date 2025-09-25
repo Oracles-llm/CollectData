@@ -6,8 +6,8 @@ from pathlib import Path
 from markitdown import MarkItDown
 
 BASE_DIR = Path(__file__).resolve().parent
-INPUT_DIR = BASE_DIR / "Inputs"
-OUTPUT_DIR = BASE_DIR / "outputs"
+INPUT_DIR = BASE_DIR / "RawInputs"
+OUTPUT_DIR = BASE_DIR / "RawOutputs"
 
 
 def convert_file(converter: MarkItDown, source_path: Path, output_dir: Path) -> None:

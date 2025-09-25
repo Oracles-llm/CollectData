@@ -1,0 +1,3 @@
+https://www.geeksforgeeks.org/system-design/singleton-design-pattern/
+https://www.geeksforgeeks.org/java/factory-method-design-pattern-in-java/
+https://www.markdownguide.org/extended-syntax/

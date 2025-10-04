@@ -28,19 +28,20 @@
 <meta property="og:image:height" content="200">
 <meta name="facebook-domain-verification" content="xo7t4ve2wn3ywfkjdvwbrk01pvdond" />
 
-<meta property="og:title" content="Factory Method Design Pattern in Java - GeeksforGeeks" />
+<meta property="og:title" content="Singleton Pattern in Python - A Complete Guide - GeeksforGeeks" />
 <meta name="description" content="Your All-in-One Learning Portal: GeeksforGeeks is a comprehensive educational platform that empowers learners across domains-spanning computer science and programming, school education, upskilling, commerce, software tools, competitive exams, and more." />
-<meta property="og:url" content="https://www.geeksforgeeks.org/java/factory-method-design-pattern-in-java/" />
-<meta name="keywords" content="Factory Method Design Pattern, creational design pattern, object creation, Java interface, abstract class, Concrete Products, Creator class, factory method, product handling, flexibility and maintainability, unit testing, object dependencies, polymorphism, dynamic binding, design mechanism" />
+<meta property="og:url" content="https://www.geeksforgeeks.org/python/singleton-pattern-in-python-a-complete-guide/" />
+<meta name="keywords" content="Data Structures, Algorithms, Python, Java, C, C++, JavaScript, Android Development, SQL, Data Science, Machine Learning, PHP, Web Development, System Design, Tutorial, Technical Blogs, Interview Experience, Interview Preparation, Programming, Competitive Programming, Jobs, Coding Contests, GATE CSE, HTML, CSS, React, NodeJS, Placement, Aptitude, Quiz, Computer Science, Programming Examples, GeeksforGeeks Courses, Puzzles, SSC, Banking, UPSC, Commerce, Finance, CBSE, School, k12, General Knowledge, News, Mathematics, Exams" />
 <meta property="og:site_name" content="GeeksforGeeks" />
-<meta property="og:image" content="https://media.geeksforgeeks.org/wp-content/uploads/20240117221304/factory-method.jpg" />
-<meta property="article:section" content="Java" />
+<meta property="og:image" content="http://www.geeksforgeeks.org/wp-content/uploads/gfg_200X200-1.png" />
+<meta property="article:section" content="Python" />
+<meta property="article:tag" content="python-design-pattern" />
 <meta property="og:type" content="article" />
 <meta property="og:locale" content="en_US" />
-<meta property="article:published_time" content="2020-04-28 11:24:47+00:00" />
-<meta property="article:modified_time" content="2025-07-12 18:50:23+00:00" />
-<meta property="og:updated_time" content="2025-07-12 18:50:23+00:00" />
-<meta property="og:image:secure_url" content="https://media.geeksforgeeks.org/wp-content/uploads/20240117221304/factory-method.jpg" />
+<meta property="article:published_time" content="2020-10-30 13:32:02+00:00" />
+<meta property="article:modified_time" content="2024-08-21 12:40:00+00:00" />
+<meta property="og:updated_time" content="2024-08-21 12:40:00+00:00" />
+<meta property="og:image:secure_url" content="http://www.geeksforgeeks.org/wp-content/uploads/gfg_200X200-1.png" />
 <meta property="og:description" content="Your All-in-One Learning Portal: GeeksforGeeks is a comprehensive educational platform that empowers learners across domains-spanning computer science and programming, school education, upskilling, commerce, software tools, competitive exams, and more." />
 <script src="https://cdnads.geeksforgeeks.org/synchronously_gfg_ads.min.js"></script>
 <script defer src="https://apis.google.com/js/platform.js"></script>
@@ -67,13 +68,16 @@
 <script defer src="https://cdnads.geeksforgeeks.org/prebid.js?ver=0.1"></script>
 
                     <script> 
-                        var video_api_response = JSON.parse("[{\"id\":9534,\"title\":\"Factory method design pattern in Java\",\"slug\":\"factory-method-design-pattern-in-java\",\"description\":\"<p><span style=\\\"background-color:rgb(255,255,255);color:rgb(0,0,0);\\\">Design patterns are solutions to commonly recurring problems. Design patterns are classified into <strong>Creational<\/strong>, <strong>Structural, and Behavioural types<\/strong>.&nbsp;<\/span><br><span style=\\\"background-color:rgb(255,255,255);color:rgb(0,0,0);\\\"><strong>Factory Method Design Pattern<\/strong> is a creational design pattern that means it deals with the creation of objects. It says that, define an interface for creating the object and let the subclasses decide which class to instantiate.&nbsp;<\/span><br><br><span style=\\\"background-color:rgb(255,255,255);color:rgb(0,0,0);\\\"><strong>Steps to implement Factory Method Design Pattern<\/strong><\/span><br><br><span style=\\\"background-color:rgb(255,255,255);color:rgb(0,0,0);\\\">1. Create an interface having an abstract method<\/span><br><span style=\\\"background-color:rgb(255,255,255);color:rgb(0,0,0);\\\">2. Create implementation classes<\/span><br><span style=\\\"background-color:rgb(255,255,255);color:rgb(0,0,0);\\\">3. Create a Factory that will decide which imp object will be created.<\/span><br><span style=\\\"background-color:rgb(255,255,255);color:rgb(0,0,0);\\\">4. Test in the main method<\/span><br><br><span style=\\\"background-color:rgb(255,255,255);color:rgb(0,0,0);\\\">So in this video, let's look at the detailed explanation of the <strong>Factory Method Design Pattern in Java.<\/strong><\/span><\/p>\",\"source\":\"https:\/\/videos.geeksforgeeks.org\/hls\/e90b8d3982fb47f2bc8821d1a864401fgfg-1234520240624133149.m3u8\",\"category\":[{\"term_id__id\":47,\"term_id__term_name\":\"Java\",\"term_id__term_type\":1,\"term_id__slug\":\"java\"},{\"term_id__id\":48,\"term_id__term_name\":\"Java\",\"term_id__term_type\":2,\"term_id__slug\":\"java-uk02eh\"},{\"term_id__id\":96,\"term_id__term_name\":\"Android\",\"term_id__term_type\":1,\"term_id__slug\":\"android\"}],\"meta\":{\"thumbnail\":\"https:\/\/media.geeksforgeeks.org\/geeksforgeeks\/FactorymethoddesignpatterninJava\/1223456720240624133302-small.png\",\"largeThumbnail\":\"https:\/\/media.geeksforgeeks.org\/geeksforgeeks\/FactorymethoddesignpatterninJava\/1223456720240624133302.jpg\",\"likes\":1,\"views\":42100,\"isFeatured\":0,\"isPremium\":0,\"isPublic\":0,\"format\":\"video\/mp4\",\"revision\":{}},\"time\":\"24\/06\/2024\",\"subtitle\":\"https:\/\/videos.geeksforgeeks.org\/subtitles\/1234520240624133149.vtt\",\"duration\":1915,\"course_link\":null,\"video_schema\":{\"@context\":\"https:\/\/schema.org\",\"@type\":\"VideoObject\",\"name\":\"Factory method design pattern in Java\",\"description\":\"Design patterns are solutions to commonly recurring problems. Design patterns are classified into Creational, Structural, and Behavioural types. nbspFactory Method Design Pattern is a creational design pattern that means it deals with the creation of objects. It says that, define an interface for creating the object and let the subclasses decide which class to instantiate. nbspSteps to implement Factory Method Design Pattern1. Create an interface having an abstract method2. Create implementation classes3. Create a Factory that will decide which imp object will be created.4. Test in the main methodSo in this video, lets look at the detailed explanation of the Factory Method Design Pattern in Java.\",\"thumbnailUrl\":[\"https:\/\/media.geeksforgeeks.org\/geeksforgeeks\/FactorymethoddesignpatterninJava\/1223456720240624133302.jpg\",\"https:\/\/media.geeksforgeeks.org\/geeksforgeeks\/FactorymethoddesignpatterninJava\/1223456720240624133302-seo.png\",\"https:\/\/media.geeksforgeeks.org\/geeksforgeeks\/FactorymethoddesignpatterninJava\/1223456720240624133302-small.png\"],\"uploadDate\":\"2024-06-24T13:33:33Z\",\"duration\":\"PT0H31M55S\",\"contentUrl\":\"https:\/\/www.geeksforgeeks.org\/videos\/factory-method-design-pattern-in-java\/\"}}]");
+                        var video_api_response = JSON.parse("[]");
+                    </script>
+                                    <script> 
+                        var quizData = JSON.parse("{}");
                     </script>
                 
 <!-- gfg tabs compatablity bundled js -->
   <script defer src="https://assets.geeksforgeeks.org/codetabs/v4/codetabs.js" environment="production" domain="gfg" no-scroll></script>
 
-<title>Factory Method Design Pattern in Java - GeeksforGeeks</title>
+<title>Singleton Pattern in Python - A Complete Guide - GeeksforGeeks</title>
 <link rel="profile" href="http://gmpg.org/xfn/11" />
 <link rel="pingback" href="" />
 <!--[if lt IE 9]>
@@ -82,8 +86,7 @@
 
 
 <!-- Video Schema for posts only -->
-            <script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoObject","name":"Factory method design pattern in Java","description":"Design patterns are solutions to commonly recurring problems. Design patterns are classified into Creational, Structural, and Behavioural types. nbspFactory Method Design Pattern is a creational design pattern that means it deals with the creation of objects. It says that, define an interface for creating the object and let the subclasses decide which class to instantiate. nbspSteps to implement Factory Method Design Pattern1. Create an interface having an abstract method2. Create implementation classes3. Create a Factory that will decide which imp object will be created.4. Test in the main methodSo in this video, lets look at the detailed explanation of the Factory Method Design Pattern in Java.","thumbnailUrl":["https://media.geeksforgeeks.org/geeksforgeeks/FactorymethoddesignpatterninJava/1223456720240624133302.jpg","https://media.geeksforgeeks.org/geeksforgeeks/FactorymethoddesignpatterninJava/1223456720240624133302-seo.png","https://media.geeksforgeeks.org/geeksforgeeks/FactorymethoddesignpatterninJava/1223456720240624133302-small.png"],"uploadDate":"2024-06-24T13:33:33Z","duration":"PT0H31M55S","contentUrl":"https://www.geeksforgeeks.org/videos/factory-method-design-pattern-in-java/"}</script>
-      
+
 <!-- adding article schema markup -->
 
 
@@ -94,16 +97,16 @@
   "@type": "Article",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "id": "https://www.geeksforgeeks.org/java/factory-method-design-pattern-in-java/"
+    "id": "https://www.geeksforgeeks.org/python/singleton-pattern-in-python-a-complete-guide/"
   },
-  "headline": "Factory Method Design Pattern in Java",
-  "datePublished": "2020-04-28 11:24:47",
-  "dateModified": "2025-07-12 06:50:23",
+  "headline": "Singleton Pattern in Python A Complete Guide",
+  "datePublished": "2020-10-30 01:32:02",
+  "dateModified": "2024-08-21 12:40:00",
   "image": {
     "@type": "ImageObject",
-    "url": "https://media.geeksforgeeks.org/wp-content/uploads/20240117221304/factory-method.jpg",
-    "width": "1000",
-    "height": "500"
+    "url": "https://media.geeksforgeeks.org/wp-content/uploads/20200827120450/output.PNG",
+    "width": "600",
+    "height": "433"
   },
   "author": {
     "@type": "Organization",
@@ -127,11 +130,15 @@
       "height": "40"
     }
   },
-  "description": "It is a creational design pattern that talks about the creation of an object. The factory design pattern says to define an interface ( A java interface or an abstract class) for creating the object and let the subclasses decide which class to instantiate. Table of ContentWhat is the Factory",
+  "description": "A Singleton pattern in python is a design pattern that allows you to create just one instance of a class, throughout the lifetime of a program. Using a singleton pattern has many benefits. A few of them are:To limit concurrent access to a shared resource.To create a global point of",
   "about": [
     {
       "@type": "Thing",
-      "name": "Java"
+      "name": "Python"
+    },
+    {
+      "@type": "Thing",
+      "name": "PythonDesignPattern"
     }
   ]
 }</script>
@@ -176,53 +183,53 @@
     {
       "@type": "ListItem",
       "position": 1,
-      "name": "Java",
+      "name": "Python",
       "item": {
         "@type": "Thing",
-        "@id": "https://www.geeksforgeeks.org/category/java/"
+        "@id": "https://www.geeksforgeeks.org/category/python/"
       }
     },
     {
       "@type": "ListItem",
       "position": 2,
-      "name": "factory-method-design-pattern-in-java",
+      "name": "singleton-pattern-in-python-a-complete-guide",
       "item": {
         "@type": "Thing",
-        "@id": "https://www.geeksforgeeks.org/java/factory-method-design-pattern-in-java/"
+        "@id": "https://www.geeksforgeeks.org/python/singleton-pattern-in-python-a-complete-guide/"
       }
     }
   ]
 }</script>
 <script>
     var arrPostCat = new Array();
-    var arrPostCatName="Java";
-            arrPostCat.push('2058');
-        var tIds = "2058";
-    var termsNames = "Java,ProgrammingLanguage";
-    var tIdsInclusiveParents = "2058,2056";
+    var arrPostCatName="Python";
+            arrPostCat.push('1789');
+        var tIds = "1789,4152";
+    var termsNames = "Python,pythondesignpattern,ProgrammingLanguage";
+    var tIdsInclusiveParents = "1789,4152,2056";
     var domain = 1;
     var arrPost = new Array();
-    var post_id = "404122";
+    var post_id = "506522";
     var post_type = "post";
     var post_slug = window.location.href;
-    var ip = "64.252.73.140";
-    var post_title = `Factory Method Design Pattern in Java`;
+    var ip = "64.252.71.246";
+    var post_title = `Singleton Pattern in Python - A Complete Guide`;
     var post_status = "publish";
     var practiceAPIURL="https://practiceapi.geeksforgeeks.org/";
     var practiceURL="https://practice.geeksforgeeks.org/";
-    var post_date = "2020-04-27 18:38:00";
+    var post_date = "2020-11-01 08:05:38";
     var commentSysUrl = "https://discuss.geeksforgeeks.org/commentEmbedV2.js";
     //var postAdApiUrlString = "";
     var link_on_code_run = '';
     var link_search_modal_top = '';
-    var country_code_cf = "MA";
+    var country_code_cf = "LK";
     
     
-        var postAdApiUrlString = '2056/2058/';
+        var postAdApiUrlString = '2056/1789/4152/';
 </script>
 
 
-<link rel="canonical" href="https://www.geeksforgeeks.org/java/factory-method-design-pattern-in-java/">
+<link rel="canonical" href="https://www.geeksforgeeks.org/python/singleton-pattern-in-python-a-complete-guide/">
 <link rel='dns-prefetch' href='//cdn.geeksforgeeks.org' />
 <link rel='dns-prefetch' href='//s.w.org' />
 		<script type="text/javascript">
@@ -387,7 +394,7 @@ enable_page_level_ads: true
 
 </head>
 
-<body class="post-template-default single single-post postid-404122 single-format-standard custom-background custom-background-white">
+<body class="post-template-default single single-post postid-506522 single-format-standard custom-background custom-background-white">
 
     <script>
         // Dark mode script
@@ -531,7 +538,7 @@ enable_page_level_ads: true
             </button>
             <!-- main content for leftbar -->
             <ul id="hslider">
-            <li><a href="https://www.geeksforgeeks.org/java/java/">Java Tutorial</a></li><li><a href="https://www.geeksforgeeks.org/advance-java/advanced-java/">Advanced Java</a></li><li><a href="https://www.geeksforgeeks.org/java/java-interview-questions/">Interview Questions</a></li><li><a href="https://www.geeksforgeeks.org/java/java-exercises/">Exercises</a></li><li><a href="https://www.geeksforgeeks.org/java/java-programming-examples/">Examples</a></li><li><a href="https://www.geeksforgeeks.org/java/java-quiz/">Quizzes</a></li><li><a href="https://www.geeksforgeeks.org/blogs/java-projects/">Projects</a></li><li><a href="https://www.geeksforgeeks.org/java/java-cheat-sheet/">Cheatsheet</a></li><li><a href="https://www.geeksforgeeks.org/dsa/dsa-in-java/">DSA in Java</a></li>            </ul>
+            <li><a href="https://www.geeksforgeeks.org/python/python-programming-language-tutorial/">Python Tutorial</a></li><li><a href="https://www.geeksforgeeks.org/python/python-interview-questions/">Interview Questions</a></li><li><a href="https://www.geeksforgeeks.org/python/python-programming-examples/">Examples</a></li><li><a href="https://www.geeksforgeeks.org/python/python-quizzes/">Quizzes</a></li><li><a href="https://www.geeksforgeeks.org/python/python-projects-beginner-to-advanced/">Projects</a></li><li><a href="https://www.geeksforgeeks.org/data-science/data-science-with-python-tutorial/">Data Science</a></li><li><a href="https://www.geeksforgeeks.org/python/numpy-tutorial/">NumPy</a></li><li><a href="https://www.geeksforgeeks.org/pandas/pandas-tutorial/">Pandas</a></li><li><a href="https://www.geeksforgeeks.org/machine-learning/machine-learning-with-python/">Machine Learning</a></li><li><a href="https://www.geeksforgeeks.org/python/django-tutorial/">Django</a></li><li><a href="https://www.geeksforgeeks.org/python/flask-tutorial/">Flask</a></li><li><a href="https://www.geeksforgeeks.org/dsa/python-data-structures-and-algorithms/">DSA with Python</a></li>            </ul>
             <button aria-label="sub header slider next" class="header-main__slider-arrow next hideIt">
                 <i class="gfg-icon gfg-icon_arrow-right gicon-centered"></i>
             </button>
@@ -567,7 +574,7 @@ enable_page_level_ads: true
     //getting tags for the page type data
     let mobileView = false;
     let pageTags = JSON.parse('null');
-    let allTags = JSON.parse('["Java","ProgrammingLanguage"]');
+    let allTags = JSON.parse('["Python","pythondesignpattern","ProgrammingLanguage"]');
 </script>
 
 <script>
@@ -767,7 +774,7 @@ enable_page_level_ads: true
 <!-- Above code is for old openInApp pop-up with open in app and continue buttons-->
 
 <div id='openInApp-modal' class='openInApp'>
-    <a href = 'https://geeksforgeeksapp.page.link/?link=https://www.geeksforgeeks.org/factory-method-design-pattern-in-java/?type%3Darticle%26id%3D404122&apn=free.programming.programming&isi=1641848816&ibi=org.geeksforgeeks.GeeksforGeeksDev&efr=1' class='openInAppLink'>
+    <a href = 'https://geeksforgeeksapp.page.link/?link=https://www.geeksforgeeks.org/singleton-pattern-in-python-a-complete-guide/?type%3Darticle%26id%3D506522&apn=free.programming.programming&isi=1641848816&ibi=org.geeksforgeeks.GeeksforGeeksDev&efr=1' class='openInAppLink'>
         <span style='color: #fff;'>Open In App</span>
     </a>
 </div>
@@ -813,7 +820,12 @@ enable_page_level_ads: true
         }
     </style>
 <!-- END Open in App Button and CSS-->
-<div class="container-fluid bg-light" id="home-page" style="position: relative; max-width:100%;">
+
+            <script>
+                companyTagsArray = JSON.parse('[]');
+                categoryTagsArray = JSON.parse('[]');
+            </script>
+            <div class="container-fluid bg-light" id="home-page" style="position: relative; max-width:100%;">
     <div class="article-page_flex">
             <div class="sidebar_wrapper  manual_leftbar ">
                       <div class="sideBar " style="height: unset !important">
@@ -833,31 +845,31 @@ enable_page_level_ads: true
                     <div class="a-wrapper">
                         <div class="" style="z-index:9999 !important;position:relative;">
                         </div>
-                         <article class="content post-404122 post type-post status-publish format-standard hentry category-java" id="post-404122">
+                         <article class="content post-506522 post type-post status-publish format-standard hentry category-python tag-python-design-pattern" id="post-506522">
                                                                                    <!-- when comment system will be scalable from practice side then we will display  Article/Discussion tab-->
                             <div class="main_wrapper" style="display:flex;">
                                                                 <div style="width: 100%;">
                                         <div class="article-title">
-                                            <h1>Factory Method Design Pattern in Java</h1>
+                                            <h1>Singleton Pattern in Python - A Complete Guide</h1>
                                         </div>
                                                                                     <div class="last_updated_parent">
                                                 <div>
                                                     <span class="strong">Last Updated : </span>
-                                                    <span>12 Jul, 2025</span>
+                                                    <span>21 Aug, 2024</span>
                                                 </div>
 
                                                  <!-- three dot menu -->
                                                 <div class="three_dot_dropdown"> 
                                                         <div style="display: flex;">
                                                                                         
-                                         <div pid="404122" class="article--viewer_share tooltip">
+                                         <div pid="506522" class="article--viewer_share tooltip">
                                                 <div class="three_dot_dropdown_div three_dot_dropdown_share"onmouseleave="closeShareModal()" onmouseenter="openShareModal()">
                                                     <div style="display: flex;align-items: center;" class="three_dot_dropdown_inner_div_share" data-gfg-action="share-article" data-bookmark-value="0">
                                                         <i class="gfg-share-icon"></i>
                                                     </div>
                                                 </div>
                                             </div>
-                                                                                                                                                                                        <div pid="404122" ptitle="Factory Method Design Pattern in Java" class="article--viewer_comment tooltip top-comment-icon-div">
+                                                                                                                                                                                        <div pid="506522" ptitle="Singleton Pattern in Python - A Complete Guide" class="article--viewer_comment tooltip top-comment-icon-div">
                                                                     <span class="comment_tooltiptext">Comments</span>
                                                                     <div class="three_dot_dropdown_div" data-gfg-action='loadComments'>
                                                                         <div class="comment_header">
@@ -865,7 +877,7 @@ enable_page_level_ads: true
                                                                         </div>
                                                                     </div>
                                                                 </div>
-                                                                <div pid="404122" ptitle="Factory Method Design Pattern in Java" class="article--viewer_improve tooltip">
+                                                                <div pid="506522" ptitle="Singleton Pattern in Python - A Complete Guide" class="article--viewer_improve tooltip">
                                                                 <span class="improve_tooltiptext">Improve</span>
                                                                 <div class="three_dot_dropdown_div three_dot_dropdown_improve" onclick="improveArticleCall()">
                                                                     <div class="improve_wrapper_top">
@@ -890,7 +902,7 @@ enable_page_level_ads: true
                             <div class="article-buttons drop" onmouseleave="closeKebabMenu()">
                                             <!-- If the status of the summary API is true than we are showing the summarize button otherwise not  -->
                                             <!--  -->
-                                            <div pid="404122" ptitle="Factory Method Design Pattern in Java" class="improve_article--viewer tooltip">
+                                            <div pid="506522" ptitle="Singleton Pattern in Python - A Complete Guide" class="improve_article--viewer tooltip">
                                                 <div class="three_dot_dropdown_div three_dot_dropdown_improve" onclick="suggestionArticleCall()" style="margin-top: 1px;">
                                                     <div class="three_dot_dropdown_inner_div improve_dot_dropdown_inner_div">
                                                         <i class="gfg-icon gfg-icon_suggest_changes gfg-icon_edit"></i>
@@ -898,7 +910,7 @@ enable_page_level_ads: true
                                                     </div>
                                                 </div>
                                             </div>
-                                                                                        <div pid="404122" class="article--viewer_like tooltip">
+                                                                                        <div pid="506522" class="article--viewer_like tooltip">
                                             <div class="three_dot_dropdown_div three_dot_dropdown_likearticle" onmouseleave='toggleLikeElementVisibility("showLikesContainer", false)'  onmouseenter='toggleLikeElementVisibility("showLikesContainer", true)'>
                                                     <div class="showLikesContainer"> 
                                                         <span class="likeTooltip">Like Article</span>
@@ -915,7 +927,7 @@ enable_page_level_ads: true
                                             
                                             <!-- share button is removed from here for web view and placed at the place of summarize on 03/04/25 for task T1G-3293 -->
 
-                                            <!-- <div pid="404122" class="article--viewer_share tooltip">
+                                            <!-- <div pid="506522" class="article--viewer_share tooltip">
                                                 <div class="three_dot_dropdown_div three_dot_dropdown_share" onmouseleave="closeShareModal()" onmouseenter="openShareModal()">
                                                     <div style="display: flex;align-items: center;" class="three_dot_dropdown_inner_div" data-gfg-action="share-article" data-bookmark-value="0">
                                                         <i class="gfg-share-icon"></i>
@@ -945,124 +957,259 @@ enable_page_level_ads: true
                                     </div>
                             <div class="text">
                                                                                     <script> 
-                        var video_api_response = JSON.parse("[{\"id\":9534,\"title\":\"Factory method design pattern in Java\",\"slug\":\"factory-method-design-pattern-in-java\",\"description\":\"<p><span style=\\\"background-color:rgb(255,255,255);color:rgb(0,0,0);\\\">Design patterns are solutions to commonly recurring problems. Design patterns are classified into <strong>Creational<\/strong>, <strong>Structural, and Behavioural types<\/strong>.&nbsp;<\/span><br><span style=\\\"background-color:rgb(255,255,255);color:rgb(0,0,0);\\\"><strong>Factory Method Design Pattern<\/strong> is a creational design pattern that means it deals with the creation of objects. It says that, define an interface for creating the object and let the subclasses decide which class to instantiate.&nbsp;<\/span><br><br><span style=\\\"background-color:rgb(255,255,255);color:rgb(0,0,0);\\\"><strong>Steps to implement Factory Method Design Pattern<\/strong><\/span><br><br><span style=\\\"background-color:rgb(255,255,255);color:rgb(0,0,0);\\\">1. Create an interface having an abstract method<\/span><br><span style=\\\"background-color:rgb(255,255,255);color:rgb(0,0,0);\\\">2. Create implementation classes<\/span><br><span style=\\\"background-color:rgb(255,255,255);color:rgb(0,0,0);\\\">3. Create a Factory that will decide which imp object will be created.<\/span><br><span style=\\\"background-color:rgb(255,255,255);color:rgb(0,0,0);\\\">4. Test in the main method<\/span><br><br><span style=\\\"background-color:rgb(255,255,255);color:rgb(0,0,0);\\\">So in this video, let's look at the detailed explanation of the <strong>Factory Method Design Pattern in Java.<\/strong><\/span><\/p>\",\"source\":\"https:\/\/videos.geeksforgeeks.org\/hls\/e90b8d3982fb47f2bc8821d1a864401fgfg-1234520240624133149.m3u8\",\"category\":[{\"term_id__id\":47,\"term_id__term_name\":\"Java\",\"term_id__term_type\":1,\"term_id__slug\":\"java\"},{\"term_id__id\":48,\"term_id__term_name\":\"Java\",\"term_id__term_type\":2,\"term_id__slug\":\"java-uk02eh\"},{\"term_id__id\":96,\"term_id__term_name\":\"Android\",\"term_id__term_type\":1,\"term_id__slug\":\"android\"}],\"meta\":{\"thumbnail\":\"https:\/\/media.geeksforgeeks.org\/geeksforgeeks\/FactorymethoddesignpatterninJava\/1223456720240624133302-small.png\",\"largeThumbnail\":\"https:\/\/media.geeksforgeeks.org\/geeksforgeeks\/FactorymethoddesignpatterninJava\/1223456720240624133302.jpg\",\"likes\":1,\"views\":42100,\"isFeatured\":0,\"isPremium\":0,\"isPublic\":0,\"format\":\"video\/mp4\",\"revision\":{}},\"time\":\"24\/06\/2024\",\"subtitle\":\"https:\/\/videos.geeksforgeeks.org\/subtitles\/1234520240624133149.vtt\",\"duration\":1915,\"course_link\":null,\"video_schema\":{\"@context\":\"https:\/\/schema.org\",\"@type\":\"VideoObject\",\"name\":\"Factory method design pattern in Java\",\"description\":\"Design patterns are solutions to commonly recurring problems. Design patterns are classified into Creational, Structural, and Behavioural types. nbspFactory Method Design Pattern is a creational design pattern that means it deals with the creation of objects. It says that, define an interface for creating the object and let the subclasses decide which class to instantiate. nbspSteps to implement Factory Method Design Pattern1. Create an interface having an abstract method2. Create implementation classes3. Create a Factory that will decide which imp object will be created.4. Test in the main methodSo in this video, lets look at the detailed explanation of the Factory Method Design Pattern in Java.\",\"thumbnailUrl\":[\"https:\/\/media.geeksforgeeks.org\/geeksforgeeks\/FactorymethoddesignpatterninJava\/1223456720240624133302.jpg\",\"https:\/\/media.geeksforgeeks.org\/geeksforgeeks\/FactorymethoddesignpatterninJava\/1223456720240624133302-seo.png\",\"https:\/\/media.geeksforgeeks.org\/geeksforgeeks\/FactorymethoddesignpatterninJava\/1223456720240624133302-small.png\"],\"uploadDate\":\"2024-06-24T13:33:33Z\",\"duration\":\"PT0H31M55S\",\"contentUrl\":\"https:\/\/www.geeksforgeeks.org\/videos\/factory-method-design-pattern-in-java\/\"}}]");
+                        var video_api_response = JSON.parse("[]");
                     </script>
-                <p dir="ltr" style="text-align: justify;"><span>It is a </span><a href="https://www.geeksforgeeks.org/system-design/creational-design-pattern/" rel="noreferrer noopener"><span>creational design pattern</span></a><span> that talks about the creation of an object. The factory design pattern says to define an interface ( A java interface or an abstract class) for creating the object and let the subclasses decide which class to instantiate. </span></p><p dir="ltr"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20240117221304/factory-method.jpg" alt="factory-method" width="1000" height="500" srcset="https://media.geeksforgeeks.org/wp-content/uploads/20240117221304/factory-method.jpg 1000w,https://media.geeksforgeeks.org/wp-content/uploads/20240117221304/factory-method-100.jpg 100w,https://media.geeksforgeeks.org/wp-content/uploads/20240117221304/factory-method-200.jpg 200w,https://media.geeksforgeeks.org/wp-content/uploads/20240117221304/factory-method-300.jpg 300w,https://media.geeksforgeeks.org/wp-content/uploads/20240117221304/factory-method-660.jpg 660w,https://media.geeksforgeeks.org/wp-content/uploads/20240117221304/factory-method-768.jpg 768w"></p><div id="table_of_content"><p style="margin:4px; font-size:20px; font-weight:bold;">Table of Content</p><ul><li><a href="#what-is-the-factory-method-design-pattern-in-java">What is the Factory Method Design Pattern?</a></li><li><a href="#when-to-use-factory-method-design-pattern-in-java">When to use Factory Method Design Pattern?</a></li><li><a href="#key-components-of-factory-method-design-pattern">Key Components of Factory Method Design Pattern</a></li><li><a href="#factory-method-design-pattern-example-in-java">Factory Method Design Pattern Example </a></li><li><a href="#use-cases-of-the-factory-method">Use Cases of the Factory Method Design Pattern</a></li><li><a href="#advantages-of-factory-method">Advantages of Factory Method Design Pattern</a></li><li><a href="#disadvantages-of-factory-method">Disadvantages of Factory Method Design Pattern</a></li></ul></div><h2 id="what-is-the-factory-method-design-pattern-in-java"><span>What is the Factory Method Design Pattern?</span></h2><blockquote><p dir="ltr"><span>Factory Method Design Pattern define an interface for creating an object, but let subclass decide which class to instantiate. Factory Method lets a class defer instantiation to subclass.</span></p></blockquote><p dir="ltr"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20240110163637/What-is-Factory-Method-Design-Pattern-768.jpg" alt="What-is-Factory-Method-Design-Pattern" width="768" height="384" srcset="https://media.geeksforgeeks.org/wp-content/uploads/20240110163637/What-is-Factory-Method-Design-Pattern.jpg 1000w,https://media.geeksforgeeks.org/wp-content/uploads/20240110163637/What-is-Factory-Method-Design-Pattern-100.jpg 100w,https://media.geeksforgeeks.org/wp-content/uploads/20240110163637/What-is-Factory-Method-Design-Pattern-200.jpg 200w,https://media.geeksforgeeks.org/wp-content/uploads/20240110163637/What-is-Factory-Method-Design-Pattern-300.jpg 300w,https://media.geeksforgeeks.org/wp-content/uploads/20240110163637/What-is-Factory-Method-Design-Pattern-660.jpg 660w,https://media.geeksforgeeks.org/wp-content/uploads/20240110163637/What-is-Factory-Method-Design-Pattern-768.jpg 768w" loading="lazy"></p><p dir="ltr"><span>Below is the explanation of the above image:</span></p><ul><li value="1"><span>The factory method in the interface lets a class defer the instantiation to one or more concrete subclasses. </span></li><li value="2"><span>Since these design patterns talk about the instantiation of an object they come under the category of creational design pattern. </span></li><li value="3"><span>If we notice the name </span><b><strong>Factory method</strong></b><span>, that means there is a method which is a factory, and in general, factories are involved with creational stuff and here with this, an object is being created. </span></li><li value="4"><span>It is one of the best ways to create an object where object creation logic is hidden from the client. Now Let's look at the implementation.</span></li></ul><h2 id="when-to-use-factory-method-design-pattern-in-java"><span>When to use Factory Method Design Pattern?</span></h2><p dir="ltr"><span>Factory method design pattern can be used in java in following cases:</span></p><ul><li value="1"><span>A class cannot predict the type of objects it needs to create.</span></li><li value="2"><span>A class wants its subclasses to specify the objects it creates. </span></li><li value="3"><span>Classes delegate responsibility to one of multiple helper subclasses, and you aim to keep the information about which helper subclass is the delegate within a specific scope or location.</span></li></ul><h2 id="key-components-of-factory-method-design-pattern"><b><strong>Key Components of Factory Method Design Pattern</strong></b></h2><p dir="ltr"><span>Below are the main components of Factory Method Design Pattern in Java:</span></p><p dir="ltr"><img src="https://media.geeksforgeeks.org/wp-content/uploads/20240110163911/Key-Component-of-Factory-Method-Design-Pattern-in-Java-768.jpg" alt="Key-Component-of-Factory-Method-Design-Pattern-in-Java" width="768" height="384" srcset="https://media.geeksforgeeks.org/wp-content/uploads/20240110163911/Key-Component-of-Factory-Method-Design-Pattern-in-Java.jpg 1000w,https://media.geeksforgeeks.org/wp-content/uploads/20240110163911/Key-Component-of-Factory-Method-Design-Pattern-in-Java-100.jpg 100w,https://media.geeksforgeeks.org/wp-content/uploads/20240110163911/Key-Component-of-Factory-Method-Design-Pattern-in-Java-200.jpg 200w,https://media.geeksforgeeks.org/wp-content/uploads/20240110163911/Key-Component-of-Factory-Method-Design-Pattern-in-Java-300.jpg 300w,https://media.geeksforgeeks.org/wp-content/uploads/20240110163911/Key-Component-of-Factory-Method-Design-Pattern-in-Java-660.jpg 660w,https://media.geeksforgeeks.org/wp-content/uploads/20240110163911/Key-Component-of-Factory-Method-Design-Pattern-in-Java-768.jpg 768w" loading="lazy"></p><ul><li value="1"><b><strong>Product</strong></b><ul><li value="1"><span>It's an abstract class or interface that defines the common operations for the objects that the factory will create.</span></li><li value="2"><span>Concrete Products are the actual classes that implement the Product interface,&nbsp;each representing a specific type of object to be created.</span></li></ul></li><li value="2"><b><strong>Creator</strong></b><ul><li value="1"><span>It's an abstract class or interface that declares the factory method.</span></li><li value="2"><span>This method is responsible for creating Product objects,&nbsp;but it delegates the actual creation to subclasses.</span></li></ul></li><li value="3"><b><strong>Concrete Creators</strong></b><ul><li value="1"><span>These are subclasses of the Creator that implement the factory method.</span></li><li value="2"><span>They decide which specific Concrete Product to create,&nbsp;often based on input parameters or configuration.</span></li></ul></li><li value="4"><b><strong>Factory Method</strong></b><ul><li value="1"><span>It's a method defined in the Creator class that is responsible for creating Product objects.</span></li><li value="2"><span>It's typically declared as abstract in the Creator and implemented in the Concrete Creators.</span></li></ul></li></ul><h2 id="factory-method-design-pattern-example-in-java"><span>Factory Method Design Pattern Example </span></h2><p dir="ltr"><span>Let's understand factory method design pattern using an example. Below is the problem statement to understand it:</span></p><blockquote><p dir="ltr"><span>You are developing a software system for an e-commerce platform that deals with various types of products. Each product category (e.g., electronics, clothing, books) requires specific handling during creation. However, you want to decouple the client code from the concrete product creation logic to enhance flexibility and maintainability. Additionally, you want to allow for easy extension by adding new product types in the future without modifying existing code.</span></p></blockquote><h3 id="1-solution-using-abstract-class"><span>1. Solution using Abstract Class</span></h3><p dir="ltr"><span>The above problem can be solved using Factory Method Design Pattern:</span></p><gfg-tabs data-run-ide="true" data-mode="light">
-            <gfg-tab slot="tab">Java</gfg-tab>
-<gfg-panel slot="panel" data-code-lang="java" data-main-code-start="None" data-main-code-end="None">
-    <code class="language-java"><div class=highlight><pre><span></span><span class=c1>// Abstract Product Class</span>
-<span class=kd>abstract</span><span class=w> </span><span class=kd>class</span> <span class=nc>Product</span><span class=w> </span><span class=p>{</span>
-<span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kd>abstract</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=nf>display</span><span class=p>();</span>
-<span class=p>}</span>
+                <p dir="ltr"><span>A Singleton pattern in python is a design pattern that allows you to create just one instance of a class, throughout the lifetime of a program. Using a singleton pattern has many benefits. A few of them are:</span></p><ul><li value="1"><span>To limit concurrent access to a shared resource.</span></li><li value="2"><span>To create a global point of access for a resource.</span></li><li value="3"><span>To create just one instance of a class, throughout the lifetime of a program.</span></li></ul><p dir="ltr" style="text-align: justify;"><b><strong>Different ways to implement a Singleton:</strong></b></p><p dir="ltr"><span>A singleton pattern can be implemented in three different ways. They are as follows:</span></p><ul><li value="1"><span>Module-level Singleton</span></li><li value="2"><span>Classic Singleton</span></li><li value="3"><span>Borg Singleton</span></li></ul><p dir="ltr"><b><strong>Module-level Singleton:</strong></b></p><p dir="ltr"><span>All modules are singleton, by definition.  Let's create a simple module-level singleton where the data is shared among other modules. Here we will create three python files – singleton.py, sample_module1.py, and sample_module2.py – in which the other sample modules share a variable from singleton.py. </span></p><pre><span>## singleton.py</span><br/><span>shared_variable = "Shared Variable"</span></pre><p dir="ltr"><span> singleton.py</span></p><pre><span>## samplemodule1.py</span><br/><span>import singleton</span><br/><span>print(singleton.shared_variable)</span><br/><span>singleton.shared_variable += "(modified by samplemodule1)"</span></pre><p dir="ltr"><span>samplemodule1.py</span></p><pre><span>##samplemodule2.py</span><br/><span>import singleton</span><br/><span>print(singleton.shared_variable)</span></pre><p dir="ltr"><span>samplemodule2.py</span></p><p dir="ltr"><span>Let's look into the output.</span></p><p dir="ltr"><img height="inherit" src="https://media.geeksforgeeks.org/wp-content/uploads/20200827120450/output.PNG" width="inherit"/></p><p dir="ltr"><span>Here, the value changed by samplemodule1 is also reflected in samplemodule2.</span></p><p dir="ltr"><b><strong>Classic Singleton:</strong></b></p><p dir="ltr"><span>Classic Singleton creates an instance only if there is no instance created so far; otherwise, it will return the instance that is already created. Let's take a look at the below code.</span></p><gfg-tabs allow-code-exec=true  data-run-ide="true">
+            <gfg-tab slot="tab">Python</gfg-tab>
+<gfg-panel slot="panel" data-code-lang="python3" data-main-code-start="None" data-main-code-end="None">
+    <code class="language-python3"><div class=highlight><pre><span></span><span class=k>class</span> <span class=nc>SingletonClass</span><span class=p>(</span><span class=nb>object</span><span class=p>):</span>
+  <span class=k>def</span> <span class=fm>__new__</span><span class=p>(</span><span class=bp>cls</span><span class=p>):</span>
+    <span class=k>if</span> <span class=ow>not</span> <span class=nb>hasattr</span><span class=p>(</span><span class=bp>cls</span><span class=p>,</span> <span class=s1>&#39;instance&#39;</span><span class=p>):</span>
+      <span class=bp>cls</span><span class=o>.</span><span class=n>instance</span> <span class=o>=</span> <span class=nb>super</span><span class=p>(</span><span class=n>SingletonClass</span><span class=p>,</span> <span class=bp>cls</span><span class=p>)</span><span class=o>.</span><span class=fm>__new__</span><span class=p>(</span><span class=bp>cls</span><span class=p>)</span>
+    <span class=k>return</span> <span class=bp>cls</span><span class=o>.</span><span class=n>instance</span>
+  
+<span class=n>singleton</span> <span class=o>=</span> <span class=n>SingletonClass</span><span class=p>()</span>
+<span class=n>new_singleton</span> <span class=o>=</span> <span class=n>SingletonClass</span><span class=p>()</span>
 
-<span class=c1>// Concrete Products</span>
-<span class=kd>class</span> <span class=nc>ConcreteProductA</span><span class=w> </span><span class=kd>extends</span><span class=w> </span><span class=n>Product</span><span class=w> </span><span class=p>{</span>
-<span class=w>    </span><span class=nd>@Override</span>
-<span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=nf>display</span><span class=p>()</span><span class=w> </span><span class=p>{</span>
-<span class=w>        </span><span class=n>System</span><span class=p>.</span><span class=na>out</span><span class=p>.</span><span class=na>println</span><span class=p>(</span><span class=s>&quot;This is Concrete Product A.&quot;</span><span class=p>);</span>
-<span class=w>    </span><span class=p>}</span>
-<span class=p>}</span>
+<span class=nb>print</span><span class=p>(</span><span class=n>singleton</span> <span class=ow>is</span> <span class=n>new_singleton</span><span class=p>)</span>
 
-<span class=kd>class</span> <span class=nc>ConcreteProductB</span><span class=w> </span><span class=kd>extends</span><span class=w> </span><span class=n>Product</span><span class=w> </span><span class=p>{</span>
-<span class=w>    </span><span class=nd>@Override</span>
-<span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=nf>display</span><span class=p>()</span><span class=w> </span><span class=p>{</span>
-<span class=w>        </span><span class=n>System</span><span class=p>.</span><span class=na>out</span><span class=p>.</span><span class=na>println</span><span class=p>(</span><span class=s>&quot;This is Concrete Product B.&quot;</span><span class=p>);</span>
-<span class=w>    </span><span class=p>}</span>
-<span class=p>}</span>
-
-<span class=c1>// Creator Abstract Class</span>
-<span class=kd>abstract</span><span class=w> </span><span class=kd>class</span> <span class=nc>Creator</span><span class=w> </span><span class=p>{</span>
-<span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kd>abstract</span><span class=w> </span><span class=n>Product</span><span class=w> </span><span class=nf>factoryMethod</span><span class=p>();</span>
-<span class=p>}</span>
-
-<span class=c1>// Concrete Creators</span>
-<span class=kd>class</span> <span class=nc>ConcreteCreatorA</span><span class=w> </span><span class=kd>extends</span><span class=w> </span><span class=n>Creator</span><span class=w> </span><span class=p>{</span>
-<span class=w>    </span><span class=nd>@Override</span>
-<span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=n>Product</span><span class=w> </span><span class=nf>factoryMethod</span><span class=p>()</span><span class=w> </span><span class=p>{</span>
-<span class=w>        </span><span class=k>return</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>ConcreteProductA</span><span class=p>();</span>
-<span class=w>    </span><span class=p>}</span>
-<span class=p>}</span>
-
-<span class=kd>class</span> <span class=nc>ConcreteCreatorB</span><span class=w> </span><span class=kd>extends</span><span class=w> </span><span class=n>Creator</span><span class=w> </span><span class=p>{</span>
-<span class=w>    </span><span class=nd>@Override</span>
-<span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=n>Product</span><span class=w> </span><span class=nf>factoryMethod</span><span class=p>()</span><span class=w> </span><span class=p>{</span>
-<span class=w>        </span><span class=k>return</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>ConcreteProductB</span><span class=p>();</span>
-<span class=w>    </span><span class=p>}</span>
-<span class=p>}</span>
-
-<span class=c1>// Client Code</span>
-<span class=kd>public</span><span class=w> </span><span class=kd>class</span> <span class=nc>FactoryMethodExample</span><span class=w> </span><span class=p>{</span>
-<span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kd>static</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=nf>main</span><span class=p>(</span><span class=n>String</span><span class=o>[]</span><span class=w> </span><span class=n>args</span><span class=p>)</span><span class=w> </span><span class=p>{</span>
-<span class=w>        </span><span class=n>Creator</span><span class=w> </span><span class=n>creatorA</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>ConcreteCreatorA</span><span class=p>();</span>
-<span class=w>        </span><span class=n>Product</span><span class=w> </span><span class=n>productA</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>creatorA</span><span class=p>.</span><span class=na>factoryMethod</span><span class=p>();</span>
-<span class=w>        </span><span class=n>productA</span><span class=p>.</span><span class=na>display</span><span class=p>();</span>
-
-<span class=w>        </span><span class=n>Creator</span><span class=w> </span><span class=n>creatorB</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>ConcreteCreatorB</span><span class=p>();</span>
-<span class=w>        </span><span class=n>Product</span><span class=w> </span><span class=n>productB</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>creatorB</span><span class=p>.</span><span class=na>factoryMethod</span><span class=p>();</span>
-<span class=w>        </span><span class=n>productB</span><span class=p>.</span><span class=na>display</span><span class=p>();</span>
-<span class=w>    </span><span class=p>}</span>
-<span class=p>}</span>
+<span class=n>singleton</span><span class=o>.</span><span class=n>singl_variable</span> <span class=o>=</span> <span class=s2>&quot;Singleton Variable&quot;</span>
+<span class=nb>print</span><span class=p>(</span><span class=n>new_singleton</span><span class=o>.</span><span class=n>singl_variable</span><span class=p>)</span>
 </pre></div></code>
-</gfg-panel></gfg-tabs><div class="code-output"><br><strong>Output</strong><pre>This is Concrete Product A.
-This is Concrete Product B.</pre></div><h3 id="2-solution-using-interface"><span>2. Solution using Interface</span></h3><p dir="ltr"><span>The above problem can be solved using Factory Method Design Pattern:</span></p><gfg-tabs data-run-ide="true" data-mode="light">
-            <gfg-tab slot="tab">Java</gfg-tab>
-<gfg-panel slot="panel" data-code-lang="java" data-main-code-start="None" data-main-code-end="None">
-    <code class="language-java"><div class=highlight><pre><span></span><span class=c1>// Product Interface</span>
-<span class=kd>interface</span> <span class=nc>Product</span><span class=w> </span><span class=p>{</span>
-<span class=w>    </span><span class=kt>void</span><span class=w> </span><span class=nf>display</span><span class=p>();</span>
-<span class=p>}</span>
+</gfg-panel></gfg-tabs><div class="code-output"><br/><strong>Output</strong><pre>True
+Singleton Variable</pre></div><p dir="ltr"><span>Here, in the __new__ method, we will check whether an instance is created or not. If created, it will return the instance; otherwise, it will create a new instance. You can notice that singleton and new_singleton return the same instance and have the same variable.</span></p><p dir="ltr"><span>Let's check what happens when we subclass a singleton class. </span></p><gfg-tabs allow-code-exec=true  data-run-ide="true">
+            <gfg-tab slot="tab">Python</gfg-tab>
+<gfg-panel slot="panel" data-code-lang="python3" data-main-code-start="None" data-main-code-end="None">
+    <code class="language-python3"><div class=highlight><pre><span></span><span class=k>class</span> <span class=nc>SingletonClass</span><span class=p>(</span><span class=nb>object</span><span class=p>):</span>
+  <span class=k>def</span> <span class=fm>__new__</span><span class=p>(</span><span class=bp>cls</span><span class=p>):</span>
+    <span class=k>if</span> <span class=ow>not</span> <span class=nb>hasattr</span><span class=p>(</span><span class=bp>cls</span><span class=p>,</span> <span class=s1>&#39;instance&#39;</span><span class=p>):</span>
+      <span class=bp>cls</span><span class=o>.</span><span class=n>instance</span> <span class=o>=</span> <span class=nb>super</span><span class=p>(</span><span class=n>SingletonClass</span><span class=p>,</span> <span class=bp>cls</span><span class=p>)</span><span class=o>.</span><span class=fm>__new__</span><span class=p>(</span><span class=bp>cls</span><span class=p>)</span>
+    <span class=k>return</span> <span class=bp>cls</span><span class=o>.</span><span class=n>instance</span>
+  
+<span class=k>class</span> <span class=nc>SingletonChild</span><span class=p>(</span><span class=n>SingletonClass</span><span class=p>):</span>
+    <span class=k>pass</span>
+  
+<span class=n>singleton</span> <span class=o>=</span> <span class=n>SingletonClass</span><span class=p>()</span>  
+<span class=n>child</span> <span class=o>=</span> <span class=n>SingletonChild</span><span class=p>()</span>
+<span class=nb>print</span><span class=p>(</span><span class=n>child</span> <span class=ow>is</span> <span class=n>singleton</span><span class=p>)</span>
 
-<span class=c1>// Concrete Products</span>
-<span class=kd>class</span> <span class=nc>ConcreteProductA</span><span class=w> </span><span class=kd>implements</span><span class=w> </span><span class=n>Product</span><span class=w> </span><span class=p>{</span>
-<span class=w>    </span><span class=nd>@Override</span>
-<span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=nf>display</span><span class=p>()</span><span class=w> </span><span class=p>{</span>
-<span class=w>        </span><span class=n>System</span><span class=p>.</span><span class=na>out</span><span class=p>.</span><span class=na>println</span><span class=p>(</span><span class=s>&quot;This is Concrete Product A.&quot;</span><span class=p>);</span>
-<span class=w>    </span><span class=p>}</span>
-<span class=p>}</span>
-
-<span class=kd>class</span> <span class=nc>ConcreteProductB</span><span class=w> </span><span class=kd>implements</span><span class=w> </span><span class=n>Product</span><span class=w> </span><span class=p>{</span>
-<span class=w>    </span><span class=nd>@Override</span>
-<span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=nf>display</span><span class=p>()</span><span class=w> </span><span class=p>{</span>
-<span class=w>        </span><span class=n>System</span><span class=p>.</span><span class=na>out</span><span class=p>.</span><span class=na>println</span><span class=p>(</span><span class=s>&quot;This is Concrete Product B.&quot;</span><span class=p>);</span>
-<span class=w>    </span><span class=p>}</span>
-<span class=p>}</span>
-
-<span class=c1>// Factory Interface</span>
-<span class=kd>interface</span> <span class=nc>Factory</span><span class=w> </span><span class=p>{</span>
-<span class=w>    </span><span class=n>Product</span><span class=w> </span><span class=nf>factoryMethod</span><span class=p>();</span>
-<span class=p>}</span>
-
-<span class=c1>// Concrete Factories</span>
-<span class=kd>class</span> <span class=nc>ConcreteFactoryA</span><span class=w> </span><span class=kd>implements</span><span class=w> </span><span class=n>Factory</span><span class=w> </span><span class=p>{</span>
-<span class=w>    </span><span class=nd>@Override</span>
-<span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=n>Product</span><span class=w> </span><span class=nf>factoryMethod</span><span class=p>()</span><span class=w> </span><span class=p>{</span>
-<span class=w>        </span><span class=k>return</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>ConcreteProductA</span><span class=p>();</span>
-<span class=w>    </span><span class=p>}</span>
-<span class=p>}</span>
-
-<span class=kd>class</span> <span class=nc>ConcreteFactoryB</span><span class=w> </span><span class=kd>implements</span><span class=w> </span><span class=n>Factory</span><span class=w> </span><span class=p>{</span>
-<span class=w>    </span><span class=nd>@Override</span>
-<span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=n>Product</span><span class=w> </span><span class=nf>factoryMethod</span><span class=p>()</span><span class=w> </span><span class=p>{</span>
-<span class=w>        </span><span class=k>return</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>ConcreteProductB</span><span class=p>();</span>
-<span class=w>    </span><span class=p>}</span>
-<span class=p>}</span>
-
-<span class=c1>// Client Code</span>
-<span class=kd>public</span><span class=w> </span><span class=kd>class</span> <span class=nc>FactoryMethodExample</span><span class=w> </span><span class=p>{</span>
-<span class=w>    </span><span class=kd>public</span><span class=w> </span><span class=kd>static</span><span class=w> </span><span class=kt>void</span><span class=w> </span><span class=nf>main</span><span class=p>(</span><span class=n>String</span><span class=o>[]</span><span class=w> </span><span class=n>args</span><span class=p>)</span><span class=w> </span><span class=p>{</span>
-<span class=w>        </span><span class=n>Factory</span><span class=w> </span><span class=n>factoryA</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>ConcreteFactoryA</span><span class=p>();</span>
-<span class=w>        </span><span class=n>Product</span><span class=w> </span><span class=n>productA</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>factoryA</span><span class=p>.</span><span class=na>factoryMethod</span><span class=p>();</span>
-<span class=w>        </span><span class=n>productA</span><span class=p>.</span><span class=na>display</span><span class=p>();</span>
-
-<span class=w>        </span><span class=n>Factory</span><span class=w> </span><span class=n>factoryB</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=k>new</span><span class=w> </span><span class=n>ConcreteFactoryB</span><span class=p>();</span>
-<span class=w>        </span><span class=n>Product</span><span class=w> </span><span class=n>productB</span><span class=w> </span><span class=o>=</span><span class=w> </span><span class=n>factoryB</span><span class=p>.</span><span class=na>factoryMethod</span><span class=p>();</span>
-<span class=w>        </span><span class=n>productB</span><span class=p>.</span><span class=na>display</span><span class=p>();</span>
-<span class=w>    </span><span class=p>}</span>
-<span class=p>}</span>
+<span class=n>singleton</span><span class=o>.</span><span class=n>singl_variable</span> <span class=o>=</span> <span class=s2>&quot;Singleton Variable&quot;</span>
+<span class=nb>print</span><span class=p>(</span><span class=n>child</span><span class=o>.</span><span class=n>singl_variable</span><span class=p>)</span>
 </pre></div></code>
-</gfg-panel></gfg-tabs><div class="code-output"><br><strong>Output</strong><pre>This is Concrete Product A.
-This is Concrete Product B.</pre></div><h2 id="use-cases-of-the-factory-method"><span>Use Cases of the Factory Method Design Pattern</span></h2><p dir="ltr"><span>Below are the use cases of factory method: </span></p><ul><li value="1"><span>JDBC uses factories to create connections and statements. Frameworks like Spring and Guice utilize factories for managing beans.</span></li><li value="2"><span>Swing and JavaFX uses factories to produce UI components such as buttons and text fields, offering flexibility in design.</span></li><li value="3"><span>Tools like Log4j and Logback employ factories to create loggers with various configurations, allowing for control over logging levels.</span></li><li value="4"><span>Serialization frameworks use factories to generate objects from serialized data, accommodating different formats and versions.</span></li></ul><h2 id="advantages-of-factory-method"><span>Advantages of Factory Method Design Pattern</span></h2><p dir="ltr"><span>Below are the main advantages of factory method:</span></p><ul><li value="1"><span>Separates object creation from client code, enhancing flexibility and maintainability since changes to creation don’t affect clients.</span></li><li value="2"><span>New product types can be easily added without altering client code by simply creating new Concrete Creator subclasses.</span></li><li value="3"><span>Simplifies unit testing by allowing mock product creation, enabling tests of various implementations without actual object dependencies.</span></li><li value="4"><span>The factory method can be reused across different application parts, centralizing and streamlining object creation logic.</span></li><li value="5"><span>Hides specific product classes from clients, reducing dependencies and improving maintainability.</span></li></ul><h2 id="disadvantages-of-factory-method"><span>Disadvantages of Factory Method Design Pattern</span></h2><p dir="ltr"><span>Below are the main advantages of factory method:</span></p><ul><li value="1"><span>Adds more classes and interfaces, which can complicate understanding and maintenance, especially for newcomers.</span></li><li value="2"><span>Polymorphism and dynamic binding may slightly affect performance, though this is usually minimal.</span></li><li value="3"><span>Concrete creators remain closely linked to their products, necessitating changes across both when one is modified.</span></li><li value="4"><span>Client code must be aware of concrete subclasses to make accurate factory calls.</span></li><li value="5"><span>The pattern should be applied carefully to avoid unnecessary complexity; simple object creation may not need a factory.</span></li><li value="6"><span>Testing the factory logic can be more complicated compared to simpler designs.</span></li></ul><h2 id="conclusion"><span>Conclusion</span></h2><p dir="ltr" style="text-align: start;"><span>So far we learned what is Factory method design pattern and how to implement it. I believe now we have a fair understanding of the advantage of this design mechanism. Factory methods pervade toolkits and frameworks.The preceding document example is a typical use in MacApp and ET++. </span></p><p dir="ltr"><span>Further Read</span><i><em class="GFGEditorTheme__textItalic">:</em></i><b><strong> </strong></b><a href="https://www.geeksforgeeks.org/system-design/java-design-patterns/" rel="noopener"><b><strong>Java Design Patterns Tutorial</strong></b></a></p>                                <script>
-                                    const rawVideoDataMap = [];
+</gfg-panel></gfg-tabs><p><span> </span><br/><span> </span></p><div class="code-output"><br/><strong>Output</strong><pre>True
+Singleton Variable</pre></div><p dir="ltr"><span>Here, you can see that SingletonChild has the same instance of SingletonClass and also shares the same state. But there are scenarios, where we need a different instance, but should share the same state. This state sharing can be achieved using Borg singleton.</span></p><p dir="ltr"><b><strong>Borg Singleton:</strong></b><span> </span></p><p dir="ltr"><span>Borg singleton is a design pattern in Python that allows state sharing for different instances. Let's look into the following code.</span></p><gfg-tabs allow-code-exec=true  data-run-ide="true">
+            <gfg-tab slot="tab">Python</gfg-tab>
+<gfg-panel slot="panel" data-code-lang="python3" data-main-code-start="None" data-main-code-end="None">
+    <code class="language-python3"><div class=highlight><pre><span></span><span class=k>class</span> <span class=nc>BorgSingleton</span><span class=p>(</span><span class=nb>object</span><span class=p>):</span>
+  <span class=n>_shared_borg_state</span> <span class=o>=</span> <span class=p>{}</span>
+  
+  <span class=k>def</span> <span class=fm>__new__</span><span class=p>(</span><span class=bp>cls</span><span class=p>,</span> <span class=o>*</span><span class=n>args</span><span class=p>,</span> <span class=o>**</span><span class=n>kwargs</span><span class=p>):</span>
+    <span class=n>obj</span> <span class=o>=</span> <span class=nb>super</span><span class=p>(</span><span class=n>BorgSingleton</span><span class=p>,</span> <span class=bp>cls</span><span class=p>)</span><span class=o>.</span><span class=fm>__new__</span><span class=p>(</span><span class=bp>cls</span><span class=p>,</span> <span class=o>*</span><span class=n>args</span><span class=p>,</span> <span class=o>**</span><span class=n>kwargs</span><span class=p>)</span>
+    <span class=n>obj</span><span class=o>.</span><span class=vm>__dict__</span> <span class=o>=</span> <span class=bp>cls</span><span class=o>.</span><span class=n>_shared_borg_state</span>
+    <span class=k>return</span> <span class=n>obj</span>
+  
+<span class=n>borg</span> <span class=o>=</span> <span class=n>BorgSingleton</span><span class=p>()</span>
+<span class=n>borg</span><span class=o>.</span><span class=n>shared_variable</span> <span class=o>=</span> <span class=s2>&quot;Shared Variable&quot;</span>
+
+<span class=k>class</span> <span class=nc>ChildBorg</span><span class=p>(</span><span class=n>BorgSingleton</span><span class=p>):</span>
+  <span class=k>pass</span>
+
+<span class=n>childBorg</span> <span class=o>=</span> <span class=n>ChildBorg</span><span class=p>()</span>
+<span class=nb>print</span><span class=p>(</span><span class=n>childBorg</span> <span class=ow>is</span> <span class=n>borg</span><span class=p>)</span>
+<span class=nb>print</span><span class=p>(</span><span class=n>childBorg</span><span class=o>.</span><span class=n>shared_variable</span><span class=p>)</span>
+</pre></div></code>
+</gfg-panel></gfg-tabs><div class="code-output"><br/><strong>Output</strong><pre>False
+Shared Variable</pre></div><p dir="ltr"><span>Along with the new instance creation process, a shared state is also defined in the __new__ method. Here the shared state is retained using the shared_borg_state attribute and it is stored in the __dict__ dictionary of each instance.</span></p><p dir="ltr"><span>If you want a different state, then you can reset the  shared_borg_state attribute. Let's see how to reset a shared state.</span></p><gfg-tabs allow-code-exec=true  data-run-ide="true">
+            <gfg-tab slot="tab">Python</gfg-tab>
+<gfg-panel slot="panel" data-code-lang="python3" data-main-code-start="None" data-main-code-end="None">
+    <code class="language-python3"><div class=highlight><pre><span></span><span class=k>class</span> <span class=nc>BorgSingleton</span><span class=p>(</span><span class=nb>object</span><span class=p>):</span>
+  <span class=n>_shared_borg_state</span> <span class=o>=</span> <span class=p>{}</span>
+  
+  <span class=k>def</span> <span class=fm>__new__</span><span class=p>(</span><span class=bp>cls</span><span class=p>,</span> <span class=o>*</span><span class=n>args</span><span class=p>,</span> <span class=o>**</span><span class=n>kwargs</span><span class=p>):</span>
+    <span class=n>obj</span> <span class=o>=</span> <span class=nb>super</span><span class=p>(</span><span class=n>BorgSingleton</span><span class=p>,</span> <span class=bp>cls</span><span class=p>)</span><span class=o>.</span><span class=fm>__new__</span><span class=p>(</span><span class=bp>cls</span><span class=p>,</span> <span class=o>*</span><span class=n>args</span><span class=p>,</span> <span class=o>**</span><span class=n>kwargs</span><span class=p>)</span>
+    <span class=n>obj</span><span class=o>.</span><span class=vm>__dict__</span> <span class=o>=</span> <span class=bp>cls</span><span class=o>.</span><span class=n>_shared_borg_state</span>
+    <span class=k>return</span> <span class=n>obj</span>
+  
+<span class=n>borg</span> <span class=o>=</span> <span class=n>BorgSingleton</span><span class=p>()</span>
+<span class=n>borg</span><span class=o>.</span><span class=n>shared_variable</span> <span class=o>=</span> <span class=s2>&quot;Shared Variable&quot;</span>
+
+<span class=k>class</span> <span class=nc>NewChildBorg</span><span class=p>(</span><span class=n>BorgSingleton</span><span class=p>):</span>
+    <span class=n>_shared_borg_state</span> <span class=o>=</span> <span class=p>{}</span>
+
+<span class=n>newChildBorg</span> <span class=o>=</span> <span class=n>NewChildBorg</span><span class=p>()</span>
+<span class=nb>print</span><span class=p>(</span><span class=n>newChildBorg</span><span class=o>.</span><span class=n>shared_variable</span><span class=p>)</span>
+</pre></div></code>
+</gfg-panel></gfg-tabs><p dir="ltr"><span>Here, we have reset the shared state and tried to access the shared_variable. Let's see the error.</span></p><pre><span>Traceback (most recent call last):</span><br/><span>  File "/home/329d68500c5916767fbaf351710ebb13.py", line 16, in &lt;module&gt;</span><br/><span>    print(newChildBorg.shared_variable)</span><br/><span>AttributeError: 'NewChildBorg' object has no attribute 'shared_variable'</span></pre><p dir="ltr" style="text-align: justify;"><b><strong>Use cases of a Singleton:</strong></b></p><p dir="ltr"><span>Let's list a few of the use cases of a singleton class. They are as follows:</span></p><ul><li value="1"><span>Managing a database connection</span></li><li value="2"><span>Global point access to writing log messages</span></li><li value="3"><span>File Manager</span></li><li value="4"><span>Print spooler</span></li></ul><p dir="ltr" style="text-align: justify;"><b><strong>Create a Web Crawler using Classic Singleton:</strong></b></p><p dir="ltr"><span>Let's create a webcrawler that uses the benefit of a classic singleton. In this practical example, the crawler scans a webpage, fetch the links associated with the same website, and download all the images in it. Here, we have two main classes and two main functions.</span></p><ul><li value="1"><span>CrawlerSingleton: This class acts a classic singleton</span></li><li value="2"><span>ParallelDownloader: This class provides thread functionality to download images</span></li><li value="3"><span>navigate_site: This function crawls the website and fetches the links that belong to the same website. And, finally, it arranges the link to download images.</span></li><li value="4"><span>download_images: This function crawls the page link and downloads the images.</span></li></ul><p dir="ltr"><span>Apart from the above classes and functions, we use two sets of libraries to parse the web page - </span><b><strong>BeautifulSoup and HTTP Client</strong></b><span>.</span></p><p dir="ltr"><span>Have a look at the below code. </span></p><p dir="ltr"><i><em class="GFGEditorTheme__textItalic">Note: Execute the code in your local machine</em></i></p><gfg-tabs allow-code-exec=true  data-run-ide="true">
+            <gfg-tab slot="tab">Python</gfg-tab>
+<gfg-panel slot="panel" data-code-lang="python3" data-main-code-start="None" data-main-code-end="None">
+    <code class="language-python3"><div class=highlight><pre><span></span><span class=kn>import</span> <span class=nn>httplib2</span>
+<span class=kn>import</span> <span class=nn>os</span>
+<span class=kn>import</span> <span class=nn>re</span>
+<span class=kn>import</span> <span class=nn>threading</span>
+<span class=kn>import</span> <span class=nn>urllib</span>
+<span class=kn>import</span> <span class=nn>urllib.request</span>
+<span class=kn>from</span> <span class=nn>urllib.parse</span> <span class=kn>import</span> <span class=n>urlparse</span><span class=p>,</span> <span class=n>urljoin</span>
+<span class=kn>from</span> <span class=nn>bs4</span> <span class=kn>import</span> <span class=n>BeautifulSoup</span>
+
+<span class=k>class</span> <span class=nc>CrawlerSingleton</span><span class=p>(</span><span class=nb>object</span><span class=p>):</span>
+    <span class=k>def</span> <span class=fm>__new__</span><span class=p>(</span><span class=bp>cls</span><span class=p>):</span>
+<span class=w>        </span><span class=sd>&quot;&quot;&quot; creates a singleton object, if it is not created, </span>
+<span class=sd>        or else returns the previous singleton object&quot;&quot;&quot;</span>
+        <span class=k>if</span> <span class=ow>not</span> <span class=nb>hasattr</span><span class=p>(</span><span class=bp>cls</span><span class=p>,</span> <span class=s1>&#39;instance&#39;</span><span class=p>):</span>
+            <span class=bp>cls</span><span class=o>.</span><span class=n>instance</span> <span class=o>=</span> <span class=nb>super</span><span class=p>(</span><span class=n>CrawlerSingleton</span><span class=p>,</span> <span class=bp>cls</span><span class=p>)</span><span class=o>.</span><span class=fm>__new__</span><span class=p>(</span><span class=bp>cls</span><span class=p>)</span>
+        <span class=k>return</span> <span class=bp>cls</span><span class=o>.</span><span class=n>instance</span>
+
+<span class=k>def</span> <span class=nf>navigate_site</span><span class=p>(</span><span class=n>max_links</span> <span class=o>=</span> <span class=mi>5</span><span class=p>):</span>
+<span class=w>    </span><span class=sd>&quot;&quot;&quot; navigate the website using BFS algorithm, find links and</span>
+<span class=sd>        arrange them for downloading images &quot;&quot;&quot;</span>
+
+    <span class=c1># singleton instance</span>
+    <span class=n>parser_crawlersingleton</span> <span class=o>=</span> <span class=n>CrawlerSingleton</span><span class=p>()</span>
+    
+    <span class=c1># During the initial stage, url_queue has the main_url. </span>
+    <span class=c1># Upon parsing the main_url page, new links that belong to the </span>
+    <span class=c1># same website is added to the url_queue until</span>
+    <span class=c1># it equals to max _links.</span>
+    <span class=k>while</span> <span class=n>parser_crawlersingleton</span><span class=o>.</span><span class=n>url_queue</span><span class=p>:</span>
+
+        <span class=c1># checks whether it reached the max. link</span>
+        <span class=k>if</span> <span class=nb>len</span><span class=p>(</span><span class=n>parser_crawlersingleton</span><span class=o>.</span><span class=n>visited_url</span><span class=p>)</span> <span class=o>==</span> <span class=n>max_links</span><span class=p>:</span>
+            <span class=k>return</span>
+
+        <span class=c1># pop the url from the queue</span>
+        <span class=n>url</span> <span class=o>=</span> <span class=n>parser_crawlersingleton</span><span class=o>.</span><span class=n>url_queue</span><span class=o>.</span><span class=n>pop</span><span class=p>()</span>
+
+        <span class=c1># connect to the web page</span>
+        <span class=n>http</span> <span class=o>=</span> <span class=n>httplib2</span><span class=o>.</span><span class=n>Http</span><span class=p>()</span>
+        <span class=k>try</span><span class=p>:</span>
+            <span class=n>status</span><span class=p>,</span> <span class=n>response</span> <span class=o>=</span> <span class=n>http</span><span class=o>.</span><span class=n>request</span><span class=p>(</span><span class=n>url</span><span class=p>)</span>
+        <span class=k>except</span> <span class=ne>Exception</span><span class=p>:</span>
+            <span class=k>continue</span>
+        
+        <span class=c1># add the link to download the images</span>
+        <span class=n>parser_crawlersingleton</span><span class=o>.</span><span class=n>visited_url</span><span class=o>.</span><span class=n>add</span><span class=p>(</span><span class=n>url</span><span class=p>)</span>
+        <span class=nb>print</span><span class=p>(</span><span class=n>url</span><span class=p>)</span>
+
+        <span class=c1># crawl the web page and fetch the links within</span>
+        <span class=c1># the main page</span>
+        <span class=n>bs</span> <span class=o>=</span> <span class=n>BeautifulSoup</span><span class=p>(</span><span class=n>response</span><span class=p>,</span> <span class=s2>&quot;html.parser&quot;</span><span class=p>)</span>
+
+        <span class=k>for</span> <span class=n>link</span> <span class=ow>in</span> <span class=n>BeautifulSoup</span><span class=o>.</span><span class=n>findAll</span><span class=p>(</span><span class=n>bs</span><span class=p>,</span> <span class=s1>&#39;a&#39;</span><span class=p>):</span>
+            <span class=n>link_url</span> <span class=o>=</span> <span class=n>link</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=s1>&#39;href&#39;</span><span class=p>)</span>
+            <span class=k>if</span> <span class=ow>not</span> <span class=n>link_url</span><span class=p>:</span>
+                <span class=k>continue</span>
+
+            <span class=c1># parse the fetched link</span>
+            <span class=n>parsed</span> <span class=o>=</span> <span class=n>urlparse</span><span class=p>(</span><span class=n>link_url</span><span class=p>)</span>
+            
+            <span class=c1># skip the link, if it leads to an external page</span>
+            <span class=k>if</span> <span class=n>parsed</span><span class=o>.</span><span class=n>netloc</span> <span class=ow>and</span> <span class=n>parsed</span><span class=o>.</span><span class=n>netloc</span> <span class=o>!=</span> <span class=n>parsed_url</span><span class=o>.</span><span class=n>netloc</span><span class=p>:</span>
+                <span class=k>continue</span>
+
+            <span class=n>scheme</span> <span class=o>=</span> <span class=n>parsed_url</span><span class=o>.</span><span class=n>scheme</span>
+            <span class=n>netloc</span> <span class=o>=</span> <span class=n>parsed</span><span class=o>.</span><span class=n>netloc</span> <span class=ow>or</span> <span class=n>parsed_url</span><span class=o>.</span><span class=n>netloc</span>
+            <span class=n>path</span> <span class=o>=</span> <span class=n>parsed</span><span class=o>.</span><span class=n>path</span>
+            
+            <span class=c1># construct a full url </span>
+            <span class=n>link_url</span> <span class=o>=</span> <span class=n>scheme</span> <span class=o>+</span><span class=s1>&#39;://&#39;</span> <span class=o>+</span><span class=n>netloc</span> <span class=o>+</span> <span class=n>path</span>
+
+            
+            <span class=c1># skip, if the link is already added</span>
+            <span class=k>if</span> <span class=n>link_url</span> <span class=ow>in</span> <span class=n>parser_crawlersingleton</span><span class=o>.</span><span class=n>visited_url</span><span class=p>:</span>
+                <span class=k>continue</span>
+            
+            <span class=c1># Add the new link fetched,</span>
+            <span class=c1># so that the while loop continues with next iteration.</span>
+            <span class=n>parser_crawlersingleton</span><span class=o>.</span><span class=n>url_queue</span> <span class=o>=</span> <span class=p>[</span><span class=n>link_url</span><span class=p>]</span> <span class=o>+</span>\
+                                                <span class=n>parser_crawlersingleton</span><span class=o>.</span><span class=n>url_queue</span>
+            
+<span class=k>class</span> <span class=nc>ParallelDownloader</span><span class=p>(</span><span class=n>threading</span><span class=o>.</span><span class=n>Thread</span><span class=p>):</span>
+<span class=w>    </span><span class=sd>&quot;&quot;&quot; Download the images parallelly &quot;&quot;&quot;</span>
+    <span class=k>def</span> <span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>,</span> <span class=n>thread_id</span><span class=p>,</span> <span class=n>name</span><span class=p>,</span> <span class=n>counter</span><span class=p>):</span>
+        <span class=n>threading</span><span class=o>.</span><span class=n>Thread</span><span class=o>.</span><span class=fm>__init__</span><span class=p>(</span><span class=bp>self</span><span class=p>)</span>
+        <span class=bp>self</span><span class=o>.</span><span class=n>name</span> <span class=o>=</span> <span class=n>name</span>
+
+    <span class=k>def</span> <span class=nf>run</span><span class=p>(</span><span class=bp>self</span><span class=p>):</span>
+        <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;Starting thread&#39;</span><span class=p>,</span> <span class=bp>self</span><span class=o>.</span><span class=n>name</span><span class=p>)</span>
+        <span class=c1># function to download the images </span>
+        <span class=n>download_images</span><span class=p>(</span><span class=bp>self</span><span class=o>.</span><span class=n>name</span><span class=p>)</span>
+        <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;Finished thread&#39;</span><span class=p>,</span> <span class=bp>self</span><span class=o>.</span><span class=n>name</span><span class=p>)</span>
+            
+<span class=k>def</span> <span class=nf>download_images</span><span class=p>(</span><span class=n>thread_name</span><span class=p>):</span>
+    <span class=c1># singleton instance</span>
+    <span class=n>singleton</span> <span class=o>=</span> <span class=n>CrawlerSingleton</span><span class=p>()</span>
+    <span class=c1># visited_url has a set of URLs. </span>
+    <span class=c1># Here we will fetch each URL and </span>
+    <span class=c1># download the images in it.</span>
+    <span class=k>while</span> <span class=n>singleton</span><span class=o>.</span><span class=n>visited_url</span><span class=p>:</span>
+        <span class=c1># pop the url to download the images </span>
+        <span class=n>url</span> <span class=o>=</span> <span class=n>singleton</span><span class=o>.</span><span class=n>visited_url</span><span class=o>.</span><span class=n>pop</span><span class=p>()</span>
+
+        <span class=n>http</span> <span class=o>=</span> <span class=n>httplib2</span><span class=o>.</span><span class=n>Http</span><span class=p>()</span>
+        <span class=nb>print</span><span class=p>(</span><span class=n>thread_name</span><span class=p>,</span> <span class=s1>&#39;Downloading images from&#39;</span><span class=p>,</span> <span class=n>url</span><span class=p>)</span>
+
+        <span class=k>try</span><span class=p>:</span>
+            <span class=n>status</span><span class=p>,</span> <span class=n>response</span> <span class=o>=</span> <span class=n>http</span><span class=o>.</span><span class=n>request</span><span class=p>(</span><span class=n>url</span><span class=p>)</span>
+        <span class=k>except</span> <span class=ne>Exception</span><span class=p>:</span>
+            <span class=k>continue</span>
+
+        <span class=c1># parse the web page to find all images</span>
+        <span class=n>bs</span> <span class=o>=</span> <span class=n>BeautifulSoup</span><span class=p>(</span><span class=n>response</span><span class=p>,</span> <span class=s2>&quot;html.parser&quot;</span><span class=p>)</span>
+
+        <span class=c1># Find all &lt;img&gt; tags</span>
+        <span class=n>images</span> <span class=o>=</span> <span class=n>BeautifulSoup</span><span class=o>.</span><span class=n>findAll</span><span class=p>(</span><span class=n>bs</span><span class=p>,</span> <span class=s1>&#39;img&#39;</span><span class=p>)</span>
+
+        <span class=k>for</span> <span class=n>image</span> <span class=ow>in</span> <span class=n>images</span><span class=p>:</span>
+            <span class=n>src</span> <span class=o>=</span> <span class=n>image</span><span class=o>.</span><span class=n>get</span><span class=p>(</span><span class=s1>&#39;src&#39;</span><span class=p>)</span>
+            <span class=n>src</span> <span class=o>=</span> <span class=n>urljoin</span><span class=p>(</span><span class=n>url</span><span class=p>,</span> <span class=n>src</span><span class=p>)</span>
+
+            <span class=n>basename</span> <span class=o>=</span> <span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>basename</span><span class=p>(</span><span class=n>src</span><span class=p>)</span>
+            <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;basename:&#39;</span><span class=p>,</span> <span class=n>basename</span><span class=p>)</span>
+
+            <span class=k>if</span> <span class=n>basename</span> <span class=o>!=</span> <span class=s1>&#39;&#39;</span><span class=p>:</span>
+                <span class=k>if</span> <span class=n>src</span> <span class=ow>not</span> <span class=ow>in</span> <span class=n>singleton</span><span class=o>.</span><span class=n>image_downloaded</span><span class=p>:</span>
+                    <span class=n>singleton</span><span class=o>.</span><span class=n>image_downloaded</span><span class=o>.</span><span class=n>add</span><span class=p>(</span><span class=n>src</span><span class=p>)</span>
+                    <span class=nb>print</span><span class=p>(</span><span class=s1>&#39;Downloading&#39;</span><span class=p>,</span> <span class=n>src</span><span class=p>)</span>
+                    <span class=c1># Download the images to local system</span>
+                    <span class=n>urllib</span><span class=o>.</span><span class=n>request</span><span class=o>.</span><span class=n>urlretrieve</span><span class=p>(</span><span class=n>src</span><span class=p>,</span> <span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>join</span><span class=p>(</span><span class=s1>&#39;images&#39;</span><span class=p>,</span> <span class=n>basename</span><span class=p>))</span>
+                    <span class=nb>print</span><span class=p>(</span><span class=n>thread_name</span><span class=p>,</span> <span class=s1>&#39;finished downloading images from&#39;</span><span class=p>,</span> <span class=n>url</span><span class=p>)</span>
+
+<span class=k>def</span> <span class=nf>main</span><span class=p>():</span>
+    <span class=c1># singleton instance</span>
+    <span class=n>crwSingltn</span> <span class=o>=</span> <span class=n>CrawlerSingleton</span><span class=p>()</span>
+
+    <span class=c1># adding the url to the queue for parsing</span>
+    <span class=n>crwSingltn</span><span class=o>.</span><span class=n>url_queue</span> <span class=o>=</span> <span class=p>[</span><span class=n>main_url</span><span class=p>]</span>
+
+    <span class=c1># initializing a set to store all visited URLs</span>
+    <span class=c1># for downloading images.</span>
+    <span class=n>crwSingltn</span><span class=o>.</span><span class=n>visited_url</span> <span class=o>=</span> <span class=nb>set</span><span class=p>()</span>
+
+    <span class=c1># initializing a set to store path of the downloaded images</span>
+    <span class=n>crwSingltn</span><span class=o>.</span><span class=n>image_downloaded</span> <span class=o>=</span> <span class=nb>set</span><span class=p>()</span>
+    
+    <span class=c1># invoking the method to crawl the website</span>
+    <span class=n>navigate_site</span><span class=p>()</span>
+
+    <span class=c1>## create images directory if not exists</span>
+    <span class=k>if</span> <span class=ow>not</span> <span class=n>os</span><span class=o>.</span><span class=n>path</span><span class=o>.</span><span class=n>exists</span><span class=p>(</span><span class=s1>&#39;images&#39;</span><span class=p>):</span>
+        <span class=n>os</span><span class=o>.</span><span class=n>makedirs</span><span class=p>(</span><span class=s1>&#39;images&#39;</span><span class=p>)</span>
+
+    <span class=n>thread1</span> <span class=o>=</span> <span class=n>ParallelDownloader</span><span class=p>(</span><span class=mi>1</span><span class=p>,</span> <span class=s2>&quot;Thread-1&quot;</span><span class=p>,</span> <span class=mi>1</span><span class=p>)</span>
+    <span class=n>thread2</span> <span class=o>=</span> <span class=n>ParallelDownloader</span><span class=p>(</span><span class=mi>2</span><span class=p>,</span> <span class=s2>&quot;Thread-2&quot;</span><span class=p>,</span> <span class=mi>2</span><span class=p>)</span>
+
+    <span class=c1># Start new threads</span>
+    <span class=n>thread1</span><span class=o>.</span><span class=n>start</span><span class=p>()</span>
+    <span class=n>thread2</span><span class=o>.</span><span class=n>start</span><span class=p>()</span>
+
+    
+<span class=k>if</span> <span class=vm>__name__</span> <span class=o>==</span> <span class=s2>&quot;__main__&quot;</span><span class=p>:</span>
+    <span class=n>main_url</span> <span class=o>=</span> <span class=p>(</span><span class=s2>&quot;https://www.geeksforgeeks.org/&quot;</span><span class=p>)</span>
+    <span class=n>parsed_url</span> <span class=o>=</span> <span class=n>urlparse</span><span class=p>(</span><span class=n>main_url</span><span class=p>)</span>
+    <span class=n>main</span><span class=p>()</span>
+</pre></div></code>
+</gfg-panel></gfg-tabs><p dir="ltr"><span>Let's look into the downloaded images and python shell output.</span></p><figure class="image"><img height="inherit" loading="lazy" src="https://media.geeksforgeeks.org/wp-content/uploads/20200902213031/Output-660x133.PNG" width="inherit"/><figcaption>Downloaded Images</figcaption></figure><figure class="image"><img height="inherit" loading="lazy" src="https://media.geeksforgeeks.org/wp-content/uploads/20200902213351/terminaloutput-603x660.PNG" width="inherit"/><figcaption>Python Shell Output</figcaption></figure><p dir="ltr"><b><strong>Summary:</strong></b></p><p dir="ltr"><span>Singleton pattern is a design pattern in Python that restricts the instantiation of a class to one object. It can limit concurrent access to a shared resource, and also it helps to create a global point of access for a resource. </span></p><p><br/></p>                                <script>
+                                    const rawVideoDataMap = null;
 
                                     // Convert it into a JS Map
                                     const videoDataMap = new Map(Object.entries(rawVideoDataMap));
@@ -1078,7 +1225,7 @@ This is Concrete Product B.</pre></div><h2 id="use-cases-of-the-factory-method">
                                         if (!videoIframe) return;
 
                                         // Safely inject PHP data as JSON into JavaScript
-                                        var resp = [{"id":9534,"title":"Factory method design pattern in Java","slug":"factory-method-design-pattern-in-java","description":"<p><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\">Design patterns are solutions to commonly recurring problems. Design patterns are classified into <strong>Creational<\/strong>, <strong>Structural, and Behavioural types<\/strong>.&nbsp;<\/span><br><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>Factory Method Design Pattern<\/strong> is a creational design pattern that means it deals with the creation of objects. It says that, define an interface for creating the object and let the subclasses decide which class to instantiate.&nbsp;<\/span><br><br><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\"><strong>Steps to implement Factory Method Design Pattern<\/strong><\/span><br><br><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\">1. Create an interface having an abstract method<\/span><br><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\">2. Create implementation classes<\/span><br><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\">3. Create a Factory that will decide which imp object will be created.<\/span><br><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\">4. Test in the main method<\/span><br><br><span style=\"background-color:rgb(255,255,255);color:rgb(0,0,0);\">So in this video, let's look at the detailed explanation of the <strong>Factory Method Design Pattern in Java.<\/strong><\/span><\/p>","source":"https:\/\/videos.geeksforgeeks.org\/hls\/e90b8d3982fb47f2bc8821d1a864401fgfg-1234520240624133149.m3u8","category":[{"term_id__id":47,"term_id__term_name":"Java","term_id__term_type":1,"term_id__slug":"java"},{"term_id__id":48,"term_id__term_name":"Java","term_id__term_type":2,"term_id__slug":"java-uk02eh"},{"term_id__id":96,"term_id__term_name":"Android","term_id__term_type":1,"term_id__slug":"android"}],"meta":{"thumbnail":"https:\/\/media.geeksforgeeks.org\/geeksforgeeks\/FactorymethoddesignpatterninJava\/1223456720240624133302-small.png","largeThumbnail":"https:\/\/media.geeksforgeeks.org\/geeksforgeeks\/FactorymethoddesignpatterninJava\/1223456720240624133302.jpg","likes":1,"views":42100,"isFeatured":0,"isPremium":0,"isPublic":0,"format":"video\/mp4","revision":[]},"time":"24\/06\/2024","subtitle":"https:\/\/videos.geeksforgeeks.org\/subtitles\/1234520240624133149.vtt","duration":1915,"course_link":null,"video_schema":{"@context":"https:\/\/schema.org","@type":"VideoObject","name":"Factory method design pattern in Java","description":"Design patterns are solutions to commonly recurring problems. Design patterns are classified into Creational, Structural, and Behavioural types. nbspFactory Method Design Pattern is a creational design pattern that means it deals with the creation of objects. It says that, define an interface for creating the object and let the subclasses decide which class to instantiate. nbspSteps to implement Factory Method Design Pattern1. Create an interface having an abstract method2. Create implementation classes3. Create a Factory that will decide which imp object will be created.4. Test in the main methodSo in this video, lets look at the detailed explanation of the Factory Method Design Pattern in Java.","thumbnailUrl":["https:\/\/media.geeksforgeeks.org\/geeksforgeeks\/FactorymethoddesignpatterninJava\/1223456720240624133302.jpg","https:\/\/media.geeksforgeeks.org\/geeksforgeeks\/FactorymethoddesignpatterninJava\/1223456720240624133302-seo.png","https:\/\/media.geeksforgeeks.org\/geeksforgeeks\/FactorymethoddesignpatterninJava\/1223456720240624133302-small.png"],"uploadDate":"2024-06-24T13:33:33Z","duration":"PT0H31M55S","contentUrl":"https:\/\/www.geeksforgeeks.org\/videos\/factory-method-design-pattern-in-java\/"}}];
+                                        var resp = null;
 
                                         function postToIframeWhenReady(iframe, data, maxAttempts = 20, intervalTime = 100) {
                                             let attempts = 0;
@@ -1167,27 +1314,9 @@ This is Concrete Product B.</pre></div><h2 id="use-cases-of-the-factory-method">
                                                                                 <div class='article_bottom_text'></div><br>
                                                             <div id="video-tab-content">
                                                     <script> 
-                        var video_api_response = JSON.parse("[{\"id\":9534,\"title\":\"Factory method design pattern in Java\",\"slug\":\"factory-method-design-pattern-in-java\",\"description\":\"<p><span style=\\\"background-color:rgb(255,255,255);color:rgb(0,0,0);\\\">Design patterns are solutions to commonly recurring problems. Design patterns are classified into <strong>Creational<\/strong>, <strong>Structural, and Behavioural types<\/strong>.&nbsp;<\/span><br><span style=\\\"background-color:rgb(255,255,255);color:rgb(0,0,0);\\\"><strong>Factory Method Design Pattern<\/strong> is a creational design pattern that means it deals with the creation of objects. It says that, define an interface for creating the object and let the subclasses decide which class to instantiate.&nbsp;<\/span><br><br><span style=\\\"background-color:rgb(255,255,255);color:rgb(0,0,0);\\\"><strong>Steps to implement Factory Method Design Pattern<\/strong><\/span><br><br><span style=\\\"background-color:rgb(255,255,255);color:rgb(0,0,0);\\\">1. Create an interface having an abstract method<\/span><br><span style=\\\"background-color:rgb(255,255,255);color:rgb(0,0,0);\\\">2. Create implementation classes<\/span><br><span style=\\\"background-color:rgb(255,255,255);color:rgb(0,0,0);\\\">3. Create a Factory that will decide which imp object will be created.<\/span><br><span style=\\\"background-color:rgb(255,255,255);color:rgb(0,0,0);\\\">4. Test in the main method<\/span><br><br><span style=\\\"background-color:rgb(255,255,255);color:rgb(0,0,0);\\\">So in this video, let's look at the detailed explanation of the <strong>Factory Method Design Pattern in Java.<\/strong><\/span><\/p>\",\"source\":\"https:\/\/videos.geeksforgeeks.org\/hls\/e90b8d3982fb47f2bc8821d1a864401fgfg-1234520240624133149.m3u8\",\"category\":[{\"term_id__id\":47,\"term_id__term_name\":\"Java\",\"term_id__term_type\":1,\"term_id__slug\":\"java\"},{\"term_id__id\":48,\"term_id__term_name\":\"Java\",\"term_id__term_type\":2,\"term_id__slug\":\"java-uk02eh\"},{\"term_id__id\":96,\"term_id__term_name\":\"Android\",\"term_id__term_type\":1,\"term_id__slug\":\"android\"}],\"meta\":{\"thumbnail\":\"https:\/\/media.geeksforgeeks.org\/geeksforgeeks\/FactorymethoddesignpatterninJava\/1223456720240624133302-small.png\",\"largeThumbnail\":\"https:\/\/media.geeksforgeeks.org\/geeksforgeeks\/FactorymethoddesignpatterninJava\/1223456720240624133302.jpg\",\"likes\":1,\"views\":42100,\"isFeatured\":0,\"isPremium\":0,\"isPublic\":0,\"format\":\"video\/mp4\",\"revision\":{}},\"time\":\"24\/06\/2024\",\"subtitle\":\"https:\/\/videos.geeksforgeeks.org\/subtitles\/1234520240624133149.vtt\",\"duration\":1915,\"course_link\":null,\"video_schema\":{\"@context\":\"https:\/\/schema.org\",\"@type\":\"VideoObject\",\"name\":\"Factory method design pattern in Java\",\"description\":\"Design patterns are solutions to commonly recurring problems. Design patterns are classified into Creational, Structural, and Behavioural types. nbspFactory Method Design Pattern is a creational design pattern that means it deals with the creation of objects. It says that, define an interface for creating the object and let the subclasses decide which class to instantiate. nbspSteps to implement Factory Method Design Pattern1. Create an interface having an abstract method2. Create implementation classes3. Create a Factory that will decide which imp object will be created.4. Test in the main methodSo in this video, lets look at the detailed explanation of the Factory Method Design Pattern in Java.\",\"thumbnailUrl\":[\"https:\/\/media.geeksforgeeks.org\/geeksforgeeks\/FactorymethoddesignpatterninJava\/1223456720240624133302.jpg\",\"https:\/\/media.geeksforgeeks.org\/geeksforgeeks\/FactorymethoddesignpatterninJava\/1223456720240624133302-seo.png\",\"https:\/\/media.geeksforgeeks.org\/geeksforgeeks\/FactorymethoddesignpatterninJava\/1223456720240624133302-small.png\"],\"uploadDate\":\"2024-06-24T13:33:33Z\",\"duration\":\"PT0H31M55S\",\"contentUrl\":\"https:\/\/www.geeksforgeeks.org\/videos\/factory-method-design-pattern-in-java\/\"}}]");
+                        var video_api_response = JSON.parse("[]");
                     </script>
-                <div id="#GFG_AD_InContent_Desktop_728x280" style="display: flex; width: 100%; justify-content: center;">
-    <div id="video-iframe-container" style="display: flex; flex-direction: column; align-items: center;">
-        <iframe
-            id="video-iframe"
-            src="https://aa.geeksforgeeks.org/instream/video.html"
-            width="640"
-            height="380"
-            frameborder="0"
-            allowfullscreen
-            allow="autoplay"
-            referrerpolicy="origin"
-        ></iframe>
-        
-        <!-- This part is dynamically created by JavaScript -->
-        <div id="video-info-container">
-            <!-- Video title -->
-            <div id="video-info-container-title" style="width:100%; text-align: left; color: var(--similar-read-title-color); font-size: 20px; font-family: var(--font-primary); padding-right: 10px;">Factory method design pattern in Java</div>
-        </div>
-    </div></div>                                </div>
+                                                </div>
                                                         <div class="d-row content-bw "style="margin-top: 20px;">
                             <div class="article-pgnavi_prev"><div class="comment_div" data-title="Comments"><button class="author_footer_btn" data-gfg-action="loadComments">
     <div class='discussion_panel'>
@@ -1201,19 +1330,19 @@ This is Concrete Product B.</pre></div><h2 id="use-cases-of-the-factory-method">
                                             <div class="article-meta-author-details-profile-display">
                                                 <div class="author_info">
                                                 <div class="article-meta-author-details-profile-display-icon">
-                                                    <a href="https://www.geeksforgeeks.org/user/asadaliasad/" style="text-decoration: none;"><div class="image-wrap" style="position: relative"><p class="profileCard-profile-picture" style="background-color:#B0DAFF;  margin:0px;">A</p>
+                                                    <a href="https://www.geeksforgeeks.org/user/sonugeorge/" style="text-decoration: none;"><div class="image-wrap" style="position: relative"><p class="profileCard-profile-picture" style="background-color:#B0DAFF;  margin:0px;">S</p>
         <div style="position: absolute;top: -35px; left: -13px;">
             <i class="gfg-badge-icon md scholar"></i>
         </div>
         </div>
 </a>                                                </div>
                                                 <div class="article-meta-author-details-profile-display-name" >
-                                                    <a aria-label="author profile" href="https://www.geeksforgeeks.org/user/asadaliasad/" style="display: block;overflow: hidden;width: 65px;text-decoration: none;text-overflow: ellipsis;color: var(--gfg-title-color);font-weight: bold;white-space: nowrap;">asadaliasad</a>                                                </div>
+                                                    <a aria-label="author profile" href="https://www.geeksforgeeks.org/user/sonugeorge/" style="display: block;overflow: hidden;width: 65px;text-decoration: none;text-overflow: ellipsis;color: var(--gfg-title-color);font-weight: bold;white-space: nowrap;">sonugeorge</a>                                                </div>
                                                 </div>
                                                 <div class="author_follow_btn"><div class="article-meta-author-details-follow-button">
             <div class="follow-container">
             <div class="follow-btn" >
-<button id="followAuthor" type="button" onclick ="followOrUnfollowAuthor()" value="asadaliasad">
+<button id="followAuthor" type="button" onclick ="followOrUnfollowAuthor()" value="sonugeorge">
 <span role="img" aria-label="plus" class="plus-icon"><svg viewBox="64 64 896 896" focusable="false" data-icon="plus" width="1em" height="1em" fill="currentColor" aria-hidden="true"><defs><style></style></defs><path d="M482 152h60q8 0 8 8v704q0 8-8 8h-60q-8 0-8-8V160q0-8 8-8z"></path><path d="M176 474h672q8 0 8 8v60q0 8-8 8H176q-8 0-8-8v-60q0-8 8-8z"></path></svg></span> <span>Follow</span></button></div></div></div></div>                                            </div>
                                             
                                         </div>
@@ -1223,7 +1352,7 @@ This is Concrete Product B.</pre></div><h2 id="use-cases-of-the-factory-method">
                                                     <img class="gfg-icon_Gnews no-zoom-in-cursor" src=https://media.geeksforgeeks.org/auth-dashboard-uploads/Google-news.svg  loading="lazy" alt="News"></img>
                                                 </a>
                                             </div>  -->
-                                            <div pid="404122" class="article--viewer_like tooltip tooltipBottom" data-title="Like Article">
+                                            <div pid="506522" class="article--viewer_like tooltip tooltipBottom" data-title="Like Article">
                                                 <!-- <span class="tooltiptext likeTooltipBottom">Like Article</span> -->
                                                 <button id="likeButton" aria-label="like article" data-gfg-action="like-article" data-bookmark-value="0" data-liked="false" style="color: #5B5A5A !important; display: flex; align-items: center; background-color: unset; margin: 0px !important; padding: 5px 0px;">
                                                     <i class="author-badge-like-button"></i>
@@ -1244,7 +1373,10 @@ This is Concrete Product B.</pre></div><h2 id="use-cases-of-the-factory-method">
                                     <ul>
                                         
             <li style="border-radius: 25px;" class="">
-                <a href="https://www.geeksforgeeks.org/category/programming-language/java/">Java</a>
+                <a href="https://www.geeksforgeeks.org/category/programming-language/python/">Python</a>
+            </li>
+            <li style="border-radius: 25px;" class="">
+                <a href="https://www.geeksforgeeks.org/tag/python-design-pattern/">python-design-pattern</a>
             </li>                                    </ul>
                                                                     </div>
                                                                                 </div>
@@ -1255,7 +1387,145 @@ This is Concrete Product B.</pre></div><h2 id="use-cases-of-the-factory-method">
                                                                                     <div class="article--recommended article--recommended_wrapper" id="similar-reads">
                                                                 <h3 class="new-top-bar top-bar-title">Explore</h3>
                                     <div class="gfg-similar-reads-list">
-                                        <ul class="similarReadLeftBarList"><div class="second"><h2 class="dropdown-title">Java Basics<span class="gfg-icon gfg-icon_arrow-down-thin"></span></h2><div class="dropdown-item" style="display: none !important; border-bottom: 1px solid #CCC;"><a class=" similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/introduction-to-java/"><p class="title-text">Introduction to Java</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">4 min read</span></div></a><a class=" similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/java-programming-basics/"><p class="title-text">Java Programming Basics</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">9 min read</span></div></a><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/methods-in-java/"><p class="title-text">Java Methods</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">7 min read</span></div></a><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/access-modifiers-java/"><p class="title-text">Access Modifiers in Java</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">5 min read</span></div></a><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/arrays-in-java/"><p class="title-text">Arrays in Java</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">7 min read</span></div></a><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/strings-in-java/"><p class="title-text">Java Strings</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">8 min read</span></div></a><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/regular-expressions-in-java/"><p class="title-text">Regular Expressions in Java</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">7 min read</span></div></a></div><h2 class="dropdown-title">OOP &amp; Interfaces<span class="gfg-icon gfg-icon_arrow-down-thin"></span></h2><div class="dropdown-item" style="display: none !important; border-bottom: 1px solid #CCC;"><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/classes-objects-java/"><p class="title-text">Classes and Objects in Java</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">10 min read</span></div></a><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/access-modifiers-java/"><p class="title-text">Access Modifiers in Java</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">5 min read</span></div></a><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/constructors-in-java/"><p class="title-text">Java Constructors</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">10 min read</span></div></a><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/object-oriented-programming-oops-concept-in-java/"><p class="title-text">Java OOP(Object Oriented Programming) Concepts</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">10 min read</span></div></a><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/packages-in-java/"><p class="title-text">Java Packages</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">7 min read</span></div></a><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/interfaces-in-java/"><p class="title-text">Java Interface</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">11 min read</span></div></a></div><h2 class="dropdown-title">Collections<span class="gfg-icon gfg-icon_arrow-down-thin"></span></h2><div class="dropdown-item" style="display: none !important; border-bottom: 1px solid #CCC;"><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/collections-in-java-2/"><p class="title-text">Collections in Java</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">12 min read</span></div></a><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/collections-class-in-java/"><p class="title-text">Collections Class in Java</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">13 min read</span></div></a><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/collection-interface-in-java-with-examples/"><p class="title-text">Collection Interface in Java</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">6 min read</span></div></a><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/iterators-in-java/"><p class="title-text">Iterator in Java</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">5 min read</span></div></a><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/java-comparator-interface/"><p class="title-text">Java Comparator Interface</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">6 min read</span></div></a></div><h2 class="dropdown-title">Exception Handling<span class="gfg-icon gfg-icon_arrow-down-thin"></span></h2><div class="dropdown-item" style="display: none !important; border-bottom: 1px solid #CCC;"><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/exceptions-in-java/"><p class="title-text">Java Exception Handling</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">8 min read</span></div></a><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/java-try-catch-block/"><p class="title-text">Java Try Catch Block</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">4 min read</span></div></a><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/java-final-finally-and-finalize/"><p class="title-text">Java final, finally and finalize</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">4 min read</span></div></a><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/chained-exceptions-in-java/"><p class="title-text">Chained Exceptions in Java</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">3 min read</span></div></a><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/null-pointer-exception-in-java/"><p class="title-text">Null Pointer Exception in Java</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">5 min read</span></div></a><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/exception-handling-with-method-overriding-in-java/"><p class="title-text">Exception Handling with Method Overriding in Java</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">4 min read</span></div></a></div><h2 class="dropdown-title">Java Advanced<span class="gfg-icon gfg-icon_arrow-down-thin"></span></h2><div class="dropdown-item" style="display: none !important; border-bottom: 1px solid #CCC;"><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/java-multithreading-tutorial/"><p class="title-text">Java Multithreading Tutorial</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">3 min read</span></div></a><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/synchronization-in-java/"><p class="title-text">Synchronization in Java</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">10 min read</span></div></a><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/file-handling-in-java/"><p class="title-text">File Handling in Java</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">4 min read</span></div></a><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/java-method-references/"><p class="title-text">Java Method References</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">9 min read</span></div></a><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/java-8-stream-tutorial/"><p class="title-text">Java 8 Stream Tutorial</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">7 min read</span></div></a><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/java-networking/"><p class="title-text">Java Networking</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">15+ min read</span></div></a><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/jdbc-tutorial/"><p class="title-text">JDBC Tutorial</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">5 min read</span></div></a><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/java-memory-management/"><p class="title-text">Java Memory Management</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">4 min read</span></div></a><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/garbage-collection-in-java/"><p class="title-text">Garbage Collection in Java</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">6 min read</span></div></a><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/memory-leaks-in-java/"><p class="title-text">Memory Leaks in Java</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">3 min read</span></div></a></div><h2 class="dropdown-title">Practice Java<span class="gfg-icon gfg-icon_arrow-down-thin"></span></h2><div class="dropdown-item" style="display: none !important; border-bottom: 1px solid #CCC;"><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/java-interview-questions/"><p class="title-text">Java Interview Questions and Answers</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">15+ min read</span></div></a><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/java-programming-examples/"><p class="title-text">Java Programs - Java Programming Examples</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">7 min read</span></div></a><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/java-exercises/"><p class="title-text">Java Exercises - Basic to Advanced Java Practice Programs with Solutions</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">5 min read</span></div></a><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/java/java-quiz/"><p class="title-text">Java Quiz | Level Up Your Java Skills</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">1 min read</span></div></a><a class=" similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem similarReadDropdownItem" href="https://www.geeksforgeeks.org/blogs/java-projects/"><p class="title-text">Top 50 Java Project Ideas For Beginners and Advanced [Update 2025]</p><div class="reading-time"><i class="reading-time-icon" data-gfg-action="readingtime"></i><span style="color: var(--recommendation-card-text-color); font-size: 14px; font-weight: 500; line-height: 17px;">15+ min read</span></div></a></div></div></ul>
+                                        <ul class="similarReadLeftBarList"><div class="second"><h2 class="dropdown-title">Python Fundamentals<span class="gfg-icon gfg-icon_arrow-down-thin"></span></h2><div class="dropdown-item" style="display:none;"><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/introduction-to-python/"><p class="title-text">Python Introduction</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">2 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/input-and-output-in-python/"><p class="title-text">Input and Output in Python</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">4 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/python-variables/"><p class="title-text">Python Variables</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">5 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/python-operators/"><p class="title-text">Python Operators</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">5 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/python-keywords/"><p class="title-text">Python Keywords</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">2 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/python-data-types/"><p class="title-text">Python Data Types</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">7 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/conditional-statements-in-python/"><p class="title-text">Conditional Statements in Python</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">3 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/loops-in-python/"><p class="title-text">Loops in Python - For, While and Nested Loops</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">6 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/python-functions/"><p class="title-text">Python Functions</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">5 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/recursion-in-python/"><p class="title-text">Recursion in Python</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">4 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/python-lambda-anonymous-functions-filter-map-reduce/"><p class="title-text">Python Lambda Functions</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">5 min read</span>
+                </div></a></div><h2 class="dropdown-title">Python Data Structures<span class="gfg-icon gfg-icon_arrow-down-thin"></span></h2><div class="dropdown-item" style="display:none;"><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/python-string/"><p class="title-text">Python String</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">5 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/python-lists/"><p class="title-text">Python Lists</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">4 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/python-tuples/"><p class="title-text">Python Tuples</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">4 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/python-dictionary/"><p class="title-text">Python Dictionary</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">3 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/python-sets/"><p class="title-text">Python Sets</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">6 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/python-arrays/"><p class="title-text">Python Arrays</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">7 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/python-list-comprehension/"><p class="title-text">List Comprehension in Python</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">4 min read</span>
+                </div></a></div><h2 class="dropdown-title">Advanced Python<span class="gfg-icon gfg-icon_arrow-down-thin"></span></h2><div class="dropdown-item" style="display:none;"><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/python-oops-concepts/"><p class="title-text">Python OOP Concepts</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">11 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/python-exception-handling/"><p class="title-text">Python Exception Handling</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">5 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/file-handling-python/"><p class="title-text">File Handling in Python</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">4 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/python-database-tutorial/"><p class="title-text">Python Database Tutorial</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">4 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/python-mongodb-tutorial/"><p class="title-text">Python MongoDB Tutorial</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">2 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/python-mysql/"><p class="title-text">Python MySQL</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">9 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/python-packages/"><p class="title-text">Python Packages</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">12 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/python-modules/"><p class="title-text">Python Modules</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">7 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/python-dsa-libraries/"><p class="title-text">Python DSA Libraries</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">15 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/python3-gui-application-overview/"><p class="title-text">List of Python GUI Library and Packages</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">3 min read</span>
+                </div></a></div><h2 class="dropdown-title">Data Science with Python<span class="gfg-icon gfg-icon_arrow-down-thin"></span></h2><div class="dropdown-item" style="display:none;"><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/numpy-tutorial/"><p class="title-text">NumPy Tutorial - Python Library</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">3 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/pandas/pandas-tutorial/"><p class="title-text">Pandas Tutorial</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">6 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/matplotlib-tutorial/"><p class="title-text">Matplotlib Tutorial</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">5 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/python-seaborn-tutorial/"><p class="title-text">Python Seaborn Tutorial</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">15+ min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/data-science/statsmodel-library-tutorial/"><p class="title-text">StatsModel Library- Tutorial</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">4 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/machine-learning/learning-model-building-scikit-learn-python-machine-learning-library/"><p class="title-text">Learning Model Building in Scikit-learn</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">8 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/deep-learning/tensorflow/"><p class="title-text">TensorFlow Tutorial</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">2 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/deep-learning/pytorch-learn-with-examples/"><p class="title-text">PyTorch Tutorial</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">6 min read</span>
+                </div></a></div><h2 class="dropdown-title">Web Development with Python<span class="gfg-icon gfg-icon_arrow-down-thin"></span></h2><div class="dropdown-item" style="display:none;"><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/flask-tutorial/"><p class="title-text">Flask Tutorial</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">8 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/django-tutorial/"><p class="title-text">Django Tutorial | Learn Django Framework</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">7 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/django-orm-inserting-updating-deleting-data/"><p class="title-text">Django ORM - Inserting, Updating &amp; Deleting Data</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">4 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/templating-with-jinja2-in-flask/"><p class="title-text">Templating With Jinja2 in Flask</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">6 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/django-templates/"><p class="title-text">Django Templates</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">7 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/python-build-a-rest-api-using-flask/"><p class="title-text">Python | Build a REST API using Flask</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">3 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/how-to-create-a-basic-api-using-django-rest-framework/"><p class="title-text">How to Create a basic API using Django Rest Framework ?</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">4 min read</span>
+                </div></a></div><h2 class="dropdown-title">Python Practice<span class="gfg-icon gfg-icon_arrow-down-thin"></span></h2><div class="dropdown-item" style="display:none;"><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/python-quizzes/"><p class="title-text">Python Quiz</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">3 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/python-coding-practice-problems/"><p class="title-text">Python Coding Practice</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">1 min read</span>
+                </div></a><a class="similarReadDropdownItem" href="https://www.geeksforgeeks.org/python/python-interview-questions/"><p class="title-text">Python Interview Questions and Answers</p><div class="reading-time">
+                    <i class="reading-time-icon" data-gfg-action="readingtime"></i>
+                    <span style="color: var(--recommendation-card-text-color);font-size: 14px;font-weight: 500;line-height: 17px;">15+ min read</span>
+                </div></a></div></div></ul>
                                     </div>
                                 </div>
                         
@@ -3072,8 +3342,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 </html>
 
 
-<!-- Dynamic page generated in 0.443 seconds. -->
-<!-- Cached page generated by WP-Super-Cache on 2025-10-03 13:31:13 -->
+<!-- Dynamic page generated in 0.478 seconds. -->
+<!-- Cached page generated by WP-Super-Cache on 2025-10-04 13:22:04 -->
 
 <!-- Compression = gzip -->
 <!-- super cache -->

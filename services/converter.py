@@ -11,7 +11,7 @@ import trafilatura
 from services.supabase import supabase_service
 
 BASE_DIR = Path(__file__).resolve().parent
-INPUT_FILE = BASE_DIR / "../inputs.txt"
+INPUT_FILE = BASE_DIR / "../singleton.txt"
 RAW_DIR = BASE_DIR / "../data/rawInputs/singleton"
 OUTPUT_DIR = BASE_DIR / "../data/markdowns/singleton"
 CREATOR_NAME = "Neranjan"

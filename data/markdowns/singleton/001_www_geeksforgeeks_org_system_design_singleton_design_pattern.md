@@ -1,7 +1,5 @@
 # Singleton Method Design Pattern
 
-Last Updated :
-26 Sep, 2025
 
 The Singleton Design Pattern ensures that a class has only one instance and provides a global access point to it. It is used when we want centralized control of resources, such as managing database connections, configuration settings or logging.
 
@@ -229,23 +227,3 @@ Singleton.getInstance().doSomething();
 
 **Output**Singleton is Instantiated.
 Something is Done.
-
-### Explore
-
-## What is System Design
-
-## System Design Fundamentals
-
-## Scalability in System Design
-
-## Databases in Designing Systems
-
-## High Level Design(HLD)
-
-## Low Level Design(LLD)
-
-## Design Patterns
-
-## Interview Guide for System Design
-
-## System Design Interview Questions & Answers

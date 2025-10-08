@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+
+<html lang="en" class="no-js">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="Thoughts, stories and ideas.">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+	<title>Carlos Caballero</title>
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="canonical" href="http://www.carloscaballero.io/understanding-the-flyweight-design-pattern/" />
+    <meta name="referrer" content="no-referrer-when-downgrade" />
+    <link rel="amphtml" href="http://www.carloscaballero.io/understanding-the-flyweight-design-pattern/amp/" />
+    
+    <meta property="og:site_name" content="Carlos Caballero" />
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content="Understanding the Flyweight Design Pattern" />
+    <meta property="og:description" content="There are 23 classic design patterns described in the original book Design
+Patterns: Elements of Reusable Object-Oriented Software
+[https://amzn.to/3VN3Ygd]. These patterns provide solutions to particular
+problems often repeated in software development.
+
+In this article, I am going to describe how the Flyweight pattern works and when
+it should be applied.
+
+
+--------------------------------------------------------------------------------
+
+Flyweight: Basic Idea
+First, let’s see the definition prov" />
+    <meta property="og:url" content="http://www.carloscaballero.io/understanding-the-flyweight-design-pattern/" />
+    <meta property="og:image" content="http://www.carloscaballero.io/content/images/2024/06/connor-coyne-OgqWLzWRSaI-unsplash--6-.jpg" />
+    <meta property="article:published_time" content="2024-06-06T11:19:30.000Z" />
+    <meta property="article:modified_time" content="2024-06-06T11:20:15.000Z" />
+    <meta property="article:tag" content="JavaScript" />
+    <meta property="article:tag" content="TypeScript" />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Understanding the Flyweight Design Pattern" />
+    <meta name="twitter:description" content="There are 23 classic design patterns described in the original book Design
+Patterns: Elements of Reusable Object-Oriented Software
+[https://amzn.to/3VN3Ygd]. These patterns provide solutions to particular
+problems often repeated in software development.
+
+In this article, I am going to describe how the Flyweight pattern works and when
+it should be applied.
+
+
+--------------------------------------------------------------------------------
+
+Flyweight: Basic Idea
+First, let’s see the definition prov" />
+    <meta name="twitter:url" content="http://www.carloscaballero.io/understanding-the-flyweight-design-pattern/" />
+    <meta name="twitter:image" content="http://www.carloscaballero.io/content/images/2024/06/connor-coyne-OgqWLzWRSaI-unsplash--6-.jpg" />
+    <meta name="twitter:label1" content="Written by" />
+    <meta name="twitter:data1" content="Carlos Caballero" />
+    <meta name="twitter:label2" content="Filed under" />
+    <meta name="twitter:data2" content="JavaScript, TypeScript" />
+    <meta name="twitter:site" content="@carlillo" />
+    <meta property="og:image:width" content="2000" />
+    <meta property="og:image:height" content="2667" />
+    
+    <script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "publisher": {
+        "@type": "Organization",
+        "name": "Carlos Caballero",
+        "logo": "https://casper.ghost.org/v1.0.0/images/ghost-logo.svg"
+    },
+    "author": {
+        "@type": "Person",
+        "name": "Carlos Caballero",
+        "url": "https://www.carloscaballero.io/author/carlos/",
+        "sameAs": []
+    },
+    "headline": "Understanding the Flyweight Design Pattern",
+    "url": "https://www.carloscaballero.io/understanding-the-flyweight-design-pattern/",
+    "datePublished": "2024-06-06T11:19:30.000Z",
+    "dateModified": "2024-06-06T11:20:15.000Z",
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://www.carloscaballero.io/content/images/2024/06/connor-coyne-OgqWLzWRSaI-unsplash--6-.jpg",
+        "width": 2000,
+        "height": 2667
+    },
+    "keywords": "JavaScript, TypeScript",
+    "description": "There are 23 classic design patterns described in the original book Design\nPatterns: Elements of Reusable Object-Oriented Software\n[https://amzn.to/3VN3Ygd]. These patterns provide solutions to particular\nproblems often repeated in software development.\n\nIn this article, I am going to describe how the Flyweight pattern works and when\nit should be applied.\n\n\n--------------------------------------------------------------------------------\n\nFlyweight: Basic Idea\nFirst, let’s see the definition prov",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://www.carloscaballero.io/"
+    }
+}
+    </script>
+
+    <script src="/public/ghost-sdk.min.js?v=143110d124"></script>
+<script>
+ghost.init({
+	clientId: "ghost-frontend",
+	clientSecret: "c566ff72785b"
+});
+</script>
+    <meta name="generator" content="Ghost 2.37" />
+    <link rel="alternate" type="application/rss+xml" title="Carlos Caballero" href="https://www.carloscaballero.io/rss/" />
+     <link href="https://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-42018932-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-42018932-2');
+</script>
+	<link rel="shortcut icon" href="/assets/img/logo.ico?v=143110d124">
+	<link rel="stylesheet" href="/assets/css/import.css?v=143110d124">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+		integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/default.min.css">
+</head>
+
+<body>
+	<header>
+    <hgroup id="hamburgerButton"><i class="fas fa-bars hamburger-button"></i></hgroup>
+
+    <figure class="header-logotype"><a class="logotype-link" href="https://carloscaballero.io">carlos caballero</a>
+    </figure>
+
+    <nav>
+        <ul class="menu">
+            <li class="menu-item-wrapper"><a class="menu-item" href="https://www.carloscaballero.io/">home</a></li>
+            <li class="menu-item-wrapper"><a class="menu-item"
+                    href="https://www.carloscaballero.io/speakings/">speakings</a></li>
+            <li class="menu-item-wrapper"><a class="menu-item"
+                    href="https://www.carloscaballero.io/publications/">publications</a></li>
+            <li class="menu-item-wrapper"><a class="menu-item"
+                    href="https://www.carloscaballero.io/projects/">projects</a></li>
+            <li class="menu-item-wrapper"><a class="menu-item" href="https://www.carloscaballero.io/about/">about</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+	<section class="central-structure">
+		<aside id="aside" class="aside-off">
+  <figure class="sidebar-logotype"><a class="logotype-link" href="https://carloscaballero.io">carlos caballero</a>
+  </figure>
+
+  <figure class="profile" style="background-image: url(/assets/img/profile_image.jpg?v=143110d124)"></figure>
+
+  <h1 class="motto">talking about computer science</h1>
+
+  <section class="social-media">
+    <a class="media-link" href="https://twitter.com/carlillo" target="_blank" title="Twitter"><i
+        class="fab fa-twitter"></i></a>
+    <a class="media-link" href="https://github.com/caballerog" target="_blank" title="Fork me on Github"><i
+        class="fab fa-github"></i></a>
+    <a class="media-link" href="https://www.linkedin.com/in/carlos-caballero-gonzalez" target="_blank"
+      title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+    <a class="media-link" href="https://www.carloscaballero.io/rss/" target="_blank" title="RSS Feed"><i class="fas fa-rss"></i></a>
+  </section>
+
+
+  <section class="series-posts">
+    <article class="news-title">series posts</article>
+    <article class="news-link">
+      <a href="/clean-code-applied-to-javascript-series/" class="news-name">Clean Code Applied to JavaScript: Series</a>
+    </article>
+    <article class="news-link">
+      <a href="/understandng-mvc-services-for-frontend/" class="news-name">Understanding MVC-Services for Frontend</a>
+    </article>
+    <article class="news-link">
+      <a href="/understanding-software-design-patterns-serie/" class="news-name">Understanding Software Design Patterns: Series</a>
+    </article>
+    <article class="news-link">
+      <a href="/clock-in-out-system/" class="news-name">Clock-in/out System: Series</a>
+    </article>
+  </section>
+
+  <section class="series-posts">
+    <article class="news-title">Newsletter </article>
+
+    <!-- Begin Mailchimp Signup Form -->
+
+    <div id="mc_embed_signup">
+      <form
+        action="https://carloscaballero.us20.list-manage.com/subscribe/post?u=9bd78db5176e890b9f05287b9&amp;id=23fe424169"
+        method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank"
+        novalidate>
+        <div id="mc_embed_signup_scroll">
+          <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required>
+          <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+          <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text"
+              name="b_9bd78db5176e890b9f05287b9_23fe424169" tabindex="-1" value=""></div>
+          <div class="clear"><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe"
+              class="button"></div>
+        </div>
+      </form>
+    </div>
+
+    <!--End mc_embed_signup-->
+  </section>
+
+  <!--End mc_embed_signup-->
+
+</aside>
+		<main>
+			<section class="filter">
+				<article class="filter-wrapper">
+					<div class="filter-item"><a class="filter-glass" href="/tag/angular/"></a><span class="filter-image"
+							style="background-image: url(http://www.carloscaballero.io/content/images/2019/04/angular_logo.png);"></span><span
+							class="filter-name">Angular</span></div>
+					<div class="filter-item"><a class="filter-glass" href="/tag/javascript/"></a><span class="filter-image"
+							style="background-image: url(http://www.carloscaballero.io/content/images/2019/04/javascript_logo-1.png);"></span><span
+							class="filter-name">JavaScript</span></div>
+					<div class="filter-item"><a class="filter-glass" href="/tag/nestjs/"></a><span class="filter-image"
+							style="background-image: url(http://www.carloscaballero.io/content/images/2019/04/nestjs_logo.png);"></span><span
+							class="filter-name">NestJS</span></div>
+					<div class="filter-item"><a class="filter-glass" href="/tag/nodejs/"></a><span class="filter-image"
+							style="background-image: url(http://www.carloscaballero.io/content/images/2019/04/nodejs_logo.png);"></span><span
+							class="filter-name">NodeJS</span></div>
+					<div class="filter-item"><a class="filter-glass" href="/tag/typescript/"></a><span class="filter-image"
+							style="background-image: url(http://www.carloscaballero.io/content/images/2019/04/typescript_logo.png);"></span><span
+							class="filter-name">TypeScript</span></div>
+					<div class="filter-item"><a class="filter-glass" href="/tag/ui-ux/"></a><span class="filter-image"
+							style="background-image: url(http://www.carloscaballero.io/content/images/2019/04/ux_logo.png);"></span><span
+							class="filter-name">UI-UX</span></div>
+					<div class="filter-item"><a class="filter-glass" href="/tag/system/"></a><span class="filter-image"
+							style="background-image: url(http://www.carloscaballero.io/content/images/2019/04/terminal_logo.png);"></span><span
+							class="filter-name">ZExtra</span></div>
+				</article>
+			</section>
+
+
+			<section class="post-wrapper">
+				<article class="title-wrapper">
+					<h1 class="post-title">Understanding the Flyweight Design Pattern</h1>
+					<span class="post-tag" style="background-image: url(http://www.carloscaballero.io/content/images/2019/04/javascript_logo-1.png);"></span>
+					<span class="post-tag" style="background-image: url(http://www.carloscaballero.io/content/images/2019/04/typescript_logo.png);"></span>
+					<span class="point">&#8226;</span>
+					<time datetime="2024-06-06">6th						June 2024</time>
+					<span class="point">&#8226;</span>
+					<span class="readme-time">21 min read</span>
+					</span>
+				</article>
+
+				<p>There are 23 classic design patterns described in the original book <a href="https://amzn.to/3VN3Ygd" rel="noopener ugc nofollow"><em><em>Design Patterns: Elements of Reusable Object-Oriented Software</em></em></a>. These patterns provide solutions to particular problems often repeated in software development.</p><p>In this article, I am going to describe how the <em><em>Flyweight</em></em> pattern works and when it should be applied.</p><!--kg-card-begin: hr--><hr><!--kg-card-end: hr--><h1 id="flyweight-basic-idea">Flyweight: Basic Idea</h1><p>First, let’s see the definition provided by the <a href="https://www.amazon.com/Design-Patterns-Object-Oriented-Addison-Wesley-Professional-ebook/dp/B000SEIBB8" rel="noopener ugc nofollow">Gang of Four book</a>:</p><blockquote>A flyweight is a shared object that can be used in multiple contexts simultaneously. The flyweight acts as an independent object in each context; it’s indistinguishable from an instance of the object that is not shared.</blockquote><p>On the other hand, flyweight objects cannot make assumptions about the context in which they operate. The key concept here is the distinction between <em><em>intrinsic</em></em> and <em><em>extrinsic</em></em> state. Intrinsic state is stored in the flyweight; it consists of information that is independent of the flyweight’s context, allowing it to be shared. Extrinsic state depends on the flyweight’s context and varies with it, therefore, it cannot be shared. Client objects are responsible for passing the extrinsic state to the flyweight when it is needed.</p><p>Next, let’s take a look at the UML class diagram for this pattern to understand each of its elements.</p><!--kg-card-begin: image--><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:770/0*vDnqV2TP0jnPq97V" class="kg-image"></figure><!--kg-card-end: image--><p>The <em><em>Flyweight</em></em> pattern typically includes the following elements:</p><ul><li><strong><strong>Flyweight</strong></strong>: Defines the interface for objects that can be shared. It contains the intrinsic states that are shared among several objects.</li><li><strong><strong>Concrete Flyweight</strong></strong>: Implements the <em><em>Flyweight</em></em> interface and stores the intrinsic states. These objects are shared among multiple contexts.</li><li><strong><strong>Unshared Concrete Flyweight</strong></strong>: Represents objects that cannot be shared. Although they do not share their state, they can contain references to other Flyweight objects.</li><li><strong><strong>Flyweight Factory</strong></strong>: Manages a set of Flyweight objects. It ensures that Flyweight objects are shared properly and provides methods to obtain instances of Flyweights.</li><li><strong><strong>Client</strong></strong>: Maintains references to the Flyweights and calculates or stores the extrinsic states (those that are not shared and can vary between objects).</li></ul><!--kg-card-begin: hr--><hr><!--kg-card-end: hr--><h1 id="flyweight-pattern-when-to-use-it">Flyweight Pattern: When to Use It</h1><p>The <em><em>Flyweight</em></em> pattern is an excellent solution when dealing with systems that need to create and manage a large number of similar objects, which can result in high memory consumption if not managed properly. Below are some common situations where using the <em><em>Flyweight</em></em> pattern can be beneficial:</p><ol><li><strong><strong>Objects with shared states:</strong></strong> When we have a large number of objects that share significant parts of their state with each other, such as text, images, or similar data, the <em><em>Flyweight</em></em> pattern allows sharing these common states among multiple instances, thereby reducing memory consumption.</li><li><strong><strong>Reduction of resource consumption</strong></strong>: If you want to reduce memory or other resource consumption in your system, the <em><em>Flyweight</em></em> pattern can be an effective solution. By sharing common parts of objects among multiple instances, unnecessary duplication of data is avoided, and system performance is optimized.</li><li><strong><strong>Facilitating object creation</strong></strong>: The <em><em>Flyweight</em></em> pattern facilitates the creation and management of a large number of objects by reusing existing instances instead of creating new ones each time they are needed. This can be especially useful in situations where object creation is resource-intensive in terms of computational resources.</li></ol><p>In summary, the <em><em>Flyweight</em></em> pattern is useful in situations where it is necessary to optimize memory and resource usage by sharing common parts of objects among multiple instances. Now, let’s look at examples of applying this pattern.</p><!--kg-card-begin: hr--><hr><!--kg-card-end: hr--><h1 id="flyweight-pattern-examples"><strong>Flyweight Pattern: Examples</strong></h1><p>Next, we will illustrate the <em><em>Flyweight</em></em> pattern with two examples:</p><ol><li><strong><strong>Basic Structure of the Flyweight Pattern</strong></strong>: In this example, we will translate the theoretical UML diagram into TypeScript code to identify each of the classes involved in the pattern.</li><li><strong><strong>A football statistics system</strong></strong>: We will have statistics for different teams, with hundreds of players where we need to objects to define the positions of the players and the teams they belong to. Here, we can see that we will have many objects that are shared, such as the specific positions of the players or the team.</li></ol><!--kg-card-begin: hr--><hr><!--kg-card-end: hr--><h1 id="example-1-basic-structure-of-the-flyweight-pattern">Example 1: Basic Structure of the Flyweight Pattern</h1><p>As always, the starting point is the UML class diagram to define each of the elements. This first class diagram is the same one we explained at the beginning of the post, and we will not repeat the explanation here to avoid making the post too long.</p><!--kg-card-begin: image--><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:770/0*yOhwlFLU39H7lOGq" class="kg-image"></figure><!--kg-card-end: image--><p>However, we will start implementing it step by step using the TypeScript programming language.</p><p>Let’s start with the <code>Flyweight</code> interface. This interface defines the contract that any <code>Flyweight</code> in the system must follow. In this case, it only has one method called <code>operation</code>, which receives the extrinsic state of our problem as a parameter. This method is implemented by the concrete flyweights, both the shared and the unshared ones.</p><!--kg-card-begin: markdown--><pre><code class="language-javascript">export interface Flyweight {
+    operation(extrinsicState: any): void;
+}
+</code></pre>
+<!--kg-card-end: markdown--><p>The next class is the <code>ConcreteFlyweight</code>. In this class, we can see that we have a private attribute, which is the <em><em>intrinsic</em></em> state of our problem. As always, to simplify the example, this attribute is of type <code>string</code>. This state is received as a constructor parameter to store it internally in this class. Finally, we have the implementation of the <code>operation</code> method, which receives the <em><em>extrinsic</em></em> state and performs a <code>console.log</code> showing both states. Obviously, here we would have the business logic for our problem.</p><!--kg-card-begin: markdown--><pre><code class="language-javascript">import { Flyweight } from &quot;./flyweight&quot;;
+
+export class ConcreteFlyweight implements Flyweight {
+    private intrinsicState: string;
+
+    constructor(intrinsicState: string) {
+        this.intrinsicState = intrinsicState;
+    }
+
+    public operation(extrinsicState: any): void {
+        console.log(`ConcreteFlyweight: Intrinsic State = ${this.intrinsicState}, Extrinsic State = ${extrinsicState}`);
+    }
+}
+</code></pre>
+<!--kg-card-end: markdown--><p>On the other hand, the <code>UnsharedConcreteFlyweight</code> class is the representation of the objects that are not shared in our problem. If we look at this class, we have a small variation; instead of having the <em><em>intrinsic</em></em> state stored, we have the entire state of the object. Obviously, again to simplify the example, it has been modeled as a <code>string</code>, but the conceptual difference is quite significant between <code>Flyweight</code> that share state and those that do not share state. Lastly, we have the implementation of the <code>operation</code> method, which displays the information of the <code>allState</code> attribute and the <em><em>extrinsic</em></em> state.</p><!--kg-card-begin: markdown--><pre><code class="language-javascript">import { Flyweight } from &quot;./flyweight&quot;;
+
+// Unshared Concrete Flyweight
+export class UnsharedConcreteFlyweight implements Flyweight {
+    private allState: string;
+
+    constructor(allState: string) {
+        this.allState = allState;
+    }
+
+    public operation(extrinsicState: any): void {
+        console.log(`UnsharedConcreteFlyweight: All State = ${this.allState}, Extrinsic State = ${extrinsicState}`);
+    }
+}
+</code></pre>
+<!--kg-card-end: markdown--><p>Up to this point, we have the <em><em>Flyweight</em></em> pattern by definition. However, in most cases, this pattern includes a factory class that is responsible for creating the <code>Flyweight</code> objects. And it is precisely this class that we will look at next.</p><!--kg-card-begin: markdown--><pre><code class="language-javascript">import { ConcreteFlyweight } from &quot;./concrete-flyweight&quot;;
+import { Flyweight } from &quot;./flyweight&quot;;
+
+// Flyweight Factory
+export class FlyweightFactory {
+    private flyweights: Map&lt;string, Flyweight&gt; = new Map();
+
+    public getFlyweight(key: string): Flyweight {
+        if(this.flyweights.has(key)){
+            console.log(`FlyweightFactory: Reusing existing flyweight for key = ${key}`);
+            return this.flyweights.get(key)!;
+        }
+        
+        this.flyweights.set(key,  new ConcreteFlyweight(key));
+        console.log(`FlyweightFactory: Created new flyweight for key = ${key}`);
+        return this.flyweights.get(key)!;
+    }
+
+    public listFlyweights(): void {
+        console.log(`FlyweightFactory: I have ${this.flyweights.size} flyweights:`);
+        for (const [key, _] of this.flyweights) {
+            console.log(key);
+        }
+    }
+}
+</code></pre>
+<!--kg-card-end: markdown--><p>In this class, we need to have a data structure where we store the different <code>Flyweight</code> objects. In our case, we are using a map where the key is a string identifier, and the value is the stored <code>Flyweight</code> object.</p><p>The <code>getFlyweight</code> method is the key to this factory because it takes the key as an argument to retrieve the object from the data structure. As we can see in the first control block of the code, the <code>if</code> statement checks whether the data structure contains the object we are looking for, and if it does, we simply return it.</p><p>If we do not have the object in the data structure, a new <code>Flyweight</code> object is created using the <code>ConcreteFlyweight</code>constructor and stored in our data structure. The method concludes by returning the object we just created.</p><p>Therefore, we are implementing a small cache that will streamline the process of creating and retrieving objects. If the object already exists, we retrieve the one we have in memory and do not create duplicate objects. If the object does not exist, it is created only once.</p><p>The next method in the class, <code>listFlyweights</code>, simply iterates over the data structure where we have all the objects and displays the objects contained within it. We could have implemented any other business logic.</p><!--kg-card-begin: markdown--><pre><code class="language-javascript">import { FlyweightFactory } from &quot;./flyweight-factory&quot;;
+import { UnsharedConcreteFlyweight } from &quot;./unshared-flyweight&quot;;
+
+const factory = new FlyweightFactory();
+
+// Create and use shared flyweights
+const flyweight1 = factory.getFlyweight('A');
+flyweight1.operation('First Call');
+
+const flyweight2 = factory.getFlyweight('B');
+flyweight2.operation('Second Call');
+
+const flyweight3 = factory.getFlyweight('A');
+flyweight3.operation('Third Call');
+
+// Create and use unshared flyweights
+const unsharedFlyweight1 = new UnsharedConcreteFlyweight('Unique State');
+unsharedFlyweight1.operation('Fourth Call');
+
+factory.listFlyweights();
+</code></pre>
+<!--kg-card-end: markdown--><p>Finally, let’s look at the client code that uses the design pattern. In the code, the first thing we do is create the factory, which is responsible for managing the <code>Flyweight</code> objects. Next, we retrieve an object with the value <code>A</code>. Internally, the pattern will create this object since it does not exist and store it in the data structure. Then, we can use the <code>operation</code> method. We do the same with the object with the value <code>B</code>. The application of the pattern comes when creating the third object, where we retrieve the value <code>A</code>, and in this case, no more resources are consumed since it is obtained directly from the data structure instead of being instantiated again.</p><p>On the other hand, showing that the instance of objects that do not share the state would be as simple as making instances of these objects and using the defined methods. To conclude, we show all the objects instantiated in the data structure through the <code>listFlyweights</code> method, and we can see that the object with the value <code>A</code> appears instantiated only once in our problem</p><h1 id="example-2-football-player-statistics-database-without-the-flyweight-pattern">Example 2: Football Player Statistics Database without the Flyweight Pattern</h1><p>In this example, we are going to create a database of football players where each player will have instances of other objects such as their positions and the team they belong to. Additionally, the players will have their own statistics on their performance in official matches.</p><p>Considering this problem, the UML class design that can be proposed is as follows:</p><!--kg-card-begin: image--><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:770/0*mZTte5B0dAB5f3Vd" class="kg-image"></figure><!--kg-card-end: image--><p>We can observe that we would have the <code>Player</code> class with its own attributes, such as <code>name</code>, <code>position</code>, <code>team</code>, and <code>statistics</code>. The attributes <code>position</code>, <code>team</code>, and <code>statistics</code> are not primitives but objects that have different attributes, which, of course, could have more logic and methods, implement interfaces, etc. However, as always, we are simplifying to properly understand the pattern. But at first glance, we can see that we have the <code>Player</code> class and, through composition, we encounter three classes that are related to it. These classes depend on the <code>Player</code>, meaning that if the <code>Player</code> disappears, the objects in the composition are also destroyed.</p><p>The client of this application is called <code>SportsSimulator</code>, which is the class that would have the data structure storing all the instances of the players and some methods to manage this data structure, such as <code>addPlayer</code>, which receives the arguments for creating players, and the <code>displayPlayers</code> method, which lists all the players in the software. We can observe that <code>SportsSimulator</code> is not responsible for creating objects such as position, team, or statistics but rather receives the information from some data source. The only thing we can know and guarantee is that the data has the corresponding attributes to be well-formed. This has been modeled with the package of <code>interfaces</code>, where we find the interfaces for position, team, and statistics.</p><p>Let’s proceed to see the implementation of this first solution, which <strong><strong>does NOT</strong></strong> use the <em><em>Flyweight</em></em> pattern, to detect where the resource leak is that we could improve with the pattern.</p><p>The first class we need to look at is the <code>Player</code> class, which is quite simple. If we observe, we have the four attributes that make up a <code>Player</code>, and through the constructor, we receive the parameters that allow us to internally store each attribute of this object. Additionally, we include a <code>toString</code> method, which we have renamed as <code>displayInfo</code>, that simply shows the information of the object.</p><!--kg-card-begin: markdown--><pre><code class="language-javascript">import { Position } from &quot;./position&quot;;
+import { Stats } from &quot;./stats&quot;;
+import { Team } from &quot;./team&quot;;
+
+export class Player {
+    private name: string;
+    private position: Position;
+    private team: Team;
+    private stats: Stats;
+
+    constructor(name: string, position: Position, team: Team, stats: Stats) {
+        this.name = name;
+        this.position = position;
+        this.team = team;
+        this.stats = stats;
+    }
+
+    public displayInfo(): void {
+        console.log(`Player - Name: ${this.name}, Position: ${this.position.name} (${this.position.role}), Team: ${this.team.name} (Coach: ${this.team.coach}), Stats: [Goals: ${this.stats.goals}, Assists: ${this.stats.assists}, Matches: ${this.stats.matches}]`);
+    }
+}
+</code></pre>
+<!--kg-card-end: markdown--><p>On the other hand, the <code>Position</code>, <code>Team</code>, and <code>Stats</code> classes do not contain any logic. Again, we repeat, this is didactic, and they should make sense as such to exist, but to simplify, we can see that they simply store the corresponding attributes of each type of object when they are constructed.</p><!--kg-card-begin: markdown--><pre><code class="language-javascript">export class Position {
+    constructor(public name: string, public role: string) {}
+}
+
+export class Stats {
+    constructor(public goals: number, public assists: number, public matches: number) {}
+}
+
+export class Stats {
+    constructor(public goals: number, public assists: number, public matches: number) {}
+}
+</code></pre>
+<!--kg-card-end: markdown--><p>The next class is <code>SportsSimulator</code>, which is responsible for storing the data structure. In this case, we would have an array of <code>Players</code>, which are built in the <code>addPlayer</code> method itself. This method receives as a parameter the necessary information to create instances of all the objects. However, what it receives are objects that satisfy the interface of <code>Position</code>, <code>Team</code>, and <code>Stats</code>, but these objects it receives are not instances of classes, but simply data.</p><p>Therefore, the three objects that the instance of the <code>Player</code> class required are created, and once created, they are added to the data structure.</p><!--kg-card-begin: markdown--><pre><code class="language-javascript">import { IPosition, IStats, ITeam } from &quot;./interfaces&quot;;
+import { Player, Position, Stats, Team } from &quot;./models&quot;;
+
+export class SportsSimulator {
+    private players: Player[] = [];
+
+    public addPlayer(name: string, position: IPosition, team: ITeam, stats: IStats): void {
+        const positionPlayer = new Position(position.name, position.role);
+        const teamPlayer = new Team(team.name, team.coach);
+        const statsPlayer = new Stats(stats.goals, stats.assists, stats.passes);
+
+        const player = new Player(name, positionPlayer, teamPlayer, statsPlayer);
+        this.players.push(player);
+    }
+
+    public displayPlayers(): void {
+        this.players.forEach(player =&gt; player.displayInfo());
+    }
+}
+</code></pre>
+<!--kg-card-end: markdown--><p>As mentioned earlier, the interfaces simply specify the attributes that the plain objects passed as arguments must contain. We have done it this way because in TypeScript, we can quickly create plain objects, which allows us to avoid having a method signature for <code>addPlayer</code> with all the attributes of player, position, team, and statistics separated, but instead having them grouped by plain objects.</p><!--kg-card-begin: markdown--><pre><code class="language-javascript">export interface IPosition {
+    name: string;
+    role: string;
+};
+
+export interface ITeam {
+    name: string;
+    coach: string;
+};
+
+export interface IStats {
+    goals: number;
+    assists: number;
+    passes: number;
+};
+</code></pre>
+<!--kg-card-end: markdown--><p>Finally, we need to see the client code that uses all these classes.</p><!--kg-card-begin: markdown--><pre><code class="language-javascript">import { IPosition, IStats, ITeam } from &quot;./interfaces&quot;;
+
+import { SportsSimulator } from &quot;./sports-simulator&quot;;
+
+// Client Code
+const simulator = new SportsSimulator();
+
+const forward: IPosition = {name: 'Forward', role: 'Attacker'};
+const midfielder: IPosition = {name: 'Midfielder', role: 'Support'};
+const defender: IPosition = { name: 'Defender', role: 'Defender'};
+const goalkeeper: IPosition = {name: 'Goalkeeper', role: 'Goalkeeper'};
+
+const positions = [goalkeeper, defender, midfielder, forward]
+
+const teams: ITeam[] = [
+    { name: &quot;New Team&quot;, coach: &quot;Roberto Sedinho&quot; },
+    { name: &quot;Furano FC&quot;, coach: &quot;Koujiro Hyuuga&quot; },
+    { name: &quot;Toho Academy&quot;, coach: &quot;Kira Hiroto&quot; },
+    { name: &quot;Nankatsu SC&quot;, coach: &quot;Tsubasa Ozora&quot; },
+    { name: &quot;Otomo FC&quot;, coach: &quot;Shingo Aoi&quot; },
+    { name: &quot;Hirado FC&quot;, coach: &quot;Hajime Taki&quot; },
+    { name: &quot;Mamoru United&quot;, coach: &quot;Taro Misaki&quot; },
+    { name: &quot;Meiwa FC&quot;, coach: &quot;Jun Misugi&quot; }
+];
+
+const captainTsubasaCharacters: string[] = [
+    &quot;Tsubasa Ozora&quot;,
+    &quot;Koujiro Hyuuga&quot;,
+    &quot;Genzo Wakabayashi&quot;,
+    &quot;Taro Misaki&quot;,
+    &quot;Shingo Aoi&quot;,
+    &quot;Hikaru Matsuyama&quot;,
+    &quot;Jun Misugi&quot;,
+    &quot;Ken Wakashimazu&quot;,
+    &quot;Kazuo Tachibana&quot;,
+    &quot;Masao Tachibana&quot;,
+    &quot;Ryo Ishizaki&quot;,
+    &quot;Kojiro Hyuga&quot;,
+    &quot;Teppei Kisugi&quot;,
+    &quot;Hiroshi Jito&quot;,
+    &quot;Shun Nitta&quot;,
+    &quot;Mamoru Izawa&quot;,
+    &quot;Hanji Urabe&quot;,
+    &quot;Shingo Takasugi&quot;,
+    &quot;Mitsuru Sano&quot;,
+    &quot;Makoto Soda&quot;
+];
+
+
+for(let i = 0; i &lt; 25*teams.length -1; i++){
+    const team = teams[i % teams.length];
+
+    const position = positions[i % positions.length];
+    const playerName = captainTsubasaCharacters[i % captainTsubasaCharacters.length];
+    const stats: IStats = {
+        goals: Math.floor(Math.random() * 20),
+        assists: Math.floor(Math.random() * 20),
+        passes: Math.floor(Math.random() * 20),
+    };
+
+    simulator.addPlayer(playerName, position, team, stats);
+}
+
+simulator.displayPlayers();
+</code></pre>
+<!--kg-card-end: markdown--><p>The first thing we have to do is create the sports simulator. To do this, we simply need to instantiate the <code>SportsSimulator</code> class. Next, we have the data we are going to use in the problem. This data can come from any data source, whether it’s integration files, databases, or even entered by the user. So, first, we define the positions, which would be forward, midfielder, defender, and goalkeeper.</p><p>Next, we define exactly the same but for the teams. We would have an array of team objects that satisfy the conditions of having a name and a coach. If you’ve noticed the names of the teams, our database is based on the anime series <em><em>Captain Tsubasa</em></em>. So, we need to reflect the names of the players as they appeared in the original version of the anime.</p><p>The last of our client code is a simple loop that is creating the necessary information for each team to have twenty five players. For that, we simply iterate to retrieve the information and send it to the simulator through the <code>addPlayer</code> method, and that’s where our object-oriented design would begin. Obviously, as we have more and more players, we will have more resources consumed by the instantiation of objects.</p><p>So far, there wouldn’t be a problem until one day the software needs more memory and we have to redesign it, which is exactly what we are going to do, but using the <em><em>Flyweight</em></em> pattern.</p><h1 id="example-2-football-player-statistics-database-using-the-flyweight-pattern">Example 2: Football Player Statistics Database using the Flyweight Pattern</h1><p>The problems that arise in the solution without the <em><em>Flyweight</em></em> pattern are as follows:</p><ol><li><strong><strong>Excessive memory usage</strong></strong>: When many similar objects are created, each instance occupies its own space in memory. This can lead to very high memory consumption, especially if the objects have attributes that are repeated in multiple instances.</li><li><strong><strong>Data redundancy</strong></strong>: In the absence of the <em><em>Flyweight</em></em> pattern, data that is common to multiple objects is duplicated in each instance. This not only increases memory usage but also introduces redundancy that can complicate data maintenance and updating.</li><li><strong><strong>Degradation of the system when used</strong></strong>: Handling a large number of individual objects can degrade application performance, both in terms of processing time and resource consumption. Operations involving the manipulation of these objects can become slow and inefficient.</li><li><strong><strong>Difficulty in resource management</strong></strong>: Without the <em><em>Flyweight</em></em> pattern, managing resources shared among multiple instances of objects becomes more complicated. This can lead to consistency and synchronization problems, especially in concurrent or distributed applications. Implementing the <em><em>Flyweight</em></em> pattern can mitigate these problems by allowing the sharing of objects where possible, reducing redundancy, and optimizing memory and resource usage. Let’s start by seeing how the UML class diagram evolves.</li></ol><!--kg-card-begin: image--><figure class="kg-card kg-image-card"><img src="https://miro.medium.com/v2/resize:fit:770/0*wL7wWjU3bRYXqop7" class="kg-image"></figure><!--kg-card-end: image--><p>Let’s start by looking at the <code>Player</code> class. This class now does not directly relate to the <code>Position</code> and <code>Team</code> classes. Instead, there is now an intermediate class called <code>PositionFlyweight</code> and <code>TeamFlyweight</code>, each of which contains an aggregation of the <code>Position</code> and <code>Team</code> classes. Both flyweight classes implement the flyweight interface, which simply has a method called display to show information. These classes could be omitted if we didn’t have <em><em>extrinsic</em></em> states, but we’re demonstrating the pattern with different elements that could disappear depending on specific circumstances and problems.</p><p>Another key point in the diagram is that we have an abstract class that defines the different object factories. The <code>flyweightFactory</code> class is composed of a <code>Map</code> of objects that satisfy the <code>Flyweight</code> interface. This abstract class is extended by the <code>PositionFlyweight</code> and <code>TeamFlyweight</code> classes, which do have concreteness in their data structure. In one case, they store objects of the <code>PositionFlyweight</code> class, and in the other, objects of the <code>TeamFlyweight</code> class. Both implement the <code>getFlyweight</code> method, which allows us to create a new <code>PositionFlyweight</code> or <code>TeamFlyweight</code> object or retrieve it from the data structure.</p><p>As an exercise or appreciation of how design patterns intertwine, this method has an algorithm in which all steps are similar except one, which could allow us to implement the <a href="https://ccaballero.medium.com/design-patterns-template-method-5400dde7bb72" rel="noopener">template-method design pattern</a>, as we have seen in another post. However, we will duplicate code to simplify this example, as we are focusing on the <em><em>flyweight</em></em> pattern and not another. But what’s important is that we understand the purpose of each design pattern so that when they arise, we can think about how to adapt it to our problem.</p><p>Finally, we see that we have the <code>SportsSimulator</code> class, which will make use of both factories and will have the data structure of the players. Similarly to the previous example, the data will come from a data source where we only have the attributes without instantiation, and we can only guarantee that they have a series of attributes using the package of interfaces that has been defined.</p><p>Alright, let’s proceed to gradually review the implementation and how it has changed compared to the previous example to improve the application’s performance.</p><p>Let’s start with the code of the <code>Player</code> class, which instead of directly receiving <code>Position</code> and <code>Team</code> objects, now receives instances of <code>PositionFlyweight</code> and <code>TeamFlyweight</code> objects. Since <code>Stats</code> objects are not reused and are different for each class, they still maintain their direct relationship with the <code>Player</code> class. The <code>displayInfo</code> method is practically the same, only updating the invocation of the display method of the <code>positionFlyweight</code> object.</p><p>The <code>Stats</code> class undergoes no modification compared to the previous example since we are not applying any pattern or improvement there. This is because the statistics will not be reused among different players as the probability of reusing an object is low, and we would not benefit from this design pattern.</p><!--kg-card-begin: markdown--><pre><code class="language-javascript">import { PositionFlyweight } from &quot;../position-flyweight&quot;;
+import { Stats } from &quot;./stats&quot;;
+import { TeamFlyweight } from &quot;../team-flyweight&quot;;
+
+export class Player {
+    private name: string;
+    private positionFlyweight: PositionFlyweight;
+    private teamFlyweight: TeamFlyweight;
+    private stats: Stats;
+
+    constructor(name: string, positionFlyweight: PositionFlyweight, teamFlyweight: TeamFlyweight, stats: Stats) {
+        this.name = name;
+        this.positionFlyweight = positionFlyweight;
+        this.teamFlyweight = teamFlyweight;
+
+        this.stats = stats;
+    }
+
+    public displayInfo(): void {
+        console.log(`Player - Name: ${this.name}, Stats: [Goals: ${this.stats.goals}, Assists: ${this.stats.assists}, Matches: ${this.stats.matches}]`);
+        this.positionFlyweight.display(this.stats);
+    }
+}
+</code></pre>
+<!--kg-card-end: markdown--><p>So, let’s move on to see the <code>PositionFlyweight</code> and <code>TeamFlyweight</code> classes.</p><!--kg-card-begin: markdown--><pre><code class="language-javascript">import { Flyweight } from &quot;./flyweight&quot;;
+import { Position } from &quot;./models&quot;;
+
+export class PositionFlyweight implements Flyweight {
+    #position: Position; // Intrinsic State
+
+    constructor(position: Position) {
+        this.#position = position;
+    }
+
+    public display(extrinsicState: any): void {
+        console.log(`Position: ${this.#position.name} (${this.#position.role})`);
+    }
+
+    public position(): Position {
+        return this.#position;
+    }
+}
+</code></pre>
+<!--kg-card-end: markdown--><!--kg-card-begin: markdown--><pre><code class="language-javascript">import { Flyweight } from &quot;./flyweight&quot;;
+import { Team } from &quot;./models&quot;;
+
+export class TeamFlyweight implements Flyweight {
+    #team: Team; // Intrinsic State
+
+    constructor(team: Team) {
+        this.#team = team;
+    }
+
+    public display(extrinsicState: any): void {
+        console.log(`Team: ${this.#team.name} (${this.#team.coach})`);
+    }
+
+    public team(): Team {
+        return this.#team;
+    }
+}
+</code></pre>
+<!--kg-card-end: markdown--><p>Both classes are very similar, as they simply have an object of the class they are encapsulating, <code>Position</code> or <code>Team</code>, which represent the <em><em>intrinsic</em></em> states of each class. In both cases, we have performed composition through the constructor, receiving the instance of the objects. The next thing we have implemented is the display method, which will receive the <em><em>extrinsic</em></em> state, if necessary, and will display information from both states through a <code>console.log</code>.</p><p>On the other hand, the <code>Position</code> and <code>Team</code> classes remain exactly the same as in the previous example; they are model classes without further changes.</p><!--kg-card-begin: markdown--><pre><code class="language-javascript">
+import { Flyweight } from &quot;./flyweight&quot;;
+
+// Flyweight Factory
+export abstract class FlyweightFactory&lt;T&gt; {
+    protected flyweights: Map&lt;string, Flyweight&gt; = new Map();
+    
+    public abstract getFlyweight(key: T): Flyweight;
+
+    public listFlyweights(): void {
+        console.log(`FlyweightFactory: I have ${this.flyweights.size} flyweights:`);
+        for (const [key, _] of this.flyweights) {
+            console.log(key);
+        }
+    }
+}
+</code></pre>
+<!--kg-card-end: markdown--><p>This class defines the two object factories that we will have. The data structure that will store the objects will be a <code>Map</code> that uses a string as the key and any object that implements the <code>Flyweight</code> interface as the value, which will be both <code>Position</code> and <code>Team</code>. The <code>getFlyweight</code> method is defined, which varies slightly depending on whether the factory is for <code>Position</code> or <code>Team</code> objects. This method is where we could improve by applying the <a href="https://ccaballero.medium.com/design-patterns-template-method-5400dde7bb72" rel="noopener">template-method pattern</a>, and we leave it as an exercise for you to do.</p><p>On the other hand, we see the <code>listFlyweight</code> method, which is exactly the same for both factories since all it does is iterate through the data structure.</p><!--kg-card-begin: markdown--><pre><code class="language-javascript">import { FlyweightFactory } from &quot;./flyweight.factory&quot;;
+import { Position } from &quot;./models&quot;;
+import { PositionFlyweight } from &quot;./position-flyweight&quot;;
+
+export class PositionFlyweightFactory extends FlyweightFactory&lt;Position&gt; {
+
+    protected flyweights: Map&lt;string, PositionFlyweight&gt; = new Map();
+
+    public getFlyweight(position: Position): PositionFlyweight {
+        const key = `${position.name}_${position.role}`;
+        if(this.flyweights.has(key)) {
+            console.log(`ConcreteFlyweightFactory: Reusing existing flyweight for Position = ${key}`);
+            return this.flyweights.get(key)!;
+        }
+
+        this.flyweights.set(key, new PositionFlyweight(position));
+        console.log(`PositionFlyweightFactory: Created new flyweight for Position = ${key}`);
+        return this.flyweights.get(key)!;
+    }
+}
+</code></pre>
+<!--kg-card-end: markdown--><!--kg-card-begin: markdown--><pre><code class="language-javascript">import { FlyweightFactory } from &quot;./flyweight.factory&quot;;
+import { Team } from &quot;./models&quot;;
+import { TeamFlyweight } from &quot;./team-flyweight&quot;;
+
+export class TeamFlyweightFactory extends FlyweightFactory&lt;Team&gt; {
+
+    protected flyweights: Map&lt;string, TeamFlyweight&gt; = new Map();
+
+    public getFlyweight(team: Team): TeamFlyweight {
+        const key = `team_${team.name}_coach_${team.coach}`;
+        if(this.flyweights.has(key)) {
+            console.log(`ConcreteFlyweightFactory: Reusing existing flyweight for Team = ${key}`);
+            return this.flyweights.get(key)!;
+        }
+
+        this.flyweights.set(key, new TeamFlyweight(team));
+        console.log(`PositionFlyweightFactory: Created new flyweight for Team = ${key}`);
+        return this.flyweights.get(key)!;
+    } 
+}
+</code></pre>
+<!--kg-card-end: markdown--><p>If we look at the concrete implementations of the <code>PositionFlyweightFactory</code> and <code>TeamFlyweightFactory</code> classes, we can see that they are exactly the same, except for the type of object they are working with and the key used to select the object in the data structure. So, we’ll focus on one to explain both. Looking at <code>PositionFlyweight</code>, we see that this method first defines the key, which will be unique for each object and is formed by the values of each object. The next thing we need to do is check if this object exists in the data structure. If it does, we return it without needing to create a new object. But if it doesn’t exist in the data structure, what we do is create the object to store, store it, and finally return the object we just created.</p><!--kg-card-begin: markdown--><pre><code class="language-javascript">import { IPosition, IStats, ITeam } from &quot;./interfaces&quot;;
+import { Player, Stats } from &quot;./models&quot;;
+
+import { PositionFlyweightFactory } from &quot;./position-flyweight.factory&quot;;
+import { TeamFlyweightFactory } from &quot;./team-flyweight.factory&quot;;
+
+export class SportsSimulator {
+    private players: Player[] = [];
+    private positionFactory: PositionFlyweightFactory = new PositionFlyweightFactory();
+    private teamFactory: TeamFlyweightFactory = new TeamFlyweightFactory();
+
+    public addPlayer(name: string, position: IPosition, team: ITeam, stats: IStats): void {
+        const positionFlyweight = this.positionFactory.getFlyweight(position);
+        const teamFlyweight = this.teamFactory.getFlyweight(team);
+        const statsPlayer = new Stats(stats.goals, stats.assists, stats.passes);
+        const player = new Player(name, positionFlyweight, teamFlyweight, statsPlayer);
+        this.players.push(player);
+    }
+
+    public displayPlayers(): void {
+        this.players.forEach(player =&gt; player.displayInfo());
+    }
+}
+</code></pre>
+<!--kg-card-end: markdown--><p>Finally, we arrive at the <code>SportsSimulator</code> class, which is the database of our players. In this new version, in addition to having the data structure of the players, we need the two factories we just defined. The <code>addPlayer</code> method is where, instead of instantiating all the objects and composing them into the <code>Player</code>, we will use the factories to retrieve or create the objects based on the information. In this way, it will be these classes that decide whether new objects are instantiated or whether they are reused in the system.</p><!--kg-card-begin: markdown--><pre><code class="language-javascript">import { IPosition, IStats, ITeam } from &quot;./interfaces&quot;;
+
+import { SportsSimulator } from &quot;./sports-simulator&quot;;
+
+// Client Code
+const simulator = new SportsSimulator();
+
+const forward: IPosition = {name: 'Forward', role: 'Attacker'};
+const midfielder: IPosition = {name: 'Midfielder', role: 'Support'};
+const defender: IPosition = { name: 'Defender', role: 'Defender'};
+const goalkeeper: IPosition = {name: 'Goalkeeper', role: 'Goalkeeper'};
+
+const positions = [goalkeeper, defender, midfielder, forward]
+
+const teams: ITeam[] = [
+    { name: &quot;New Team&quot;, coach: &quot;Roberto Sedinho&quot; },
+    { name: &quot;Furano FC&quot;, coach: &quot;Koujiro Hyuuga&quot; },
+    { name: &quot;Toho Academy&quot;, coach: &quot;Kira Hiroto&quot; },
+    { name: &quot;Nankatsu SC&quot;, coach: &quot;Tsubasa Ozora&quot; },
+    { name: &quot;Otomo FC&quot;, coach: &quot;Shingo Aoi&quot; },
+    { name: &quot;Hirado FC&quot;, coach: &quot;Hajime Taki&quot; },
+    { name: &quot;Mamoru United&quot;, coach: &quot;Taro Misaki&quot; },
+    { name: &quot;Meiwa FC&quot;, coach: &quot;Jun Misugi&quot; }
+];
+
+const captainTsubasaCharacters: string[] = [
+    &quot;Tsubasa Ozora&quot;,
+    &quot;Koujiro Hyuuga&quot;,
+    &quot;Genzo Wakabayashi&quot;,
+    &quot;Taro Misaki&quot;,
+    &quot;Shingo Aoi&quot;,
+    &quot;Hikaru Matsuyama&quot;,
+    &quot;Jun Misugi&quot;,
+    &quot;Ken Wakashimazu&quot;,
+    &quot;Kazuo Tachibana&quot;,
+    &quot;Masao Tachibana&quot;,
+    &quot;Ryo Ishizaki&quot;,
+    &quot;Kojiro Hyuga&quot;,
+    &quot;Teppei Kisugi&quot;,
+    &quot;Hiroshi Jito&quot;,
+    &quot;Shun Nitta&quot;,
+    &quot;Mamoru Izawa&quot;,
+    &quot;Hanji Urabe&quot;,
+    &quot;Shingo Takasugi&quot;,
+    &quot;Mitsuru Sano&quot;,
+    &quot;Makoto Soda&quot;
+];
+
+
+for(let i = 0; i &lt; 25*teams.length -1; i++){
+    const team = teams[i % teams.length];
+
+    const position = positions[i % positions.length];
+    const playerName = captainTsubasaCharacters[i % captainTsubasaCharacters.length];
+    const stats: IStats = {
+        goals: Math.floor(Math.random() * 20),
+        assists: Math.floor(Math.random() * 20),
+        passes: Math.floor(Math.random() * 20),
+    };
+
+    simulator.addPlayer(playerName, position, team, stats);
+}
+
+simulator.displayPlayers();
+</code></pre>
+<!--kg-card-end: markdown--><p>Finally, the client that uses our <code>SportsSimulator</code> class is completely transparent and remains exactly the same, creating the data or receiving it from some data source, and sending it to <code>SportsSimulator</code>. But now, instead of having an explosion of objects consuming hardware resources, many of these objects will be reused, making the software lighter and able to continue providing service. In other words, we have achieved an optimization of RAM memory by making the objects lighter.</p><h1 id="flyweight-pattern-relationship-with-other-patterns"><strong>Flyweight Pattern: Relationship with Other Patterns</strong></h1><p>The <em><em>Flyweight</em></em> pattern has connections with several other design patterns, as it can complement and enhance their functionality. Some of the most relevant relationships include:</p><ol><li><strong><strong><a href="https://carloscaballero.io/design-patterns-singleton/">Singleton Pattern:</a> </strong></strong>The <em><em>Singleton</em></em> pattern can be used in conjunction with the <em><em>Flyweight</em></em> pattern to ensure that only one instance of the <em><em>Flyweight</em></em> Factory exists throughout the application. This ensures centralized management of <em><em>Flyweight</em></em> objects and prevents unnecessary creation of multiple factories.</li><li><strong><strong><a href="/understanding-design-patters-factory-method/">Factory Method Pattern</a>: </strong></strong>The implementation of the <em><em>Flyweight</em></em> Factory can leverage the <em><em>Factory Method</em></em> pattern to allow flexible and decoupled creation of <code>Flyweight</code> objects. This facilitates the creation and management of <code>Flyweight</code> object instances as needed in different parts of the system.</li><li><strong><strong>Composite Pattern: </strong></strong>The <em><em>Composite</em></em> pattern can be used in combination with the <em><em>Flyweight</em></em> pattern to represent hierarchical structures where some objects can be shared among multiple components. By using the <em><em>Flyweight</em></em> pattern for shared objects, memory consumption is significantly reduced, and system efficiency is improved.</li><li><strong><strong>Proxy Pattern: </strong></strong>The <em><em>Proxy </em></em>pattern can serve as a wrapper around a <code>Flyweight</code> object, allowing additional control over object access or lifecycle management. This can be useful when more granular control over access to <code>SharedFlyweight</code> objects is needed or when additional tasks need to be performed before or after accessing the object.</li></ol><p>By leveraging these relationships with other patterns, the <em><em>Flyweight</em></em> pattern can enhance the efficiency, scalability, and maintainability of a system while optimizing resource usage and promoting a clearer and more modular code structure.</p><h1 id="differences-and-similarities-with-other-patterns-singleton-and-prototype"><strong>Differences and Similarities with Other Patterns: Singleton and Prototype</strong></h1><p>Let’s examine the similarities and differences between the Singleton and Prototype design patterns since the <em><em>Flyweight</em></em> pattern is often confused with these two design patterns.</p><h2 id="singleton-pattern-differences"><strong>Singleton Pattern: Differences</strong></h2><ol><li>The <a href="https://carloscaballero.io/design-patterns-singleton/">Singleton pattern</a> is used to ensure that a class has only one instance and provides a global access point to that instance, while the <em><em>Flyweight</em></em> pattern is used to efficiently share a large number of objects.</li><li>In <a href="https://carloscaballero.io/design-patterns-singleton/">the Singleton pattern</a>, the emphasis is on having a single instance of a class, while in the <em><em>Flyweight</em></em> pattern, the emphasis is on efficiently sharing <em><em>intrinsic</em></em> states among multiple similar objects.</li></ol><h2 id="singleton-pattern-similarities"><em>Singleton Pattern: Similarities</em></h2><ol><li>Both patterns are related to efficient object management and resource optimization.</li><li>Both patterns can be used together to optimize the performance and efficiency of a system.</li></ol><h2 id="prototype-pattern-differences"><strong>Prototype Pattern: Differences</strong></h2><ul><li>The <em><em>Prototype</em></em> pattern is used to create new objects by duplicating an existing prototype, while the <em><em>Flyweight</em></em> pattern is used to share existing objects and minimize resource usage.</li><li>In the <em><em>Prototype</em></em> pattern, each instance can have its own unique state, while in the <em><em>Flyweight</em></em> pattern, part of the state can be shared among multiple instances.</li></ul><h2 id="prototype-pattern-similarities"><em>Prototype Pattern: Similarities</em></h2><ul><li>Both patterns are related to efficient object creation and resource optimization.</li><li>Both patterns can be used to reduce the overhead of object creation and improve system performance.</li></ul><p>Although the <em><em>Flyweight</em></em> pattern shares some similarities with the <em><em>Singleton</em></em> and <em><em>Prototype</em></em> patterns, it is important to understand their fundamental differences and how they can be used complementary to address different design problems.</p><h1 id="conclusions">Conclusions</h1><p>The <em><em>Flyweight</em></em> pattern provides an efficient and elegant solution for systems that need to manage a large number of similar objects. By sharing common parts of objects among multiple instances, significant resource optimization and system performance improvement are achieved.</p><p>The most important thing about the <em><em>Flyweight</em></em> pattern is not its specific implementation, but the ability to recognize the problem that this pattern can solve and when <strong><strong>it can be applied.</strong></strong> The specific implementation is not that important, as it will vary depending on the programming language used.</p><p>See this <a href="https://github.com/Caballerog/blog/tree/master/flyweight-pattern" rel="noopener ugc nofollow">GitHub repo</a> for the full code.</p>
+
+
+				<article class="share-container">
+					<h2>Share On</h2>
+					<span class="share-description">
+						These blogs, resources and demonstrations are of great relevance now, I would love it if I had a
+						moment to
+						share them!
+					</span>
+					<div class="social-media-wrapper">
+						<a class="social-media"
+							href="https://www.facebook.com/sharer/sharer.php?u=https://www.carloscaballero.io/understanding-the-flyweight-design-pattern/"
+							onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;"
+							title="Share on Facebook"><i class="fab fa-facebook-f share-icon"></i><span
+								class="share-name">Facebook</span></a>
+						<a class="social-media"
+							href="https://twitter.com/share?text=Understanding%20the%20Flyweight%20Design%20Pattern&amp;url=https://www.carloscaballero.io/understanding-the-flyweight-design-pattern/"
+							onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;"
+							title="Share on Twitter"><i class="fab fa-twitter share-icon"></i><span
+								class="share-name">Twitter</span></a>
+						<a class="social-media"
+							href="https://www.linkedin.com/shareArticle?mini=true&url=https://www.carloscaballero.io/understanding-the-flyweight-design-pattern/&title=Understanding%20the%20Flyweight%20Design%20Pattern"
+							onclick="window.open(this.href, 'linkedin-share', 'width=600,height=494');return false;"
+							title="Share on Linkedin"><i class="fab fa-linkedin-in share-icon"></i><span
+								class="share-name">Linkedin</span></a>
+					</div>
+				</article>
+
+				<div id="disqus_thread"></div>
+				<script>
+					var disqus_config = function () {
+						this.page.url = 'https://www.carloscaballero.io/understanding-the-flyweight-design-pattern/';
+						this.page.identifier = 'ghost-665ee5c59c7a350001e7e32a';
+					};
+					(function () {
+						var d = document, s = d.createElement('script');
+						s.src = 'https://XXXX-XXXX.disqus.com/embed.js';
+						s.setAttribute('data-timestamp', +new Date());
+						(d.head || d.body).appendChild(s);
+					})();
+				</script>
+				<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments
+						powered by Disqus.</a>
+				</noscript>
+
+				<section class="read-next-wrapper">
+					<article class="read-next">
+						<a class="prev-story" href="/understanding-the-mediator-design-pattern/">
+							<h2 class="title">Understanding the Mediator Design Pattern</h2>
+							<p class="description">There are 23 classic design patterns described in the original book Design Patterns: Elements of Reu&hellip;</p>
+						</a>
+
+						<a class="next-story" href="/understanding-the-proxy-design-pattern/">
+							<h2 class="title">Understanding the Proxy Design Pattern</h2>
+							<p class="description">There are 23 classic design patterns described in the original book Design Patterns: Elements of Reu&hellip;</p>
+						</a>
+					</article>
+				</section>
+			</section>
+
+
+			<footer>
+    <section class="footer-user">
+        <span class="copyright">&copy; 2018 Carlos Caballero</span>
+    </section>
+
+    <section class="footer-ghost">
+        <span class="information">Proudly published with
+            <a class="author" target="_blank" href="https://ghost.org">Ghost</a>
+            . This theme is
+            <a class="author" href="https://github.com/caballerog/ares-designer" target="_blank">Ares designer.</a>
+        </span>
+    </section>
+</footer>		</main>
+	</section>
+
+	<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>  
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.7.0/styles/tomorrow-night-eighties.min.css">
+
+	<script>
+    function toggleMenu() {
+        const menu = document.querySelector('.mobile-nav');
+        menu.classList.toggle('show-mobile-nav');
+    }
+
+    document.querySelector('.mobile-nav-toggle')
+        .addEventListener('click', toggleMenu);
+</script>
+
+<script>
+    (function (i, s, o, g, r, a, m) {
+    i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+        (i[r].q = i[r].q || []).push(arguments)
+    }, i[r].l = 1 * new Date(); a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-xxxxxxxxx-x', 'auto');
+    ga('send', 'pageview');
+</script>	<script src="/assets/js/vendor/modernizr-2.8.0.min.js?v=143110d124"></script>
+	<script src="/assets/js/localServices/hamburger.js?v=143110d124"></script>
+	<script id="dsq-count-scr" src="//XXXXX.disqus.com/count.js" async></script>
+</body>
+
+</html>

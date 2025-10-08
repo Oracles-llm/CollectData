@@ -1,0 +1,15 @@
+https://www.tutorialspoint.com/design_pattern/template_pattern.htm
+https://www.geeksforgeeks.org/system-design/template-method-design-pattern/
+https://refactoring.guru/design-patterns/template-method
+https://en.wikipedia.org/wiki/Template_method_pattern
+https://www.scholarhat.com/tutorial/designpatterns/template-method-design-pattern
+https://sourcemaking.com/design_patterns/template_method
+https://medium.com/code-and-concepts/part-25-design-patterns-template-pattern-e26a42afbba5
+https://javadesignpatterns.com/catalog/behavioral-patterns/template-method-pattern/
+https://softwaredesignhandbook.com/basics-of-design-patterns-software-engineering-for-beginners-template-method-edc6f00c8c05
+https://www.geeksforgeeks.org/system-design/template-method-design-pattern-in-java/
+https://www.geeksforgeeks.org/system-design/template-method-design-pattern-c-design-patterns/
+https://www.digitalocean.com/community/tutorials/template-method-design-pattern-in-java
+https://medium.com/@akshatsharma0610/template-design-pattern-in-java-453da50185a8
+https://tutorials.visual-paradigm.com/template-pattern-tutorial/
+https://java-design-patterns.com/patterns/template-method/

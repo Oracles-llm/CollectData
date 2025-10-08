@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<!--[if IE 7]>
+<html class="ie ie7" lang="en-US" prefix="og: http://ogp.me/ns#">
+<![endif]-->
+<!--[if IE 8]>
+<html class="ie ie8" lang="en-US" prefix="og: http://ogp.me/ns#">
+<![endif]-->
+<!--[if !(IE 7) | !(IE 8)  ]><!-->
+<html lang="en-US">
+<head>
+<title>Design Patterns - State Pattern</title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="viewport-fit=cover, width=device-width, initial-scale=1.0, maximum-scale=3.0, user-scalable=yes">
+<meta name="keywords" content="">
+<meta name="description" content="In State pattern a class behavior changes based on its state. This type of design pattern comes under behavior pattern.">
+<!-- Favicon -->
+<link rel="icon" href="https://www.tutorialspoint.com/images/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<!-- Preload Google Fonts -->
+<link rel="preload" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+<script>
+   window.googletag = window.googletag || {};
+   window.googletag.cmd = window.googletag.cmd || [];
+   window.googletag.cmd.push(() => {
+        window.googletag.pubads().enableAsyncRendering();
+        window.googletag.pubads().disableInitialLoad();
+  });
+  const injectPgScript = (src, isAsync, onLoadCallback) => {
+    if (!src)
+      return;
+    const script = document.createElement("script");
+    script.src = src;
+    if (isAsync)
+      script.async = isAsync;
+    if (onLoadCallback)
+      script.onload = onLoadCallback;
+    document.head.appendChild(script);
+  };
+  const initiatePgAds = () => {
+    !!window.__tcfapi && window.__tcfapi("addEventListener", 2, (tcData, success) => {
+      if (success && (tcData.eventStatus === "useractioncomplete" || tcData.eventStatus === "tcloaded" || tcData.gdprApplies === false)) {
+        if (!window._initAds) {
+          window._initAds = true;
+          injectPgScript("//dsh7ky7308k4b.cloudfront.net/publishers/tutorialspointcom.min.js", true);
+          injectPgScript("//btloader.com/tag?o=5184339635601408&upapi=true", true);
+        }
+      }
+    }
+    );
+  };
+  injectPgScript("https://securepubads.g.doubleclick.net/tag/js/gpt.js?network-code=8095840", true, () => { 
+    window.googlefc = window.googlefc || {
+      callbackQueue: []
+    };
+    window.googlefc.callbackQueue.push({
+      "CONSENT_API_READY": () => initiatePgAds()
+    });
+  });
+</script>
+<!-- code from Primis - Data_Collector_tag -->
+<script type="text/javascript" language="javascript" src="https://live.primis.tech/live/liveView.php?s=119345&schain=1.0,1!pubgalaxy.com,13467,1&cbuster=%%CACHEBUSTER%%"></script>
+<!-- code from Primis -->
+
+<link rel="stylesheet" href="/static/css/new-lib-style.css?v-19" media="screen, print">
+<link rel="canonical" href="https://www.tutorialspoint.com/design_pattern/state_pattern.htm">
+</head>
+<body class="[--nav-1-height:44px] md:[--nav-2-height:68px] [--nav-2-height:60px] [--nav-3-height:40px]">
+   <nav class="bg-[#2c9d30] z-[11] text-sm max-lg:sticky top-0 text-white flex items-center h-(--nav-1-height) [&_a]:hover:underline">
+      <div
+         class="w-(--container) px-4 mx-auto flex items-center gap-6 overflow-x-auto scrollbar-hidden whitespace-nowrap">
+         <a class="min-w-fit" href="/index.htm" alt="Online Courses, Certifications &amp; eBooks">
+            <i class="fa-sharp fa-light fa-home"></i> Home
+         </a>
+         <a class="min-w-fit" href="/whiteboard.htm" title="Online Whiteboard">
+            <i class="fa-sharp fa-light fa-chalkboard"></i> Whiteboard</a>
+         </a>
+         <a class="min-w-fit" href="/compilers/index.htm" title="Online Compilers and Editors">
+            <i class="fa-sharp fa-light fa-code"></i> Online Compilers
+         </a>
+         <a class="min-w-fit" href="/practice/index.htm" title="Practice">
+            <i class="fa-sharp fa-light fa-display-code"></i> Practice
+         </a>
+         <a class="min-w-fit" href="/articles/index.php" alt="Tutorials And Articles">
+            <i class="fa-sharp fa-light fa-pen-to-square top-nav-icon"></i> Articles
+         </a>
+	 <a class="min-w-fit" href="/online_dev_tools.htm" alt="Development Tools">
+	     <i class="fa-sharp fa-light fa-tools"></i> Tools
+         </a>
+
+         <div class="ml-auto flex items-center gap-2">
+            <a class=" bg-[#318634] size-8 grid place-items-center" target="_blank"
+               href="https://www.facebook.com/tutorialspointindia" aria-label="Connect with us on Facebook" rel="nofollow">
+               <i class="fa-sharp fa-light fa-brands fa-facebook-f !h-[18px]"></i>
+            </a>
+            <a class="bg-[#318634] size-8 grid place-items-center" target="_blank"
+               href="https://x.com/tutorialspoint" aria-label="Connect with us on X" rel="nofollow">
+               <i class="fa-sharp fa-light fa-brands fa-x-twitter !h-[18px]"></i>
+            </a>
+            <a class="bg-[#318634] size-8 grid place-items-center" target="_blank" rel="nofollow"
+               href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" aria-label="Connect with us on Youtube">
+               <i class="fa-sharp fa-light fa-brands fa-youtube !h-[18px]"></i>
+            </a>
+            <a class="bg-[#318634] size-8 grid place-items-center" target="_blank"
+               href="https://www.linkedin.com/company/tutorialspoint/" aria-label="Connect with us on LinkedIn" rel="nofollow">
+               <i class="fa-sharp fa-light fa-brands fa-linkedin-in !h-[18px]"></i>
+            </a>
+            <a class="bg-[#318634] size-8 grid place-items-center" target="_blank"
+               href="https://www.instagram.com/tutorialspoint_/" aria-label="Connect with us on Instagram" rel="nofollow">
+               <i class="fa-sharp fa-light fa-brands fa-instagram !h-[18px]"></i>
+            </a>
+         </div>
+      </div>
+      <div class="w-(--container) lg:hidden px-4 mx-auto absolute h-full pointer-events-none inset-x-0">
+         <div class="absolute inset-y-0 right-0 h-full w-10 bg-gradient-to-l from-[#2c9d30] to-transparent"
+            aria-hidden="true">
+         </div>
+      </div>
+   </nav>
+   <nav style="border:0px;"
+      class="h-(--nav-2-height) z-[11] sticky bg-white top-(--nav-1-height) lg:top-0 px-3 flex items-center border-b border-gray-300">
+      <div class="w-(--container) mx-auto  flex gap-3 items-center">
+         <a href="https://www.tutorialspoint.com" class="block md:w-full md:max-w-[226px]" title="Tutorialspoint">
+            <svg class="max-md:hidden w-full" xmlns="http://www.w3.org/2000/svg" width="226" height="42" viewBox="0 0 226 42" fill="none">
+               <path
+                  d="M76.2136 13.8408V27.7576H72.3845V26.1045C71.3229 27.3193 69.7701 27.9689 68.0642 27.9689C64.5731 27.9689 62.1172 26.0042 62.1172 21.7103V13.8461H66.1523V21.1135C66.1523 23.4426 67.1874 24.4778 68.9726 24.4778C70.7577 24.4778 72.1785 23.2895 72.1785 20.7279V13.8461H76.2136V13.8408Z"
+                  fill="#40A944"></path>
+               <path
+                  d="M89.1484 20.7959C89.1484 16.6077 92.3807 13.6289 96.8066 13.6289C101.233 13.6289 104.438 16.6024 104.438 20.7959C104.438 24.9894 101.233 27.9629 96.8066 27.9629C92.3807 27.9629 89.1484 24.9894 89.1484 20.7959ZM100.351 20.7959C100.351 18.3928 98.8242 16.9404 96.8066 16.9404C94.7891 16.9404 93.2363 18.3876 93.2363 20.7959C93.2363 23.2043 94.7891 24.6514 96.8066 24.6514C98.8242 24.6514 100.351 23.2043 100.351 20.7959Z"
+                  fill="#40A944"></path>
+               <path
+                  d="M115.28 13.6348V17.3582C114.942 17.3318 114.683 17.3054 114.377 17.3054C112.153 17.3054 110.68 18.5202 110.68 21.1873V27.7575H106.645V13.8407H110.5V15.6787C111.482 14.3319 113.141 13.6348 115.285 13.6348H115.28Z"
+                  fill="#40A944"></path>
+               <path d="M117.695 13.8408H121.73V27.7576H117.695V13.8408Z" fill="#40A944">
+               </path>
+               <path
+                  d="M139.119 13.8402V27.757H135.263V26.1514C134.255 27.3661 132.781 27.9629 130.917 27.9629C126.987 27.9629 123.961 25.169 123.961 20.7959C123.961 16.4228 126.987 13.6289 130.917 13.6289C132.623 13.6289 134.07 14.1729 135.079 15.3084V13.8349H139.114L139.119 13.8402ZM135.163 20.7959C135.163 18.3928 133.61 16.9404 131.619 16.9404C129.628 16.9404 128.049 18.3876 128.049 20.7959C128.049 23.2043 129.602 24.6514 131.619 24.6514C133.637 24.6514 135.163 23.2043 135.163 20.7959Z"
+                  fill="#40A944"></path>
+               <path d="M146.402 8.5625H142.367V27.7555H146.402V8.5625Z" fill="#40A944">
+               </path>
+               <path
+                  d="M149.141 26.4622L150.487 23.5679C151.729 24.3707 153.619 24.9147 155.325 24.9147C157.19 24.9147 157.887 24.4235 157.887 23.6471C157.887 21.3708 149.479 23.7 149.479 18.1385C149.479 15.4978 151.861 13.6387 155.917 13.6387C157.829 13.6387 159.952 14.077 161.272 14.8534L159.925 17.7266C158.552 16.9502 157.184 16.6914 155.917 16.6914C154.105 16.6914 153.329 17.2618 153.329 17.9854C153.329 20.3673 161.737 18.0646 161.737 23.5468C161.737 26.1347 159.334 27.9674 155.167 27.9674C152.811 27.9674 150.435 27.3231 149.141 26.4675V26.4622Z"
+                  fill="#40A944"></path>
+               <path
+                  d="M178.226 20.9541C178.226 25.0948 175.332 27.8835 171.45 27.8835C169.279 27.8835 167.415 26.9539 166.279 25.1952V32.7742H164.441V14.1515H166.2V16.8398C167.315 15.0283 169.2 14.0459 171.45 14.0459C175.332 14.0459 178.226 16.8398 178.226 20.9541ZM176.388 20.9541C176.388 17.8011 174.191 15.6515 171.318 15.6515C168.445 15.6515 166.248 17.7958 166.248 20.9541C166.248 24.1125 168.418 26.2568 171.318 26.2568C174.218 26.2568 176.388 24.1336 176.388 20.9541Z"
+                  fill="#000"></path>
+               <path
+                  d="M180.129 20.9541C180.129 16.919 183.076 14.0459 187.058 14.0459C191.041 14.0459 193.966 16.919 193.966 20.9541C193.966 24.9892 191.046 27.8835 187.058 27.8835C183.071 27.8835 180.129 24.9892 180.129 20.9541ZM192.102 20.9541C192.102 17.7747 189.953 15.6515 187.058 15.6515C184.164 15.6515 181.988 17.7747 181.988 20.9541C181.988 24.1336 184.159 26.2568 187.058 26.2568C189.958 26.2568 192.102 24.1336 192.102 20.9541Z"
+                  fill="#000"></path>
+               <path d="M196.754 14.1523H198.592V27.7575H196.754V14.1523Z" fill="#000"></path>
+               <path
+                  d="M215.288 19.8661V27.7567H213.45V20.051C213.45 17.1778 211.95 15.7043 209.362 15.7043C206.442 15.7043 204.604 17.5159 204.604 20.6161V27.7567H202.766V14.1515H204.524V16.6602C205.507 15.0071 207.345 14.0459 209.695 14.0459C213.006 14.0459 215.283 15.9578 215.283 19.8661H215.288Z"
+                  fill="#000"></path>
+               <path
+                  d="M59.3346 24.2389C58.8699 24.5769 58.2731 24.7565 57.6815 24.7565C56.5935 24.7565 55.9756 24.1122 55.9756 22.9185V17.2568H59.4139V14.1512H55.9756V10.2852L51.9405 11.2411V14.1512H50.2188V17.2568H51.9405V22.9714C51.9405 26.2829 53.8313 27.9624 57.1375 27.9624C58.3523 27.9624 59.567 27.6772 60.3962 27.0804L59.3346 24.2336V24.2389Z"
+                  fill="#40A944"></path>
+               <path
+                  d="M87.2878 24.2389C86.823 24.5769 86.2262 24.7565 85.6347 24.7565C84.5467 24.7565 83.9287 24.1122 83.9287 22.9185V17.2568H87.367V14.1512H83.9287V10.2852L79.8936 11.2411V14.1512H78.1719V17.2568H79.8936V22.9714C79.8936 26.2829 81.7844 27.9624 85.0907 27.9624C86.3054 27.9624 87.5202 27.6772 88.3494 27.0804L87.2878 24.2336V24.2389Z"
+                  fill="#40A944"></path>
+               <path
+                  d="M119.713 11.8222C120.827 11.8222 121.73 10.9189 121.73 9.80465C121.73 8.69039 120.827 7.78711 119.713 7.78711C118.599 7.78711 117.695 8.69039 117.695 9.80465C117.695 10.9189 118.599 11.8222 119.713 11.8222Z"
+                  fill="#40A944"></path>
+               <path
+                  d="M197.674 11.8222C198.788 11.8222 199.691 10.9189 199.691 9.80465C199.691 8.69039 198.788 7.78711 197.674 7.78711C196.56 7.78711 195.656 8.69039 195.656 9.80465C195.656 10.9189 196.56 11.8222 197.674 11.8222Z"
+                  fill="#40A944"></path>
+               <path
+                  d="M225.15 25.6071C224.633 26.0719 223.909 26.3043 223.133 26.3043C221.606 26.3043 220.803 25.4223 220.803 23.822V15.699H224.918V14.1462H220.803V10.2168L218.965 11.1728V14.1462H217.043V15.699H218.965V23.9223C218.965 26.4311 220.386 27.8782 222.948 27.8782C224.009 27.8782 225.097 27.5666 225.794 26.9222L225.15 25.6019V25.6071Z"
+                  fill="#000"></path>
+               <path
+                  d="M27.3002 39.5829C33.1626 39.4561 38.4072 35.87 40.8842 30.5568C42.3208 27.4829 43.0444 24.013 42.8542 20.3582C42.2785 9.30395 33.1521 0.394029 22.082 0.0718569C9.95038 -0.282005 0 9.44655 0 21.5043C0 30.7099 5.80439 38.5583 13.9485 41.6004C13.1721 40.7871 12.6017 39.7941 12.2531 38.6217C11.7091 36.8101 11.725 34.6711 12.2954 32.2046L15.2319 19.8881H9.16343L10.1564 15.5837L10.4257 14.4429H16.5259L16.6368 13.9411L18.0628 7.76175L26.9727 6.05582L25.1506 13.9411L23.8408 19.8881L20.8197 33.2609C20.3602 35.2626 20.5398 36.8101 21.3743 37.8928C21.3743 37.8928 22.6207 39.6832 27.3002 39.5829ZM29.4128 13.4605C31.8951 12.9904 34.0288 15.1242 33.5588 17.6065C33.2947 18.9902 32.1803 20.1099 30.7912 20.374C28.3089 20.8441 26.1752 18.7103 26.6453 16.228C26.9093 14.8443 28.0237 13.7246 29.4128 13.4605Z"
+                  fill="#40A944"></path>
+            </svg>
+            <svg class="md:hidden" xmlns="http://www.w3.org/2000/svg" width="43" height="42" viewBox="0 0 43 42"
+               fill="none">
+               <path
+                  d="M27.3002 39.5829C33.1626 39.4561 38.4072 35.87 40.8842 30.5568C42.3208 27.4829 43.0444 24.013 42.8542 20.3582C42.2785 9.30395 33.1521 0.394029 22.082 0.0718569C9.95038 -0.282005 0 9.44655 0 21.5043C0 30.7099 5.80439 38.5583 13.9485 41.6004C13.1721 40.7871 12.6017 39.7941 12.2531 38.6217C11.7091 36.8101 11.725 34.6711 12.2954 32.2046L15.2319 19.8881H9.16343L10.1564 15.5837L10.4257 14.4429H16.5259L16.6368 13.9411L18.0628 7.76175L26.9727 6.05582L25.1506 13.9411L23.8408 19.8881L20.8197 33.2609C20.3602 35.2626 20.5398 36.8101 21.3743 37.8928C21.3743 37.8928 22.6207 39.6832 27.3002 39.5829ZM29.4128 13.4605C31.8951 12.9904 34.0288 15.1242 33.5588 17.6065C33.2947 18.9902 32.1803 20.1099 30.7912 20.374C28.3089 20.8441 26.1752 18.7103 26.6453 16.228C26.9093 14.8443 28.0237 13.7246 29.4128 13.4605Z"
+                  fill="#40A944"></path>
+            </svg>
+         </a>
+         <button data-toc-toggle aria-expanded="false" class="lg:mr-10 min-w-fit cursor-pointer group flex items-center gap-1.5">
+            Chapters
+            <i class="fa-sharp max-md:group-aria-expanded:-rotate-90 fa-light fa-angle-down"></i>
+         </button>
+         <div data-categories class="ml-auto lg:ml-7">
+
+              <a href="/top-categories.htm" tuitle="Top Categories">
+            <button data-categories-toggle aria-expanded="false" class="lg:mr-10 min-w-fit cursor-pointer group flex items-center gap-1.5">
+               <i class="fa-sharp fa-light fa-grid-2" aria-hidden="true"></i>
+               <span>Categories</span>
+            </button>
+               </a>
+
+         </div>
+         <button aria-expanded="false" data-nav-toggle class="lg:hidden group flex items-center gap-1.5"
+            aria-label="Toggle menu">
+            <svg class="group-aria-expanded:hidden size-7" xmlns="http://www.w3.org/2000/svg" fill="none"
+               viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+               <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+            <svg class="group-aria-expanded:block hidden size-7" xmlns="http://www.w3.org/2000/svg" fill="none"
+               viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+               <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+            </svg>
+         </button>
+         <div data-nav
+            class="w-full max-lg:shadow-lg top-(--nav-2-height) max-lg:flex-col [&_a]:py-2 max-lg:bg-white z-[2] left-0 max-lg:p-4 max-lg:border border-gray-300 max-lg:hidden max-lg:data-[visible]:flex max-lg:absolute flex lg:items-center lg:gap-6">
+            <div class="relative w-full max-w-[600px] max-lg:mb-2">
+               <input data-result="search-results" id="search-strings" name="key"
+                  class="w-full placeholder:text-black/90 text-sm focus:outline-hidden transition-colors duration-200"
+                  style="border-radius: 15px; padding-left: 35px; padding-right: 12px; padding-top: 8px; padding-bottom: 8px; transition: border-color 0.2s;"
+                  onmouseover="this.style.borderColor='#2c9d30'"
+                  onmouseout="this.style.borderColor='white'"
+                  onfocus="this.style.borderColor='#2c9d30'"
+                  placeholder="Search tutorials, courses and ebooks..." />
+               <div class="search-box search-box-inn right-0" id="search-results"></div>
+               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                  stroke="currentColor" class="absolute inset-y-0 my-auto size-5 opacity-50" style="left: 10px;">
+                  <path stroke-linecap="round" stroke-linejoin="round"
+                     d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+               </svg>
+            </div>
+           <a href="/tutorialslibrary.htm" class="lg:ml-auto" style="color: #374151; text-decoration: none; transition: color 0.3s; font-size: 16px; font-weight: 600;" onmouseover="this.style.color='#16a34a'" onmouseout="this.style.color='#374151'">Library</a>
+            <a href="https://market.tutorialspoint.com/index.asp" style="color: #374151; text-decoration: none; transition: color 0.3s; font-size: 16px; font-weight: 600;" onmouseover="this.style.color='#16a34a'" onmouseout="this.style.color='#374151'">Courses</a>
+            <a href="https://market.tutorialspoint.com/latest/certifications" style="color: #374151; text-decoration: none; transition: color 0.3s; font-size: 16px; font-weight: 600;" onmouseover="this.style.color='#16a34a'" onmouseout="this.style.color='#374151'">Certifications</a>
+            <a href="https://market.tutorialspoint.com/login.jsp"
+               class="bg-[#2c9d30] py-2 px-4 text-white hover:opacity-80 max-lg:mt-1 transition-opacity font-semibold" id="nav__signup-link">Login</a>
+         </div>
+      </div>
+   </nav>
+<main class="bg-light" style="overflow: unset;">
+<div class="container-fluid">
+<div class="row">
+<div class="tutorial-toc">
+<div class="toc-nav">
+<div class="mini-logo">
+<img src="/design_pattern/images/java-design-patterns-mini-logo.jpg" alt="Design Patterns Tutorial" />
+</div>
+<ul class="toc chapters">
+<li><a href="/design_pattern/index.htm">Design Patterns - Home</a></li>
+<li><a href="/design_pattern/design_pattern_overview.htm">Design Patterns -  Overview</a></li>
+</ul>
+<h2 class="heading">Creational Design Patterns</h2>
+<ul class="toc chapters">
+<li><a href="/design_pattern/factory_pattern.htm">Design Patterns - Factory Pattern</a></li>
+<li><a href="/design_pattern/abstract_factory_pattern.htm">Abstract Factory Pattern</a></li>
+<li><a href="/design_pattern/singleton_pattern.htm">Design Patterns - Singleton Pattern</a></li>
+<li><a href="/design_pattern/builder_pattern.htm">Design Patterns - Builder Pattern</a></li>
+<li><a href="/design_pattern/prototype_pattern.htm">Design Patterns - Prototype Pattern</a></li>
+</ul>
+<h2 class="heading">Structural Design Patterns</h2>
+<ul class="toc chapters">
+<li><a href="/design_pattern/adapter_pattern.htm">Design Patterns - Adapter Pattern</a></li>
+<li><a href="/design_pattern/bridge_pattern.htm">Design Patterns - Bridge Pattern</a></li>
+<li><a href="/design_pattern/filter_pattern.htm">Design Patterns - Filter Pattern</a></li>
+<li><a href="/design_pattern/composite_pattern.htm">Design Patterns - Composite Pattern</a></li>
+<li><a href="/design_pattern/decorator_pattern.htm">Design Patterns - Decorator Pattern</a></li>
+<li><a href="/design_pattern/facade_pattern.htm">Design Patterns - Facade Pattern</a></li>
+<li><a href="/design_pattern/flyweight_pattern.htm">Design Patterns - Flyweight Pattern</a></li>
+<li><a href="/design_pattern/proxy_pattern.htm">Design Patterns - Proxy Pattern</a></li>
+<li><a href="/design_pattern/chain_of_responsibility_pattern.htm">Chain of Responsibility Pattern</a></li>
+</ul>
+<h2 class="heading">Behavioral Design Patterns</h2>
+<ul class="toc chapters">
+<li><a href="/design_pattern/command_pattern.htm">Design Patterns - Command Pattern</a></li>
+<li><a href="/design_pattern/interpreter_pattern.htm">Design Patterns - Interpreter Pattern</a></li>
+<li><a href="/design_pattern/iterator_pattern.htm">Design Patterns - Iterator Pattern</a></li>
+<li><a href="/design_pattern/mediator_pattern.htm">Design Patterns - Mediator Pattern</a></li>
+<li><a href="/design_pattern/memento_pattern.htm">Design Patterns - Memento Pattern</a></li>
+<li><a href="/design_pattern/observer_pattern.htm">Design Patterns - Observer Pattern</a></li>
+<li><a href="/design_pattern/state_pattern.htm">Design Patterns - State Pattern</a></li>
+<li><a href="/design_pattern/strategy_pattern.htm">Design Patterns - Strategy Pattern</a></li>
+<li><a href="/design_pattern/template_pattern.htm">Design Patterns - Template Pattern</a></li>
+<li><a href="/design_pattern/visitor_pattern.htm">Design Patterns - Visitor Pattern</a></li>
+</ul>
+<h2 class="heading">J2EE Design Patterns</h2>
+<ul class="toc chapters">
+<li><a href="/design_pattern/null_object_pattern.htm">Design Patterns - Null Object Pattern</a></li>
+<li><a href="/design_pattern/mvc_pattern.htm">Design Patterns - MVC Pattern</a></li>
+<li><a href="/design_pattern/business_delegate_pattern.htm">Business Delegate Pattern</a></li>
+<li><a href="/design_pattern/composite_entity_pattern.htm">Composite Entity Pattern</a></li>
+<li><a href="/design_pattern/data_access_object_pattern.htm">Data Access Object Pattern</a></li>
+<li><a href="/design_pattern/front_controller_pattern.htm">Front Controller Pattern</a></li>
+<li><a href="/design_pattern/intercepting_filter_pattern.htm">Intercepting Filter Pattern</a></li>
+<li><a href="/design_pattern/service_locator_pattern.htm">Service Locator  Pattern</a></li>
+<li><a href="/design_pattern/transfer_object_pattern.htm">Transfer Object Pattern</a></li>
+</ul>
+<h2 class="heading">Design Patterns Useful Resources</h2>
+<ul class="toc chapters">
+<li><a class="left" href="/design_pattern/design_pattern_questions_answers.htm">Design Patterns - Questions/Answers</a></li>
+<li><a class="left" href="/design_pattern/design_pattern_quick_guide.htm">Design Patterns - Quick Guide</a></li>
+<li><a class="left" href="/design_pattern/design_pattern_resources.htm">Design Patterns - Useful Resources</a></li>
+<li><a class="left" href="/design_pattern/design_pattern_discussion.htm">Design Patterns - Discussion</a></li>
+</ul>         <ul class="toc reading">
+            <li class="sreading">Selected Reading</li>
+            <li><a target="_blank" href="/upsc_ias_exams.htm">UPSC IAS Exams Notes</a></li>
+            <li><a target="_blank" href="/developers_best_practices/index.htm">Developer's Best Practices</a></li>
+            <li><a target="_blank" href="/questions_and_answers.htm">Questions and Answers</a></li>
+            <li><a target="_blank" href="/effective_resume_writing.htm">Effective Resume Writing</a></li>
+            <li><a target="_blank" href="/resume-builder.htm">AI Based Resume Builder</a></li>
+            <li><a target="_blank" href="/assist.php">Personal AI Study Assistant</a></li>
+            <li><a target="_blank" href="/generate_coding_logic.php">Generate Coding Logic</a></li>
+            <li><a target="_blank" href="/hr_interview_questions/index.htm">HR Interview Questions</a></li>
+            <li><a target="_blank" href="/computer_glossary.htm">Computer Glossary</a></li>
+            <li><a target="_blank" href="/computer_whoiswho.htm">Who is Who</a></li>
+         </ul>
+      </div>
+      <div id="stickyparent" class="d-none d-sm-block">
+         <div style="height:0px;width:300px;" id="sticky-ad">
+          <!-- Placeholder for an advertisement -->
+         </div>
+      </div>
+</div>
+<!-- Tutorial ToC Ends Here -->
+<!-- Tutorial Content Starts Here -->
+<div class="tutorial-content" id="mainContent">
+<h1>Design Patterns - State Pattern</h1>
+<hr>
+<!-- TAGNAME: 728x90_Top -->
+   <div class="adp_top_ads" style="height:90px; overflow: hidden; display: block;width: 728px;">
+      <!-- TAGNAME: 728x90_Top -->
+      <div id="tutorialspointcom47470">
+      </div>
+    </div>
+<hr>
+<div class="library-page-top-nav">
+   <div class="button button--neutral" id="btn_top_previous">
+   <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewbox="0 0 10 16" fill="none"><path d="M1.03117 8.48836C0.64065 8.09783 0.64065 7.46467 1.03117 7.07414L7.39514 0.710183C7.78566 0.319658 8.41883 0.319658 8.80935 0.710183C9.19987 1.10071 9.19987 1.73387 8.80935 2.1244L3.15249 7.78125L8.80935 13.4381C9.19987 13.8286 9.19987 14.4618 8.80935 14.8523C8.41882 15.2428 7.78566 15.2428 7.39513 14.8523L1.03117 8.48836ZM3.12109 8.78125L1.73828 8.78125L1.73828 6.78125L3.12109 6.78125L3.12109 8.78125Z" fill="black"></path></svg>
+   <a href="/design_pattern/observer_pattern.htm">
+      Previous
+   </a>
+   </div>
+   <div class="flex-group">
+      <a href="/design_pattern/quiz_on_state_pattern.htm" target="_blank" alt="Practice Quiz on "><span class="button button--neutral">Quiz</span></a>
+      <div class="button " id="btn_top_next">
+   <a href="/design_pattern/strategy_pattern.htm">
+    Next
+   </a>
+   <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewbox="0 0 10 16" fill="none"><path d="M8.87117 8.48836C9.26169 8.09783 9.26169 7.46467 8.87117 7.07414L2.50721 0.710183C2.11668 0.319658 1.48352 0.319658 1.09299 0.710183C0.70247 1.10071 0.70247 1.73387 1.09299 2.1244L6.74985 7.78125L1.093 13.4381C0.702471 13.8286 0.702471 14.4618 1.093 14.8523C1.48352 15.2428 2.11668 15.2428 2.50721 14.8523L8.87117 8.48836ZM6.78125 8.78125L8.16406 8.78125L8.16406 6.78125L6.78125 6.78125L6.78125 8.78125Z" fill="white"></path></svg>
+   </div>
+   </div>
+</div>
+<p>In State pattern a class behavior changes based on its state. This type of design pattern comes under behavior pattern.</p>
+<p>In State pattern, we create objects which represent various states and a context object whose behavior varies as its state object changes.</p>
+<h2>Implementation</h2>
+<p>We are going to create a <i>State</i> interface defining an action and concrete state classes implementing the <i>State</i> interface. <i>Context</i> is a class which carries a State.</p>
+<p><i>StatePatternDemo</i>, our demo class, will use <i>Context</i> and state objects to demonstrate change in Context behavior  based on type of state it is in.</p>
+<img src="/design_pattern/images/state_pattern_uml_diagram.jpg" alt="State Pattern UML Diagram">
+<div class="inserted-div"><script async="true" id="PS_67ebd889ca6f1325b65a5242" type="text/javascript" src="https://ads.playstream.media/api/adserver/scripts?PS_TAGID=67ebd889ca6f1325b65a5242&amp;PS_PUB_ID=67ebd5e3ca6f1325b65a46fe"></script></div>
+<div class="inserted-div"><script async="true" id="PS_67ebd889ca6f1325b65a5242" type="text/javascript" src="https://ads.playstream.media/api/adserver/scripts?PS_TAGID=67ebd889ca6f1325b65a5242&amp;PS_PUB_ID=67ebd5e3ca6f1325b65a46fe"></script></div>
+<h2>Step 1</h2>
+<p>Create an interface.</p>
+<h3>State.java</h3>
+<pre class="just-code notranslate language-java" data-lang="design_pattern">
+package com.tutorialspoint;
+
+public interface State {
+   public void doAction(Context context);
+}
+</pre>
+<h2>Step 2</h2>
+<p>Create concrete classes implementing the same interface.</p>
+<h3>StartState.java</h3>
+<pre class="just-code notranslate language-java" data-lang="design_pattern">
+package com.tutorialspoint;
+
+public class StartState implements State {
+
+   public void doAction(Context context) {
+      System.out.println("Player is in start state");
+      context.setState(this);	
+   }
+
+   public String toString(){
+      return "Start State";
+   }
+}
+</pre>
+<h3>StopState.java</h3>
+<pre class="just-code notranslate language-java" data-lang="design_pattern">
+package com.tutorialspoint;
+
+public class StopState implements State {
+
+   public void doAction(Context context) {
+      System.out.println("Player is in stop state");
+      context.setState(this);	
+   }
+
+   public String toString(){
+      return "Stop State";
+   }
+}
+</pre>
+<h2>Step 3</h2>
+<p>Create <i>Context</i> Class.</p>
+<h3>Context.java</h3>
+<pre class="just-code notranslate language-java" data-lang="design_pattern">
+package com.tutorialspoint;
+
+public class Context {
+   private State state;
+
+   public Context(){
+      state = null;
+   }
+
+   public void setState(State state){
+      this.state = state;		
+   }
+
+   public State getState(){
+      return state;
+   }
+}
+</pre>
+<h2>Example - Usage of State Pattern</h2>
+<p>Use the <i>Context</i> to see change in behaviour when <i>State</i> changes.</p>
+<h3>StatePatternDemo.java</h3>
+<pre class="demo-code notranslate language-java" data-lang="design_pattern">
+package com.tutorialspoint;
+
+public class StatePatternDemo {
+   public static void main(String[] args) {
+      Context context = new Context();
+
+      StartState startState = new StartState();
+      startState.doAction(context);
+
+      System.out.println(context.getState().toString());
+
+      StopState stopState = new StopState();
+      stopState.doAction(context);
+
+      System.out.println(context.getState().toString());
+   }
+}
+
+interface State {
+   public void doAction(Context context);
+}
+class StartState implements State {
+
+   public void doAction(Context context) {
+      System.out.println("Player is in start state");
+      context.setState(this);	
+   }
+
+   public String toString(){
+      return "Start State";
+   }
+}
+class StopState implements State {
+
+   public void doAction(Context context) {
+      System.out.println("Player is in stop state");
+      context.setState(this);	
+   }
+
+   public String toString(){
+      return "Stop State";
+   }
+}
+class Context {
+   private State state;
+
+   public Context(){
+      state = null;
+   }
+
+   public void setState(State state){
+      this.state = state;		
+   }
+
+   public State getState(){
+      return state;
+   }
+}
+</pre>
+<h4>Output</h4>
+<p>Verify the output.</p>
+<pre class="result notranslate">
+Player is in start state
+Start State
+Player is in stop state
+Stop State
+</pre><div class="library-page-bottom-nav ">
+   <div class="button button--blue" id="print-page">
+    <svg fill="white" xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 512 512"><path d="M112 160V64c0-8.8 7.2-16 16-16H357.5c4.2 0 8.3 1.7 11.3 4.7l26.5 26.5c3 3 4.7 7.1 4.7 11.3V160h48V90.5c0-17-6.7-33.3-18.7-45.3L402.7 18.7C390.7 6.7 374.5 0 357.5 0H128C92.7 0 64 28.7 64 64v96h48zm16 208H384v96H128V368zm-16-48c-17.7 0-32 14.3-32 32H48V256c0-8.8 7.2-16 16-16H448c8.8 0 16 7.2 16 16v96H432c0-17.7-14.3-32-32-32H112zm320 80h48c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64V368c0 17.7 14.3 32 32 32H80v80c0 17.7 14.3 32 32 32H400c17.7 0 32-14.3 32-32V400z"/></svg>
+      Print Page
+   </div>
+   <div class="flex-group">
+   <a href="/design_pattern/observer_pattern.htm">
+   <div class="button button--neutral">
+   <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16" fill="none"><path d="M1.03117 8.48836C0.64065 8.09783 0.64065 7.46467 1.03117 7.07414L7.39514 0.710183C7.78566 0.319658 8.41883 0.319658 8.80935 0.710183C9.19987 1.10071 9.19987 1.73387 8.80935 2.1244L3.15249 7.78125L8.80935 13.4381C9.19987 13.8286 9.19987 14.4618 8.80935 14.8523C8.41882 15.2428 7.78566 15.2428 7.39513 14.8523L1.03117 8.48836ZM3.12109 8.78125L1.73828 8.78125L1.73828 6.78125L3.12109 6.78125L3.12109 8.78125Z" fill="black" /></svg>
+      Previous
+   </div>
+   </a>
+   <a href="/design_pattern/strategy_pattern.htm">
+   <div class="button ">Next
+   <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16" viewBox="0 0 10 16" fill="none"><path
+   d="M8.87117 8.48836C9.26169 8.09783 9.26169 7.46467 8.87117 7.07414L2.50721 0.710183C2.11668 0.319658 1.48352 0.319658 1.09299 0.710183C0.70247 1.10071 0.70247 1.73387 1.09299 2.1244L6.74985 7.78125L1.093 13.4381C0.702471 13.8286 0.702471 14.4618 1.093 14.8523C1.48352 15.2428 2.11668 15.2428 2.50721 14.8523L8.87117 8.48836ZM6.78125 8.78125L8.16406 8.78125L8.16406 6.78125L6.78125 6.78125L6.78125 8.78125Z" fill="white" /></svg>
+   </div>
+   </a>
+   </div>
+</div>
+   <div class="bottom-library-ads mt"  style="margin:5px;">
+      <div class="google-bottom-ads" id="google-bottom-ads">
+         <div>Advertisements</div>
+                    <div style="width: 750px; height: 300px;">
+                <!-- TAGNAME: 750x300_Bottom_Ad -->
+                <div id='tutorialspointcom47468'>
+                </div>
+           </div>
+                 </div>
+   </div>
+   </div>
+   <div>
+         <div class="data-sticky" id="google-right-ads">
+        <div class="google-right-ad" style="margin: 0px auto !important;margin-top:5px;min-height:280px!important">
+             <!-- TAGNAME: 336x280_Right_Sidebar_1 -->
+             <div id='tutorialspointcom47465'>
+             </div>
+        </div>
+        <div class="google-right-ad" style="margin-top:16px;min-height:280px!important">
+            <!-- TAGNAME: 336x280_Right_Sidebar_2 -->
+            <div id='tutorialspointcom47466'>
+            </div>
+        </div>
+        <div class="google-right-ad" style="margin-top:16px;min-height:280px!important">
+            <!-- TAGNAME: 300x600_Right_Sidebar -->
+           <div id='tutorialspointcom47467'>
+           </div>
+        </div>
+      </div>
+     </div>
+   </div>
+</div>
+</div>
+</main>
+<footer class="bg-neutral-800 text-sm">
+      <div class="container mx-auto px-4 py-12">
+         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 lg:justify-items-center gap-8">
+            <div>
+               <h5 class="text-white font-bold text-base mb-4">TOP TUTORIALS</h5>
+               <ul class="space-y-2">
+                  <li><a href="/python/index.htm" class="text-gray-300 hover:text-white">Python Tutorial</a></li>
+                  <li><a href="/java/index.htm" class="text-gray-300 hover:text-white">Java Tutorial</a></li>
+                  <li><a href="/cplusplus/index.htm" class="text-gray-300 hover:text-white">C++ Tutorial</a></li>
+                  <li><a href="/cprogramming/index.htm" class="text-gray-300 hover:text-white">C Programming
+                        Tutorial</a></li>
+                  <li><a href="/csharp/index.htm" class="text-gray-300 hover:text-white">C# Tutorial</a></li>
+                  <li><a href="/php/index.htm" class="text-gray-300 hover:text-white">PHP Tutorial</a></li>
+                  <li><a href="/r/index.htm" class="text-gray-300 hover:text-white">R Tutorial</a></li>
+                  <li><a href="/html/index.htm" class="text-gray-300 hover:text-white">HTML Tutorial</a></li>
+                  <li><a href="/css/index.htm" class="text-gray-300 hover:text-white">CSS Tutorial</a></li>
+                  <li><a href="/javascript/index.htm" class="text-gray-300 hover:text-white">JavaScript Tutorial</a>
+                  </li>
+                  <li><a href="/sql/index.htm" class="text-gray-300 hover:text-white">SQL Tutorial</a></li>
+               </ul>
+            </div>
+
+            <div>
+               <h5 class="text-white font-bold text-base mb-4">TRENDING TECHNOLOGIES</h5>
+               <ul class="space-y-2">
+                  <li><a href="/cloud_computing/index.htm" class="text-gray-300 hover:text-white">Cloud Computing
+                        Tutorial</a></li>
+                  <li><a href="/amazon_web_services/index.htm" class="text-gray-300 hover:text-white">Amazon Web
+                        Services Tutorial</a></li>
+                  <li><a href="/microsoft_azure/index.htm" class="text-gray-300 hover:text-white">Microsoft Azure
+                        Tutorial</a></li>
+                  <li><a href="/git/index.htm" class="text-gray-300 hover:text-white">Git Tutorial</a></li>
+                  <li><a href="/ethical_hacking/index.htm" class="text-gray-300 hover:text-white">Ethical Hacking
+                        Tutorial</a></li>
+                  <li><a href="/docker/index.htm" class="text-gray-300 hover:text-white">Docker Tutorial</a></li>
+                  <li><a href="/kubernetes/index.htm" class="text-gray-300 hover:text-white">Kubernetes Tutorial</a>
+                  </li>
+                  <li><a href="/data_structures_algorithms/index.htm" class="text-gray-300 hover:text-white">DSA
+                        Tutorial</a></li>
+                  <li><a href="/spring_boot/index.htm" class="text-gray-300 hover:text-white">Spring Boot Tutorial</a>
+                  </li>
+                  <li><a href="/sdlc/index.htm" class="text-gray-300 hover:text-white">SDLC Tutorial</a></li>
+                  <li><a href="/unix/index.htm" class="text-gray-300 hover:text-white">Unix Tutorial</a></li>
+               </ul>
+            </div>
+
+            <div>
+               <h5 class="text-white font-bold text-base mb-4">CERTIFICATIONS</h5>
+               <ul class="space-y-2">
+                  <li><a href="https://market.tutorialspoint.com/certification/business-analytics-certification-2023/index.asp"
+                        class="text-gray-300 hover:text-white">Business Analytics Certification</a></li>
+                  <li><a href="https://market.tutorialspoint.com/certification/java-prime-pack/index.asp" class="text-gray-300 hover:text-white">Java &
+                        Spring Boot Advanced Certification</a></li>
+                  <li><a href="https://market.tutorialspoint.com/certification/data-science-advanced-certification/index.asp"
+                        class="text-gray-300 hover:text-white">Data Science Advanced Certification</a></li>
+                  <li><a href="https://market.tutorialspoint.com/certification/cloud-computing-and-devops-advanced-certification/index.asp"
+                        class="text-gray-300 hover:text-white">Cloud Computing And DevOps</a></li>
+                  <li><a href="https://market.tutorialspoint.com/certification/advanced-certification-in-business-analytics/index.asp"
+                        class="text-gray-300 hover:text-white">Advanced Certification In Business Analytics</a></li>
+                  <li><a href="https://market.tutorialspoint.com/certification/artificial-intelligence-and-machine-learning-certification/index.asp"
+                        class="text-gray-300 hover:text-white">Artificial Intelligence And Machine Learning</a></li>
+                  <li><a href="https://market.tutorialspoint.com/certification/devops-certification/index.asp"
+                        class="text-gray-300 hover:text-white">DevOps Certification</a></li>
+                  <li><a href="https://market.tutorialspoint.com/certification/game-development-prime-pack/index.asp"
+                        class="text-gray-300 hover:text-white">Game Development Certification</a></li>
+                  <li><a href="https://market.tutorialspoint.com/certification/frontend-developer-certification/index.asp"
+                        class="text-gray-300 hover:text-white">Front-End Developer Certification</a></li>
+                  <li><a href="https://market.tutorialspoint.com/certification/aws-prime-pack/index.asp" class="text-gray-300 hover:text-white">AWS
+                        Certification Training</a></li>
+                  <li><a href="https://market.tutorialspoint.com/certification/complete-python-prime-pack/index.asp"
+                        class="text-gray-300 hover:text-white">Python Programming Certification</a></li>
+               </ul>
+            </div>
+
+            <div>
+               <h5 class="text-white font-bold text-base mb-4">COMPILERS & EDITORS</h5>
+               <ul class="space-y-2">
+                    <li><a href="/compilers/online-java-compiler.htm" class="text-gray-300 hover:text-white" title="Online Java Compiler">Online Java Compiler</a></li>
+                    <li><a href="/compilers/online-python-compiler.htm" class="text-gray-300 hover:text-white" title="Online Python Compiler">Online Python Compiler</a></li>
+                    <li><a href="/compilers/online-golang-compiler.htm" class="text-gray-300 hover:text-white" title="Online Go Compiler">Online Go Compiler</a></li>
+                    <li><a href="/compilers/online-c-compiler.htm" class="text-gray-300 hover:text-white" title="Online C Compiler">Online C Compiler</a></li>
+                    <li><a href="/compilers/online-cpp-compiler.htm" class="text-gray-300 hover:text-white" title="Online C++ Compiler">Online C++ Compiler</a></li>
+                    <li><a href="/compilers/online-csharp-compiler.htm" class="text-gray-300 hover:text-white" title="Online C# Compiler">Online C# Compiler</a></li>
+                    <li><a href="/compilers/online-php-compiler.htm" class="text-gray-300 hover:text-white" title="Online PHP Compiler">Online PHP Compiler</a></li>
+                    <li><a href="/compilers/online-matlab-compiler.htm" class="text-gray-300 hover:text-white" title="Online MATLAB Compiler">Online MATLAB Compiler</a></li>
+                    <li><a href="/compilers/online-bash-terminal.htm" class="text-gray-300 hover:text-white" title="Online Bash Terminal">Online Bash Terminal</a></li>
+                    <li><a href="/compilers/online-sql-editor.htm" class="text-gray-300 hover:text-white" title="Online SQL Compiler">Online SQL Compiler</a></li>
+                    <li><a href="/compilers/online-html-editor.htm" class="text-gray-300 hover:text-white" title="Online Html Editor">Online Html Editor</a></li>
+               </ul>
+            </div>
+         </div>
+
+         <ul class="footer-links flex text-xs flex-wrap justify-center gap-x-2 text-gray-300 mt-10 mb-6">
+           <li><a href="/about/index.htm" class="hover:text-white">ABOUT US</a></li>
+           <li><a href="/about/about_team.htm" class="hover:text-white">OUR TEAM</a></li>
+           <li><a href="/about/about_careers.htm" class="hover:text-white">CAREERS</a></li>
+           <li><a href="/job_search.php" class="hover:text-white">JOBS</a></li>
+           <li><a href="/about/contact_us.htm" class="hover:text-white">CONTACT US</a></li>
+           <li><a href="/about/about_terms_of_use.htm" class="hover:text-white">TERMS OF USE</a></li>
+           <li><a href="/about/about_privacy.htm" class="hover:text-white">PRIVACY POLICY</a></li>
+           <li><a href="/about/return_refund_policy.htm" class="hover:text-white">REFUND POLICY</a></li>
+           <li><a href="/about/about_cookies.htm" class="hover:text-white">COOKIES POLICY</a></li>
+           <li><a href="/about/faq.htm" class="hover:text-white">FAQ'S</a></li>
+         </ul>
+
+         <div class="flex flex-col md:flex-row items-center justify-center gap-8 py-6 border-t border-gray-700">
+            <img class="h-8 mb-4 md:mb-0" src="https://www.tutorialspoint.com/static/images/logo-footer.svg" loading="lazy" alt="tutorials point logo">
+
+            <div class="flex space-x-6 mb-4 md:mb-0">
+               <a rel="nofollow" target="_blank" href="https://www.facebook.com/tutorialspointindia" class="text-gray-400 hover:text-white" aria-label="Facebook">
+                  <i class="!size-7 fa-brands fa-facebook-f"></i>
+               </a>
+               <a target="_blank" href="https://x.com/tutorialspoint" rel="nofollow" class="text-gray-400 hover:text-white" aria-label="X">
+                  <i class="!size-7 fa-brands fa-x-twitter"></i>
+               </a>
+               <a target="_blank" href="https://www.youtube.com/channel/UCVLbzhxVTiTLiVKeGV7WEBg" rel="nofollow" class="text-gray-400 hover:text-white" aria-label="YouTube">
+                  <i class="!size-7 fa-brands fa-youtube"></i>
+               </a>
+               <a target="_blank" href="https://www.linkedin.com/company/tutorialspoint/" rel="nofollow" class="text-gray-400 hover:text-white" aria-label="Linkedin">
+                  <i class="!size-7 fa-brands fa-linkedin-in"></i>
+               </a>
+               <a target="_blank" href="https://www.instagram.com/tutorialspoint_/" rel="nofollow" class="text-gray-400 hover:text-white" aria-label="Instagram">
+                  <i class="!size-7 fa-brands fa-instagram"></i>
+               </a>
+            </div>
+
+            <div class="flex space-x-4">
+               <a href="https://play.google.com/store/apps/details?id=com.tutorialspoint.onlineviewer" target="_blank"
+                  rel="nofollow">
+                  <img src="https://www.tutorialspoint.com/static/images/googleplay.svg" alt="Download Android App" loading="lazy" class="h-10">
+               </a>
+               <a href="https://itunes.apple.com/us/app/tutorials-point/id914891263?ls=1&mt=8" target="_blank" rel="nofollow">
+                  <img src="https://www.tutorialspoint.com/static/images/appstore.svg" alt="Download IOS App" loading="lazy" class="h-10">
+               </a>
+            </div>
+         </div>
+         <div class="pt-6 pb-8 text-center border-t border-gray-700">
+            <p class="text-gray-300 max-w-5xl mx-auto mb-2">
+               Tutorials Point is a leading Ed Tech company striving to provide the best learning material on technical
+               and non-technical subjects.
+            </p>
+            <p class="text-gray-300 mt-8 text-sm">© Copyright 2025. All Rights Reserved.</p>
+         </div>
+      </div>
+</footer>
+<script src="/static/js/new-lib-script.js?v-6"></script>
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<div id="fluid-privacy-opt-out-link" onmouseover="this.style.color='rgb(25, 103, 210)'; this.style.cursor='pointer'" onmouseout="this.style.color='#CCCCCC'; this.style.cursor='auto'"></div>
+<script>
+const privacyOptOutLink = document.getElementById("fluid-privacy-opt-out-link");
+window.googlefc = window.googlefc || { callbackQueue: [] };
+window.googlefc.ccpa = window.googlefc.ccpa || {};
+window.googlefc.ccpa.overrideDnsLink = true;
+window.googlefc.callbackQueue.push({
+    "CONSENT_API_READY": () => {
+      if (!privacyOptOutLink) {
+        return;
+      }
+      !!window.__tcfapi && window.__tcfapi("addEventListener", 2, (tcData, success) => {
+        if (success && tcData.gdprApplies) {
+          privacyOptOutLink.innerText = "Change GDPR Consent";
+          privacyOptOutLink.addEventListener("click", () => googlefc.showRevocationMessage());
+          return;
+        }
+      });
+    }
+});
+window.googlefc.callbackQueue.push({
+    "INITIAL_CCPA_DATA_READY": () => {
+      if (!privacyOptOutLink) {
+        return;
+      }
+
+      if (googlefc.ccpa.getInitialCcpaStatus() && googlefc.ccpa.getInitialCcpaStatus() === googlefc.ccpa.InitialCcpaStatusEnum.NOT_OPTED_OUT) {
+        privacyOptOutLink.innerText = "Don't sell or share my personal info";
+        privacyOptOutLink.addEventListener("click", () => googlefc.ccpa.openConfirmationDialog((optedOut) => {
+          if (optedOut) {
+            privacyOptOutLink.style.display = "none";
+          }
+        }));
+        return
+      }
+    }
+ });
+</script>
+<script>
+if(getCookie('auid') == '' || getCookie('auid') == null){
+   window.onload = function() {
+        initializeGoogleOneTap();
+   };
+}
+</script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-EX9ZP4VY84"></script>
+<script>
+     window.dataLayer = window.dataLayer || [];
+     function gtag(){dataLayer.push(arguments);}
+     gtag('js', new Date());
+     gtag('config', 'G-EX9ZP4VY84');
+</script>
+<!-- New Facebook Pixel Code -->
+<script>
+   !function(f,b,e,v,n,t,s)
+   {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+   n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+   if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+   n.queue=[];t=b.createElement(e);t.async=!0;
+   t.src=v;s=b.getElementsByTagName(e)[0];
+   s.parentNode.insertBefore(t,s)}(window,document,'script',
+   'https://connect.facebook.net/en_US/fbevents.js');
+   fbq('init', '854536859149047');
+   fbq('track', 'PageView');
+</script>
+ <!-- End facebook Pixel Code -->
+</body>
+</html>

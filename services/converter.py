@@ -11,11 +11,11 @@ import trafilatura
 from services.supabase import supabase_service
 
 BASE_DIR = Path(__file__).resolve().parent
-INPUT_FILE = BASE_DIR / "../singleton.txt"
-RAW_DIR = BASE_DIR / "../data/rawInputs/singleton"
-OUTPUT_DIR = BASE_DIR / "../data/markdowns/singleton"
+INPUT_FILE = BASE_DIR / "../template.txt"
+RAW_DIR = BASE_DIR / "../data/rawInputs/template"
+OUTPUT_DIR = BASE_DIR / "../data/markdowns/template"
 CREATOR_NAME = "Neranjan"
-DESIGN_PATTERN_NAME = "Singleton"
+DESIGN_PATTERN_NAME = "Template"
 
 
 def sanitize_for_filename(url: str) -> str:

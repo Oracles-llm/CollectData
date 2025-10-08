@@ -1,0 +1,11 @@
+https://www.geeksforgeeks.org/system-design/state-design-pattern/
+https://refactoring.guru/design-patterns/state
+https://www.tutorialspoint.com/design_pattern/state_pattern.htm
+https://en.wikipedia.org/wiki/State_pattern
+https://medium.com/@ahmettemelkundupoglu/mastering-the-state-design-pattern-in-java-a-detailed-guide-with-examples-4544a975a914
+https://sourcemaking.com/design_patterns/state
+https://howtodoinjava.com/design-patterns/behavioral/state-design-pattern/
+https://www.digitalocean.com/community/tutorials/state-design-pattern-java
+https://www.geeksforgeeks.org/system-design/state-method-design-patterns-in-javascript/
+https://codezup.com/state-pattern-practical-guide/
+https://dotnettutorials.net/lesson/state-design-pattern/

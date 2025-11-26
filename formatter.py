@@ -216,6 +216,7 @@ def main() -> int:
         print(f"No text files found in {EXTRACTED_TEXT_DIR}", file=sys.stderr)
         return 1
 
+    print("=== Stage 2: Generating QA datasets via formatter.py ===")
     print(
         f"Preparing {len(text_files)} file(s). Running up to {MAX_PARALLEL_REQUESTS} concurrent API calls..."
     )
@@ -248,7 +249,7 @@ def main() -> int:
             print(f"- {result.source.name}: {result.detail}", file=sys.stderr)
         return 1
 
-    print("\nAll files processed successfully.")
+    print(f"\nStage 2 complete: Saved {len(text_files)} JSON file(s) to {OUTPUT_DIR}.")
     return 0
 
 

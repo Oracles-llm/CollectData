@@ -94,6 +94,8 @@ def main() -> None:
 
     EXTRACTED_TEXT_DIR.mkdir(parents=True, exist_ok=True)
 
+    print("=== Stage 1: Extracting documents via filter.py ===")
+
     total = len(tasks)
     for index, (task_type, payload) in enumerate(tasks, start=1):
         if task_type == "url":
@@ -137,7 +139,9 @@ def main() -> None:
             stem = f"{index:03d}_{sanitize_for_filename(path.stem)}"
             write_text_output(stem, extracted_text)
 
-    print("Processing complete.")
+    print(
+        f"Stage 1 complete: Extracted {total} file(s) into {EXTRACTED_TEXT_DIR}."
+    )
 
 
 if __name__ == "__main__":

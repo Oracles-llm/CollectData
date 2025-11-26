@@ -1,0 +1,82 @@
+name: Run Python & Push JSON
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  run-python-and-push-json:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: run-json-workflow
+      cancel-in-progress: true
+
+    steps:
+      # 1. Checkout source repository
+      - name: Checkout Source Repository
+        uses: actions/checkout@v6
+        with:
+          ref: main
+
+
+      # 2. Setup Python environment
+      - name: Setup Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'  # pin to your Python version
+
+      # 3. Cache pip dependencies
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
+
+      # 4. Install dependencies
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      # 5. Run Python script and log output
+      - name: Run Python Script
+        id: run_script
+        run: |
+          echo "Starting Python script..."
+          python main.py
+          echo "Python script finished."
+        continue-on-error: false
+
+      # 6. List JSON files for logging
+      - name: List generated JSON files
+        run: |
+          echo "Generated JSON files:"
+          ls -lh Outputs/
+
+      # 7. Checkout target repository
+      - name: Checkout Target Repository
+        uses: actions/checkout@v6
+        with:
+          repository: Oracles-llm/dataset
+          token: ${{ secrets.TARGET_REPO_PAT }}
+          ref: master
+          path: data-repo
+
+      # 8. Copy JSON files to target repo
+      - name: Copy JSON files
+        run: |
+          cp -r Outputs/* data-repo/design-pattern/
+
+      # 9. Commit and push JSON files if there are changes
+      - name: Commit and Push JSON
+        run: |
+          cd data-repo
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add .
+          git commit -m "Update JSON files from main branch"
+          git push origin master
+          

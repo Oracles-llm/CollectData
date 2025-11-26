@@ -2,21 +2,15 @@ from __future__ import annotations
 
 import re
 import sys
-from datetime import datetime
 from pathlib import Path
 from urllib.parse import urlparse
 
 import trafilatura
 
-from services.supabase import supabase_service
-
 BASE_DIR = Path(__file__).resolve().parent
-INPUT_FILE = BASE_DIR / "../template.txt"
-RAW_DIR = BASE_DIR / "../data/rawInputs/template"
-OUTPUT_DIR = BASE_DIR / "../data/markdowns/template"
-CREATOR_NAME = "Neranjan"
-DESIGN_PATTERN_NAME = "Template"
-
+INPUT_FILE = BASE_DIR / "inputs.txt"
+RAW_DIR = BASE_DIR / "RawInputs"
+OUTPUT_DIR = BASE_DIR / "Outputs"
 
 def sanitize_for_filename(url: str) -> str:
     """Create a filesystem-safe stem from the given URL."""
@@ -26,7 +20,6 @@ def sanitize_for_filename(url: str) -> str:
     cleaned = re.sub(r"[^A-Za-z0-9]+", "_", candidate).strip("_")
     return cleaned or "download"
 
-
 def read_urls(path: Path) -> list[str]:
     if not path.exists():
         print(f"Missing input file: {path}", file=sys.stderr)
@@ -34,8 +27,7 @@ def read_urls(path: Path) -> list[str]:
     content = path.read_text(encoding="utf-8")
     return [line.strip() for line in content.splitlines() if line.strip()]
 
-
-def convert_urls_to_markdown() -> None:
+def main() -> None:
     urls = read_urls(INPUT_FILE)
     if not urls:
         print("No URLs to process.", file=sys.stderr)
@@ -81,21 +73,8 @@ def convert_urls_to_markdown() -> None:
         output_path = OUTPUT_DIR / f"{stem}.md"
         output_path.write_text(markdown_content, encoding="utf-8")
 
-        # Save resource details to Supabase
-        md_filename = f"{stem}.md"
-        try:
-            supabase_service.add_resource(
-                "resources",
-                {
-                    "resource_url": url,
-                    "md_file_name": md_filename,
-                    "date": datetime.now().isoformat(),
-                    "design_pattern_name": DESIGN_PATTERN_NAME,
-                    "creator_name": CREATOR_NAME,
-                },
-            )
-            print(f"  ✓ Saved to Supabase: {DESIGN_PATTERN_NAME}")
-        except Exception as e:
-            print(f"  ! Failed to save to Supabase: {e}", file=sys.stderr)
-
     print("Processing complete.")
+
+
+if __name__ == "__main__":
+    main()

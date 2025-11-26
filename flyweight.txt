@@ -1,0 +1,11 @@
+https://www.geeksforgeeks.org/system-design/flyweight-design-pattern/
+https://refactoring.guru/design-patterns/flyweight
+https://www.tutorialspoint.com/design_pattern/flyweight_pattern.htm
+https://en.wikipedia.org/wiki/Flyweight_pattern
+https://www.carloscaballero.io/understanding-the-flyweight-design-pattern/
+https://www.oodesign.com/flyweight-pattern
+https://howtodoinjava.com/design-patterns/structural/flyweight-design-pattern/
+https://medium.com/@willianggbatista/flyweight-design-pattern-with-real-world-example-8f240e01dd72
+https://www.digitalocean.com/community/tutorials/flyweight-design-pattern-java
+https://sourcemaking.com/design_patterns/flyweight
+https://medium.com/@thecodebean/flyweight-design-pattern-implementation-in-java-aefa07fde038

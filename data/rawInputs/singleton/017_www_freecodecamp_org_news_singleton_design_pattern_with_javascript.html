@@ -1,0 +1,1067 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        
+        
+            <title>Singleton Design Pattern – How it Works in JavaScript with Example Code</title>
+        
+        <meta name="HandheldFriendly" content="True">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+        <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Roboto+Mono:wght@400;700&display=swap">
+        
+
+        
+        
+    <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://cdn.freecodecamp.org/news-assets/prism/1.29.0/themes/prism.min.css">
+<noscript>
+  <link rel="stylesheet" href="https://cdn.freecodecamp.org/news-assets/prism/1.29.0/themes/prism.min.css">
+</noscript>
+<link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="https://cdn.freecodecamp.org/news-assets/prism/1.29.0/plugins/unescaped-markup/prism-unescaped-markup.min.css">
+<noscript>
+  <link rel="stylesheet" href="https://cdn.freecodecamp.org/news-assets/prism/1.29.0/plugins/unescaped-markup/prism-unescaped-markup.min.css">
+</noscript>
+
+<script defer="" src="https://cdn.freecodecamp.org/news-assets/prism/1.29.0/components/prism-core.min.js"></script>
+<script defer="" src="https://cdn.freecodecamp.org/news-assets/prism/1.29.0/plugins/autoloader/prism-autoloader.min.js"></script>
+
+
+
+        
+        <link rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'" href="/news/assets/css/global-5a272ab5e0.css">
+        <link rel="stylesheet" type="text/css" href="/news/assets/css/screen-73acb3583e.css">
+        <link rel="stylesheet" type="text/css" href="/news/assets/css/search-bar-124f5f949c.css">
+
+        
+        <script defer="" src="https://cdn.freecodecamp.org/news-assets/algolia/algoliasearch-3-33-0/algoliasearch.min.js"></script>
+        <script defer="" src="https://cdn.freecodecamp.org/news-assets/algolia/autocomplete-0-36-0/autocomplete.min.js"></script>
+
+        
+        <script defer="" src="https://cdn.freecodecamp.org/news-assets/dayjs/1.10.4/dayjs.min.js"></script>
+        <script defer="" src="https://cdn.freecodecamp.org/news-assets/dayjs/1.10.4/localizedFormat.min.js"></script>
+        <script defer="" src="https://cdn.freecodecamp.org/news-assets/dayjs/1.10.4/relativeTime.min.js"></script>
+
+        
+        
+            <script defer="" src="https://cdn.freecodecamp.org/news-assets/dayjs/1.10.4/locale/en.min.js"></script>
+        
+
+        
+        <script>let client,index;document.addEventListener("DOMContentLoaded",()=>{client=algoliasearch("QMJYL5WYTI","89770b24481654192d7a5c402c6ad9a0"),index=client.initIndex("news")}),document.addEventListener("DOMContentLoaded",()=>{const e=window.screen.width,t=window.screen.height,n=e>=767&&t>=768?8:5,o=document.getElementById("search-form"),s=document.getElementById("search-input"),a=document.getElementById("dropdown-container");let i,d,c;s.addEventListener("input",e=>{i=e.target.value}),o.addEventListener("submit",e=>{e.preventDefault(),function(){if(d=document.getElementsByClassName("aa-cursor")[0],d&&i){const e=d.querySelector("a").href;window.location.assign(e)}else!d&&i&&c&&window.location.assign(`https://www.freecodecamp.org/news/search?query=${i}`)}()});const l=autocomplete("#search-input",{hint:!1,keyboardShortcuts:["s",191],openOnFocus:!0,appendTo:a,debug:!0},[{source:autocomplete.sources.hits(index,{hitsPerPage:n}),debounce:250,templates:{suggestion:e=>(c=!0,`\n            <a href="${e.url}">\n              <div class="algolia-result">\n                <span>${e._highlightResult.title.value}</span>\n              </div>\n            </a>\n          `),empty:()=>(c=!1,'\n            <div class="aa-suggestion footer-suggestion no-hits-footer">\n              <div class="algolia-result">\n                <span>\n                  No results found\n                </span>\n              </div>\n            </div>\n          '),footer:e=>{if(!e.isEmpty)return`\n              <div class="aa-suggestion footer-suggestion">\n                <a id="algolia-footer-selector" href="https://www.freecodecamp.org/news/search?query=${i}">\n                  <div class="algolia-result algolia-footer">\n                    See all results for ${i}\n                  </div>\n                </a>\n              </div>\n            `}}}]).on("autocomplete:selected",(e,t,n,o)=>{d=t?t.url:`https://www.freecodecamp.org/news/search?query=${i}`,"click"!==o.selectionMethod&&"tabKey"!==o.selectionMethod&&c&&window.location.assign(d)});document.addEventListener("click",e=>{e.target!==s&&l.autocomplete.close()})}),document.addEventListener("DOMContentLoaded",()=>{dayjs.extend(dayjs_plugin_localizedFormat),dayjs.extend(dayjs_plugin_relativeTime),dayjs.locale("en")});const isAuthenticated=document.cookie.split(";").some(e=>e.trim().startsWith("jwt_access_token=")),isDonor=document.cookie.split(";").some(e=>e.trim().startsWith("isDonor=true"));</script>
+
+        
+            <script src="https://securepubads.g.doubleclick.net/tag/js/gpt.js" crossorigin="anonymous" async=""></script>
+        
+
+        
+        
+    
+        
+            <script>
+document.addEventListener('DOMContentLoaded', function() {
+    var sidebar = document.querySelector('.sidebar');
+    var isSideBarDisplayed = window.getComputedStyle(sidebar).display !== 'none';
+    function prepareAdSlot(elementId) {
+        // Get the element by ID
+        const targetElement = document.getElementById(elementId);
+
+        // Ensure the element exists before proceeding
+        if (!targetElement) {
+            console.error(`Element with ID ${elementId} not found`);
+            return;
+        }
+
+        const parentElement = targetElement.parentElement;
+        // Change the background color of the parent element
+
+        if (parentElement) {
+            console.log(elementId)
+
+            if (elementId === 'gam-ad-bottom' ) {
+                parentElement.style.backgroundColor = '#eeeef0';
+                if(getComputedStyle(parentElement).visibility === 'hidden') {
+                    parentElement.style.visibility = 'inherit'; 
+                }
+            }
+
+            // Get the sibling elements
+            const siblingElements = parentElement.children;
+
+            for (let i = 0; i < siblingElements.length; i++) {
+                const sibling = siblingElements[i];
+
+                // Skip the element itself
+                if (sibling === targetElement) continue;
+
+                // Log the sibling or perform any other action
+                console.log('Found sibling:', sibling);
+
+                // Check visibility
+                if(getComputedStyle(sibling).visibility === 'hidden') {
+                    sibling.style.visibility = 'inherit'; 
+                }
+
+                // Check if display is 'none', then change it to 'block'
+                if (getComputedStyle(sibling).display === 'none') {
+                    sibling.style.display = 'block'; 
+                }
+            }
+        } else {
+            console.warn('No parent element found');
+        }
+    }
+
+    
+    window.googletag = window.googletag || {cmd: []};
+    googletag.cmd.push(function() {
+
+        if(isSideBarDisplayed){
+            var sidebarHeight = sidebar.offsetHeight;
+            var adTextSideBarHeight = 0;
+            var sideBarAdContainert = 600 + 17;
+        
+            var styles = window.getComputedStyle(sidebar);
+            var avaiableSideAdSpace = sidebarHeight - adTextSideBarHeight - parseFloat(styles.paddingTop) - parseFloat(styles.paddingBottom);
+            var numSideElements = Math.floor(avaiableSideAdSpace / sideBarAdContainert);
+            for (var i = 0; i < numSideElements; i++) {
+                // container element
+                var containerElement = document.createElement('div');
+                containerElement.classList.add('ad-wrapper');
+
+                //text element
+                var textElement = document.createElement('div');
+                textElement.classList.add('ad-text');
+                textElement.innerText = localizedAdText;
+
+                // ad element
+                var adElement = document.createElement('div');
+                var sideAdElementId = 'side-gam-ad-' + i;
+                adElement.id = sideAdElementId;
+                adElement.classList.add('side-bar-ad-slot');
+
+                // finalize setup
+                containerElement.appendChild(textElement);
+                containerElement.appendChild(adElement);
+                sidebar.appendChild(containerElement);
+                googletag.defineSlot('/23075930536/post-side', [[292, 30], [240, 400], [300, 75], [216, 54], [250, 360], [300, 50], 'fluid', [300, 31], [120, 20], [300, 250], [120, 30], [180, 150], [200, 446], [168, 42], [200, 200], [160, 600], [120, 90], [125, 125], [240, 133], [120, 60], [1, 1], [120, 240], [220, 90], [216, 36], [250, 250], [168, 28], [234, 60], [120, 600], [300, 600], [88, 31], [300, 100]], sideAdElementId).addService(googletag.pubads());
+            }
+        }
+
+        // Define bottom ad
+        googletag.defineSlot('/23075930536/post-bottom', ['fluid'], 'gam-ad-bottom').addService(googletag.pubads());
+
+        // Enable lazy loading with default settings.
+        googletag.pubads().enableLazyLoad();
+
+        googletag.pubads().addEventListener("slotRequested", (event) => {
+            console.log(`Slot ${event.slot.getSlotElementId()} fetched`);
+        });
+
+        googletag.pubads().addEventListener("slotOnload", (event) => {
+            const elementId = event.slot.getSlotElementId();
+            prepareAdSlot(elementId);
+            console.log(`Slot ${event.slot.getSlotElementId()} rendered`);
+        });
+
+        googletag.pubads().enableSingleRequest();
+        googletag.enableServices();
+
+
+        // Trigger lazy loading
+        googletag.display('gam-ad-bottom');
+
+    });
+});
+</script>
+
+        
+    
+
+
+        
+            <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5D6RKKP');</script>
+
+        
+        
+        
+        
+    
+        
+    
+        
+    
+        
+    
+
+
+        
+        
+        
+
+        
+        
+
+        <link rel="icon" href="https://cdn.freecodecamp.org/universal/favicons/favicon.ico" type="image/png">
+        
+        
+            <link rel="canonical" href="https://www.freecodecamp.org/news/singleton-design-pattern-with-javascript/">
+        
+        <meta name="referrer" content="no-referrer-when-downgrade">
+
+        
+
+        
+    <meta name="description" content="At one point or another, you might need to use global state inside your React apps. This lets you have your data in one place and make sure the required components can access it. To help you do this, you&#39;ll often use some sort of state management lib...">
+
+    
+    <meta property="og:site_name" content="freeCodeCamp.org">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="Singleton Design Pattern – How it Works in JavaScript with Example Code">
+    
+        <meta property="og:description" content="At one point or another, you might need to use global state inside your React apps. This lets you have your data in one place and make sure the required components can access it. To help you do this, you&#39;ll often use some sort of state management lib...">
+    
+    <meta property="og:url" content="https://www.freecodecamp.org/news/singleton-design-pattern-with-javascript/">
+    <meta property="og:image" content="https://www.freecodecamp.org/news/content/images/2022/07/sven-mieke-fteR0e2BzKo-unsplash.jpg">
+    <meta property="article:published_time" content="2022-07-18T19:26:56.000Z">
+    <meta property="article:modified_time" content="2024-09-05T11:27:28.415Z">
+    
+        <meta property="article:tag" content="design patterns">
+    
+        <meta property="article:tag" content="JavaScript">
+    
+        <meta property="article:tag" content="singleton">
+    
+    <meta property="article:publisher" content="https://www.facebook.com/freecodecamp">
+    
+
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Singleton Design Pattern – How it Works in JavaScript with Example Code">
+    
+        <meta name="twitter:description" content="At one point or another, you might need to use global state inside your React apps. This lets you have your data in one place and make sure the required components can access it. To help you do this, you&#39;ll often use some sort of state management lib...">
+    
+    <meta name="twitter:url" content="https://www.freecodecamp.org/news/singleton-design-pattern-with-javascript/">
+    <meta name="twitter:image" content="https://www.freecodecamp.org/news/content/images/2022/07/sven-mieke-fteR0e2BzKo-unsplash.jpg">
+    <meta name="twitter:label1" content="Written by">
+    <meta name="twitter:data1" content="Keyur Paralkar">
+    <meta name="twitter:label2" content="Filed under">
+    <meta name="twitter:data2" content="design patterns, JavaScript, singleton">
+    <meta name="twitter:site" content="@freecodecamp">
+    
+
+    <meta property="og:image:width" content="600">
+    <meta property="og:image:height" content="400">
+
+
+        
+    <script type="application/ld+json">{
+	"@context": "https://schema.org",
+	"@type": "Article",
+	"publisher": {
+		"@type": "Organization",
+		"name": "freeCodeCamp.org",
+		"url": "https://www.freecodecamp.org/news/",
+		"logo": {
+			"@type": "ImageObject",
+			"url": "https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg",
+			"width": 2100,
+			"height": 240
+		}
+	},
+	"image": {
+		"@type": "ImageObject",
+		"url": "https://www.freecodecamp.org/news/content/images/2022/07/sven-mieke-fteR0e2BzKo-unsplash.jpg",
+		"width": 600,
+		"height": 400
+	},
+	"url": "https://www.freecodecamp.org/news/singleton-design-pattern-with-javascript/",
+	"mainEntityOfPage": {
+		"@type": "WebPage",
+		"@id": "https://www.freecodecamp.org/news/"
+	},
+	"datePublished": "2022-07-18T19:26:56.000Z",
+	"dateModified": "2024-09-05T11:27:28.415Z",
+	"keywords": "design patterns, JavaScript, singleton",
+	"description": "At one point or another, you might need to use global state inside your React apps. This lets you have your data in one place and make sure the required components can access it.\nTo help you do this, you&#x27;ll often use some sort of state management lib...",
+	"headline": "Singleton Design Pattern – How it Works in JavaScript with Example Code",
+	"author": {
+		"@type": "Person",
+		"name": "Keyur Paralkar",
+		"url": "https://www.freecodecamp.org/news/author/keyurparalkar/",
+		"sameAs": [],
+		"image": {
+			"@type": "ImageObject",
+			"url": "https://cdn.hashnode.com/res/hashnode/image/upload/v1723511461126/d7fdadb4-342a-4518-b9a9-e0a9aac4ee9c.jpeg",
+			"width": 96,
+			"height": 96
+		}
+	}
+}</script>
+
+
+        <meta name="generator" content="Eleventy">
+        <link rel="alternate" type="application/rss+xml" title="freeCodeCamp.org" href="https://www.freecodecamp.org/news/rss/">
+
+        
+        
+
+        
+  <meta name="x-fcc-source" data-test-label="x-fcc-source" content="Hashnode">
+
+    </head>
+
+    
+        <body class="home-template">
+    
+
+    
+        <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5D6RKKP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    
+
+        <div class="site-wrapper">
+            <nav class="site-nav nav-padding">
+    <div class="site-nav-left">
+        
+<form id="search-form" data-test-label="search-bar">
+    <div role="search" class="searchbox__wrapper">
+        <label class="fcc_sr_only" for="search-input">
+            Search
+        </label>
+        <input type="search" placeholder="
+    Search our news articles, tutorials, and books
+" id="search-input">
+        <button type="submit" class="ais-SearchBox-submit">
+            <svg class="ais-SearchBox-submitIcon" xmlns="https://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 40 40">
+    <path d="M26.804 29.01c-2.832 2.34-6.465 3.746-10.426 3.746C7.333 32.756 0 25.424 0 16.378 0 7.333 7.333 0 16.378 0c9.046 0 16.378 7.333 16.378 16.378 0 3.96-1.406 7.594-3.746 10.426l10.534 10.534c.607.607.61 1.59-.004 2.202-.61.61-1.597.61-2.202.004L26.804 29.01zm-10.426.627c7.323 0 13.26-5.936 13.26-13.26 0-7.32-5.937-13.257-13.26-13.257C9.056 3.12 3.12 9.056 3.12 16.378c0 7.323 5.936 13.26 13.258 13.26z"></path>
+</svg>
+
+            <span class="fcc_sr_only">Submit your search query</span>
+        </button>
+        <div id="dropdown-container"></div>
+    </div>
+</form>
+
+    </div>
+    <div class="site-nav-middle">
+        <a class="site-nav-logo" href="https://www.freecodecamp.org/news/" data-test-label="site-nav-logo"><img src="https://cdn.freecodecamp.org/platform/universal/fcc_primary.svg" alt="freeCodeCamp.org"></a>
+    </div>
+    <div class="site-nav-right">
+        <div class="nav-group">
+            <a class="nav-forum" id="nav-forum" rel="noopener noreferrer" href="https://forum.freecodecamp.org/" target="_blank" data-test-label="forum-button">Forum</a>
+            <a class="toggle-button-nav" id="nav-donate" rel="noopener noreferrer" href="https://www.freecodecamp.org/donate/" target="_blank" data-test-label="donate-button">Donate</a>
+        </div>
+    </div>
+</nav>
+
+
+            
+            <a class="banner" id="banner" data-test-label="banner" rel="noopener noreferrer" target="_blank">
+    <p id="banner-text"></p>
+</a>
+
+
+    
+    <script>document.addEventListener("DOMContentLoaded",()=>{const e=document.getElementById("banner"),t=document.getElementById("banner-text");if(isAuthenticated){t.innerHTML=isDonor?"Thank you for supporting freeCodeCamp through <span>your donations</span>.":"Support our charity and our mission. <span>Donate to freeCodeCamp.org</span>.",e.href=isDonor?"https://www.freecodecamp.org/news/how-to-donate-to-free-code-camp/":"https://www.freecodecamp.org/donate";const o=isDonor?"donor":"authenticated";e.setAttribute("text-variation",o)}else t.innerHTML="Learn to code — <span>free 3,000-hour curriculum</span>",e.href="https://www.freecodecamp.org/",e.setAttribute("text-variation","default")});</script>
+
+
+            <div id="error-message"></div>
+
+            
+    <main id="site-main" class="post-template site-main outer">
+        <div class="inner ad-layout">
+            <article class="post-full post">
+                <header class="post-full-header">
+                    <section class="post-full-meta">
+                        <time class="post-full-meta-date" data-test-label="post-full-meta-date" datetime="2022-07-18T19:26:56.000Z">
+                            July 18, 2022
+                        </time>
+                        
+                            <span class="date-divider">/</span>
+                            <a dir="ltr" href="/news/tag/design-patterns/">
+                                #design patterns
+                            </a>
+                        
+                    </section>
+                    <h1 class="post-full-title" data-test-label="post-full-title">Singleton Design Pattern – How it Works in JavaScript with Example Code</h1>
+                </header>
+                
+                    <div class="post-full-author-header" data-test-label="author-header-no-bio">
+                        
+                            
+    
+    
+    
+
+    <section class="author-card" data-test-label="author-card">
+        
+            
+    <img srcset="https://cdn.hashnode.com/res/hashnode/image/upload/v1723511461126/d7fdadb4-342a-4518-b9a9-e0a9aac4ee9c.jpeg 60w" sizes="60px" src="https://cdn.hashnode.com/res/hashnode/image/upload/v1723511461126/d7fdadb4-342a-4518-b9a9-e0a9aac4ee9c.jpeg" class="author-profile-image" alt="Keyur Paralkar" width="96" height="96" onerror="this.style.display='none'" data-test-label="profile-image">
+  
+        
+
+        <section class="author-card-content author-card-content-no-bio">
+            <span class="author-card-name">
+                <a href="/news/author/keyurparalkar/" data-test-label="profile-link">
+                    
+                        Keyur Paralkar
+                    
+                </a>
+            </span>
+            
+        </section>
+    </section>
+
+                        
+                    </div>
+                
+                <figure class="post-full-image">
+                    
+    <picture>
+      <source media="(max-width: 700px)" sizes="1px" srcset="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7 1w">
+      <source media="(min-width: 701px)" sizes="(max-width: 800px) 400px, (max-width: 1170px) 700px, 1400px" srcset="https://www.freecodecamp.org/news/content/images/size/w300/2022/07/sven-mieke-fteR0e2BzKo-unsplash.jpg 300w, https://www.freecodecamp.org/news/content/images/size/w600/2022/07/sven-mieke-fteR0e2BzKo-unsplash.jpg 600w, https://www.freecodecamp.org/news/content/images/size/w1000/2022/07/sven-mieke-fteR0e2BzKo-unsplash.jpg 1000w, https://www.freecodecamp.org/news/content/images/size/w2000/2022/07/sven-mieke-fteR0e2BzKo-unsplash.jpg 2000w">
+      <img onerror="this.style.display='none'" src="https://www.freecodecamp.org/news/content/images/size/w2000/2022/07/sven-mieke-fteR0e2BzKo-unsplash.jpg" alt="Singleton Design Pattern – How it Works in JavaScript with Example Code" ,="" width="600" height="400" data-test-label="feature-image">
+    </picture>
+  
+                </figure>
+                <section class="post-full-content">
+                    <div class="post-and-sidebar">
+                        <section class="post-content " data-test-label="post-content">
+                            
+<p>At one point or another, you might need to use global state inside your React apps. This lets you have your data in one place and make sure the required components can access it.</p>
+<p>To help you do this, you'll often use some sort of state management library like Redux, React Context, or Recoil.</p>
+<p>But in this article we are going to learn about global state management with the help of design patterns.</p>
+<p>We will look at what design patterns are, and we'll focus on the singleton design pattern in particular. Finally we will look at an example of the singleton design pattern along with its advantages and disadvantages.</p>
+<p>So without any further ado, let's get started.</p>
+<h2 id="heading-table-of-contents">Table of Contents</h2>
+<ul>
+<li><p><a class="post-section-overview" href="#heading-prerequisites">Prerequisites</a></p>
+</li>
+<li><p><a class="post-section-overview" href="#heading-what-is-a-design-pattern">What is a design pattern</a>?</p>
+</li>
+<li><p><a class="post-section-overview" href="#heading-what-is-the-singleton-design-pattern">What is the singleton design pattern</a>?</p>
+</li>
+<li><p><a class="post-section-overview" href="#heading-pros-and-cons-of-the-singleton-design-pattern">Pros and cons of the singleton design pattern</a></p>
+</li>
+<li><p><a class="post-section-overview" href="#heading-summary">Summary</a></p>
+</li>
+</ul>
+<h2 id="heading-prerequisites">Prerequisites</h2>
+<p>Before going through this article, I would highly recommend being familiar with the content in the following articles:</p>
+<ul>
+<li><p><a target="_blank" href="https://www.freecodecamp.org/news/javascript-classes-how-they-work-with-use-case/">What are classes in JavaScript</a>?</p>
+</li>
+<li><p><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model/Introduction#accessing_the_dom">How to access DOM elements</a></p>
+</li>
+<li><p><a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze">How object freeze works</a></p>
+</li>
+</ul>
+<h2 id="heading-what-is-a-design-pattern">What is a Design Pattern?</h2>
+<p><img src="https://www.freecodecamp.org/news/content/images/2022/07/ezgif.com-gif-maker--9-.gif" alt="Image" width="600" height="400" loading="lazy"></p>
+<p><em>Design patterns provide conceptual solutions to common problems</em></p>
+<p>A design pattern is a set of generalised instructions that provide a solution to commonly occurring problems in software design.</p>
+<p>You can think about design patterns as a website that consists of multiple design templates you can use to build a site based on your specific needs.</p>
+<p>So, now the question is – why is it important to know design patterns? Well, using design patterns has several benefits, such as:</p>
+<ul>
+<li><p>These patterns are proven – that is, these instructions are tried and tested, and they reflect the experience and insights of many developers.</p>
+</li>
+<li><p>They're patterns that you can re-use easily.</p>
+</li>
+<li><p>They are highly expressive.</p>
+</li>
+</ul>
+<p>Note that design patterns provide just a conceptual solution to a recurring problem in an optimised way. It does not provide a piece of code that you can use in your project.</p>
+<p>So now that we know what design patterns are, let's dive into our very first design pattern.</p>
+<h2 id="heading-what-is-the-singleton-design-pattern">What is the Singleton Design Pattern?</h2>
+<p><img src="https://www.freecodecamp.org/news/content/images/2022/07/singleton-def-gif.gif" alt="Image" width="600" height="400" loading="lazy"></p>
+<p><em>Singleton design pattern exposes a single instance that can be used by multiple components</em></p>
+<p>Singleton is a design pattern that tells us that we can create only one instance of a class and that instance can be accessed globally.</p>
+<p>This is one of the basic types of design pattern. It makes sure that the class acts as a single source of entry for all the consumer components that want to access this state. In other words, it provides a common entry point for using global state.</p>
+<p>So a singleton class should be one which:</p>
+<ul>
+<li><p>Ensures that it creates only one instance of the class</p>
+</li>
+<li><p>Provides a global access point to the state.</p>
+</li>
+<li><p>Makes sure that the instance is only created the first time.</p>
+</li>
+</ul>
+<h3 id="heading-example-of-the-singleton-design-pattern">Example of the Singleton Design Pattern</h3>
+<p>To understand this concept in a better way, let's look at an example. This example is a simple React application that demonstrates how the global state value is used across the components, how it is being changed, and how the same value gets updated in all the components. Let's get started.</p>
+<p>Before we start with the actual implementation, let's have a look at the folder structure:</p>
+<pre><code class="lang-yaml"><span class="hljs-string">.</span>
+<span class="hljs-string">├──</span> <span class="hljs-string">index.html</span>
+<span class="hljs-string">├──</span> <span class="hljs-string">package.json</span>
+<span class="hljs-string">└──</span> <span class="hljs-string">src</span>
+    <span class="hljs-string">├──</span> <span class="hljs-string">componentA.js</span>
+    <span class="hljs-string">├──</span> <span class="hljs-string">componentB.js</span>
+    <span class="hljs-string">├──</span> <span class="hljs-string">globalStyles.js</span>
+    <span class="hljs-string">├──</span> <span class="hljs-string">index.js</span>
+    <span class="hljs-string">├──</span> <span class="hljs-string">styles.css</span>
+    <span class="hljs-string">└──</span> <span class="hljs-string">utilities.js</span>
+</code></pre>
+<p>Here are the details of each file:</p>
+<ul>
+<li><p><code>componentA.js</code> is a consumer component that uses the singleton class to access the global state object and manipulate it.</p>
+</li>
+<li><p><code>componentB.js</code> is similar to above component, as it has to access the global state object and can manipulate it.</p>
+</li>
+<li><p><code>globalStyles.js</code> is a module that consists of the singleton class and exports the instance of this class.</p>
+</li>
+<li><p><code>index.js</code> manages global JS operations, that is JavaScript changes that are required for other DOM elements.</p>
+</li>
+<li><p><code>styles.css</code> manages the styling of the application. Consists of basic CSS.</p>
+</li>
+<li><p><code>utilities.js</code> is a module that exports some utility functions.</p>
+</li>
+<li><p><code>index.html</code> consists of HTML code for the components that are required in the project.</p>
+</li>
+<li><p><code>package.json</code> is a boilerplate configuration emitted by the <code>npm init</code> command.</p>
+</li>
+</ul>
+<p>Now that we know what each file does, we can start off by implementing them one by one.</p>
+<p>But before we dive into this example, we need to understand the code flow. The aim of our example is to build a JavaScript application that demonstrates how the global style <code>color</code> is consumed by each of the components and how each component changes it.</p>
+<p>Each component consists of a <code>color-picker</code>. When you change the global style <code>color</code> property via the color picker present inside each component, it automatically appears in other components and in the global state.</p>
+<p>First, let's create a file: <code>index.html</code>. Then paste the below code into this file:</p>
+<pre><code class="lang-html"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>
+  <span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Parcel Sandbox<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">charset</span>=<span class="hljs-string">"UTF-8"</span> /&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">link</span> <span class="hljs-attr">rel</span>=<span class="hljs-string">"stylesheet"</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"./src/styles.css"</span> /&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>
+
+  <span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"global-state"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h3</span>&gt;</span>Global State<span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">h4</span>&gt;</span>Color<span class="hljs-tag">&lt;/<span class="hljs-name">h4</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"selected-color"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"contents"</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"component-a"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>Component A<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Pick color<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"selected-color"</span>&gt;</span>black<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"color"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"color-picker-a"</span> /&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+      <span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">class</span>=<span class="hljs-string">"component-b"</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">strong</span>&gt;</span>Component B<span class="hljs-tag">&lt;/<span class="hljs-name">strong</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Pick color<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"selected-color"</span>&gt;</span>black<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-name">input</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"color"</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"color-picker-b"</span> /&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"src/index.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"src/componentA.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+    <span class="hljs-tag">&lt;<span class="hljs-name">script</span> <span class="hljs-attr">src</span>=<span class="hljs-string">"src/componentB.js"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">script</span>&gt;</span>
+  <span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>
+<span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span>
+</code></pre>
+<p>Here at the top, we load our CSS via <code>&lt;link rel="stylesheet" href="./src/styles.css" /&gt;</code>.</p>
+<p>Then we have divided our application in two parts via two classes:</p>
+<ul>
+<li><p><code>.global-state</code>: This will represent the HTML code for showcasing the current global state of the application.</p>
+</li>
+<li><p><code>.contents</code>: This will represent the HTML code that represents the two components.</p>
+</li>
+</ul>
+<p>Each of the components (<code>component-a</code> and <code>component-b</code>) has a color picker input element.</p>
+<p>Both of these components have a <code>span</code> with class <code>selected-color</code> element that will help display the current value of global state variable <code>color</code>.</p>
+<p>As you can see on a change of the color picker inside <code>componentA</code>, the following values are also changing:</p>
+<ul>
+<li><p>Value inside the <code>.selected-color</code> span element inside the <code>componentB</code> and Global state.</p>
+</li>
+<li><p>Value of the color picker of <code>componentA</code> and <code>componentB</code>.</p>
+</li>
+</ul>
+<p>We will see later how all these values are changing. But for now it is important for us to understand that if we change the global state value from one component, then the singleton classes make sure that the instance value is updated and all the components that are consuming this instance get the same value since they are referring to the same instance.</p>
+<p>Next, we create a file named <code>globalStyles.js</code>. Copy-paste the below code in it:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">let</span> instance;
+<span class="hljs-keyword">let</span> globalState = {
+  <span class="hljs-attr">color</span>: <span class="hljs-string">""</span>
+};
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StateUtility</span> </span>{
+  <span class="hljs-keyword">constructor</span>() {
+    <span class="hljs-keyword">if</span> (instance) {
+      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">"New instance cannot be created!!"</span>);
+    }
+
+    instance = <span class="hljs-built_in">this</span>;
+  }
+
+  getPropertyByName(propertyName) {
+    <span class="hljs-keyword">return</span> globalState[propertyName];
+  }
+
+  setPropertyValue(propertyName, propertyValue) {
+    globalState[propertyName] = propertyValue;
+  }
+}
+
+<span class="hljs-keyword">let</span> stateUtilityInstance = <span class="hljs-built_in">Object</span>.freeze(<span class="hljs-keyword">new</span> StateUtility());
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> stateUtilityInstance;
+</code></pre>
+<p>The above piece of code is a module that has a singleton class <code>StateUtility</code> and default exports the instance of the same class.</p>
+<p>Let's dive deeper into the class <code>StateUtility</code> to understand how it resolves to become a singleton class:</p>
+<ul>
+<li><p>It consists of <code>constructor</code> and two class methods called <code>getPropertyByName</code> and <code>setPropertyValue</code>. Both of these class method are pretty self explanatory: one gets the property's value and the other sets its value.</p>
+</li>
+<li><p>Next, we have the <code>constructor</code> function. It is a function that gets invoked whenever we create a new of object of this class.</p>
+</li>
+<li><p>But here is a catch: for a class to be a singleton we need to make sure that it creates only one instance, and that's all.</p>
+</li>
+<li><p>To make sure that this happens, we simply create a global variable called <code>instance</code>. We define it at the top of the module. This variable acts as a checker. We add a condition in the <code>constructor</code> function such that if <code>instance</code> variable has any value (that is, the object of the <code>StateUtility</code> class) then throw an error or else assign <code>instance</code> to the current class instance (the <code>this</code> object).</p>
+</li>
+<li><p>In this example, we implemented the class <code>StateUtility</code> so that it can expose and alter the <code>globalState</code> variable.</p>
+</li>
+<li><p>We make sure that we don't expose the <code>globalState</code>. We expose them using the class methods of <code>StateUtility</code>. In this way, we protect the global state from being altered directly.</p>
+</li>
+<li><p>Finally, we create the instance of the class as follows: <code>let stateUtilityInstance = Object.freeze(new StateUtility());</code>.</p>
+</li>
+<li><p>We have used <code>Object.freeze</code> so that no other class/component/module is able to modify the exposed <code>stateUtilityInstance</code>.</p>
+</li>
+</ul>
+<p>Then let's create a file called <code>componentA.js</code> inside the <code>src</code> folder. Copy-paste the below code in this file:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">import</span> {
+    setAllSelectedColor
+} <span class="hljs-keyword">from</span> <span class="hljs-string">"./utilities"</span>;
+<span class="hljs-keyword">import</span> globalStyle <span class="hljs-keyword">from</span> <span class="hljs-string">"./globalStyles"</span>;
+
+<span class="hljs-comment">// Get respective dom elements</span>
+<span class="hljs-keyword">const</span> selectedColor = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">"#selected-color"</span>);
+<span class="hljs-keyword">const</span> colorPickerA = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"color-picker-a"</span>);
+<span class="hljs-keyword">const</span> colorPickerB = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"color-picker-b"</span>);
+
+<span class="hljs-comment">// Event handler whenever a change event occurs</span>
+colorPickerA.onchange = <span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> {
+    <span class="hljs-comment">// set the color property of the global state with current color picker's value;</span>
+    globalStyle.setPropertyValue(<span class="hljs-string">"color"</span>, event.target.value);
+    <span class="hljs-keyword">const</span> color = globalStyle.getPropertyByName(<span class="hljs-string">"color"</span>);
+
+    <span class="hljs-comment">// A function thats sets the value of all the #selection-color dom elements;</span>
+    setValueOfSimilarElements(selectedColor, color);
+
+    <span class="hljs-comment">// make sure to set the component B's color picker value is set to color picker A;</span>
+    <span class="hljs-comment">// this is done to make sure that both of the color picker have same value on change;</span>
+    colorPickerB.value = color;
+};
+</code></pre>
+<p>Here is the breakdown of the above piece of code:</p>
+<ul>
+<li><p>The aim of this code is to make sure that we attach the <code>onChange</code> handler for the color picker that is present inside the <code>component-a</code>. In this case, componentA's color picker is identified by id: <code>#color-picker-a</code>.</p>
+</li>
+<li><p>We need to make sure that this handler:</p>
+<ol>
+<li><p>Sets the value for the property color of the globalState.</p>
+</li>
+<li><p>Fetches the same property again.</p>
+</li>
+<li><p>Applies the same value to different areas of the DOM.</p>
+</li>
+<li><p>Also makes sure that we set the other color picker's value to the global state.</p>
+</li>
+</ol>
+</li>
+</ul>
+<p>Now, let's take a look at all these steps one-by-one:</p>
+<ul>
+<li><p>First, let's fetch all the required DOM elements.</p>
+</li>
+<li><p>What we are planning here is to update all the color pickers and span elements with id <code>#selected-color</code> with the value of the current globalState property color whenever the on change event occurs.</p>
+</li>
+<li><p>In case of <code>componentA</code>, once we change the color via the color picker we need to update the same value in 2 span elements (<code>#selected-color</code>) – that is, one span element of <code>componentB</code> and one span element present in the <code>.global-state</code> div container.</p>
+</li>
+<li><p>We do this because we want to keep all the components in sync and demosntrate that the value of the global state remains the same across all the components.</p>
+</li>
+<li><p>We then go ahead and update the <code>color</code> property of the global state using the <code>StateUtility</code>'s class method <code>setPropertyValue</code>. We pass on to it <code>event.target.value</code> as this contains the current value present inside the <code>#color-picker-a</code> color picker input.</p>
+</li>
+<li><p>Once the value is set, we fetch the same property again by using <code>getPropertyByName</code>. We do this to demonstrate that the property <code>color</code> of the global state has been updated and is ready to be used.</p>
+</li>
+<li><p>Then, we use the <code>setValueOfSimilarElements</code> utility function to update all the elements that are having same class/id name with some value. In this case we update all the <code>#selected-color</code> elements with value <code>color</code>.</p>
+</li>
+<li><p>Finally, we update the the value of the opposite color picker, that is componentB's color picker <code>#color-picker-b</code>.</p>
+</li>
+</ul>
+<p>We do the same thing for <code>componentB</code>. We create a file called <code>componentB.js</code> and update it with the following code:</p>
+<pre><code class="lang-javascript"><span class="hljs-keyword">import</span> {
+    setValueOfSimilarElements
+} <span class="hljs-keyword">from</span> <span class="hljs-string">"./utilities"</span>;
+<span class="hljs-keyword">import</span> globalStyle <span class="hljs-keyword">from</span> <span class="hljs-string">"./globalStyles"</span>;
+
+<span class="hljs-comment">// Get respective dom elements</span>
+<span class="hljs-keyword">const</span> selectedColor = <span class="hljs-built_in">document</span>.querySelectorAll(<span class="hljs-string">"#selected-color"</span>);
+<span class="hljs-keyword">const</span> colorPickerA = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"color-picker-a"</span>);
+<span class="hljs-keyword">const</span> colorPickerB = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">"color-picker-b"</span>);
+
+<span class="hljs-comment">/**
+ * Event handler whenever a change event occurs
+ */</span>
+colorPickerB.onchange = <span class="hljs-function">(<span class="hljs-params">event</span>) =&gt;</span> {
+    <span class="hljs-comment">// set the color property of the global state with current color picker's value;</span>
+    globalStyle.setPropertyValue(<span class="hljs-string">"color"</span>, event.target.value);
+
+    <span class="hljs-keyword">const</span> color = globalStyle.getPropertyByName(<span class="hljs-string">"color"</span>);
+
+    <span class="hljs-comment">// A function thats sets the value of all the #selection-color dom elements</span>
+    setValueOfSimilarElements(selectedColor, color);
+
+    <span class="hljs-comment">// make sure to set the component A's color picker value is set to color picker B;</span>
+    <span class="hljs-comment">// this is done to make sure that both of the color picker have same value on change;</span>
+    colorPickerA.value = color;
+};
+</code></pre>
+<p>We do the same thing as of what we did inside the <code>componentA</code> file, but in this case we update the value of the color picker present inside <code>componentA</code> (that is, we update the value of element <code>#color-picker-a</code>).</p>
+<p>Here is how our application will look like:</p>
+<p><a target="_blank" href="https://zqbo69.csb.app/">Here is the link to the code</a>:</p>
+<div class="embed-wrapper">
+        <iframe width="100%" height="350" src="https://codesandbox.io/embed/zqbo69?view=editor+%2B+preview" style="aspect-ratio: 16 / 9; width: 100%; height: auto;" title="CodeSandbox embed" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin" loading="lazy"></iframe></div>
+<p> </p>
+<h2 id="heading-pros-and-cons-of-the-singleton-design-pattern">Pros and Cons of the Singleton Design Pattern</h2>
+<p>Here are some of the pros of using the Singleton design pattern:</p>
+<ul>
+<li><p>It makes sure that only a single instance of the class is created.</p>
+</li>
+<li><p>We get a single access point to the instance that can be accessed globally.</p>
+</li>
+</ul>
+<p>Here are some cons of the Singleton design pattern:</p>
+<ul>
+<li><p>It violates the single responsibility principle. That is, it tries to solve two problems at the same time. It tries to solve the following problems: <em>Ensure that a class will have only one instance</em>, and <em>assigning a global access point to the singleton class instance.</em></p>
+</li>
+<li><p>It is difficult to write unit test cases for singleton classes. This is because the order of execution can change the value present in the global state, so the order of execution is important.</p>
+</li>
+<li><p>While writing unit tests, there is a risk of another component or a module might be changing the global state value/instance. In such scenarios, it becomes difficult to debug the error.</p>
+</li>
+</ul>
+<h2 id="heading-summary">Summary</h2>
+<p>The singleton design pattern can be useful in creating a global state that can be accessed by any component.</p>
+<p>So to talk about singleton pattern in brief:</p>
+<ul>
+<li><p>It is a pattern that restricts the class to create only one instance.</p>
+</li>
+<li><p>Singleton pattern can be considered the basics of global state management libraries such Redux or React Context.</p>
+</li>
+<li><p>They can be accessed globally and acts as a single access point for accessing the global state.</p>
+</li>
+</ul>
+<p>That's all.</p>
+<p>Thank you for reading!</p>
+<p>Follow me on <a target="_blank" href="https://twitter.com/keurplkar">Twitter</a>, <a target="_blank" href="https://github.com/keyurparalkar">GitHub</a>, and <a target="_blank" href="https://www.linkedin.com/in/keyur-paralkar-494415107/">LinkedIn</a>.</p>
+
+
+                        </section>
+                        
+                            <div class="sidebar">
+                                
+                                    
+                                    <script>var localizedAdText = "ADVERTISEMENT";</script>
+                                
+                            </div>
+                        
+                    </div>
+                    <hr>
+                    
+                        <div class="post-full-author-header" data-test-label="author-header-with-bio">
+                            
+                                
+    
+    
+    
+
+    <section class="author-card" data-test-label="author-card">
+        
+            
+    <img srcset="https://cdn.hashnode.com/res/hashnode/image/upload/v1723511461126/d7fdadb4-342a-4518-b9a9-e0a9aac4ee9c.jpeg 60w" sizes="60px" src="https://cdn.hashnode.com/res/hashnode/image/upload/v1723511461126/d7fdadb4-342a-4518-b9a9-e0a9aac4ee9c.jpeg" class="author-profile-image" alt="Keyur Paralkar" width="96" height="96" onerror="this.style.display='none'" loading="lazy" data-test-label="profile-image">
+  
+        
+
+        <section class="author-card-content ">
+            <span class="author-card-name">
+                <a href="/news/author/keyurparalkar/" data-test-label="profile-link">
+                    
+                        Keyur Paralkar
+                    
+                </a>
+            </span>
+            
+                
+                    <p data-test-label="default-bio">
+                        Read <a href="/news/author/keyurparalkar/">more posts</a>.
+                    </p>
+                
+            
+        </section>
+    </section>
+
+                            
+                        </div>
+                        <hr>
+                    
+
+                    
+                    
+                        
+    
+
+
+<p data-test-label="social-row-cta" class="social-row">
+    If this article was helpful, <button id="tweet-btn" class="cta-button" data-test-label="tweet-button">share it</button>.
+</p>
+
+
+    
+    <script>document.addEventListener("DOMContentLoaded",()=>{const t=document.getElementById("tweet-btn"),e=window.location,n="Singleton%20Design%20Pattern%20%E2%80%93%20How%20it%20Works%20in%20JavaScript%20with%20Example%20Code".replace(/&#39;/g,"%27"),o="",i="",r=Boolean("");let a;if(r&&(o||i)){const t={originalPostAuthor:"",currentPostAuthor:"Keyur Paralkar"};a=encodeURIComponent(`Thank you ${o||t.originalPostAuthor} for writing this helpful article, and ${i||t.currentPostAuthor} for translating it.`)}else!r&&i&&(a=encodeURIComponent(`Thank you ${i} for writing this helpful article.`));const s=`window.open(\n    '${a?`https://x.com/intent/post?text=${a}%0A%0A${n}%0A%0A${e}`:`https://x.com/intent/post?text=${n}%0A%0A${e}`}',\n    'share-twitter',\n    'width=550, height=235'\n  ); return false;`;t.setAttribute("onclick",s)});</script>
+
+
+                        
+
+<div class="learn-cta-row" data-test-label="learn-cta-row">
+    <p>
+        Learn to code for free. freeCodeCamp's open source curriculum has helped more than 40,000 people get jobs as developers. <a href="https://www.freecodecamp.org/learn/" class="cta-button" id="learn-to-code-cta" rel="noopener noreferrer" target="_blank">Get started</a>
+    </p>
+</div>
+
+                    
+                </section>
+                
+                    <div class="banner-ad-bottom">
+                        
+                            
+
+<div class="ad-text" data-test-label="ad-text">ADVERTISEMENT</div>
+<div style="display: block; height: auto" id="gam-ad-bottom">
+</div>
+
+                        
+                    </div>
+                
+            </article>
+        </div>
+    </main>
+
+
+            
+
+
+<footer class="site-footer">
+    <div class="footer-top">
+        <div class="footer-desc-col">
+            <p data-test-label="tax-exempt-status">freeCodeCamp is a donor-supported tax-exempt 501(c)(3) charity organization (United States Federal Tax Identification Number: 82-0779546)</p>
+            <p data-test-label="mission-statement">Our mission: to help people learn to code for free. We accomplish this by creating thousands of videos, articles, and interactive coding lessons - all freely available to the public.</p>
+            <p data-test-label="donation-initiatives">Donations to freeCodeCamp go toward our education initiatives, and help pay for servers, services, and staff.</p>
+            <p class="footer-donation" data-test-label="donate-text">
+                You can <a href="https://www.freecodecamp.org/donate/" class="inline" rel="noopener noreferrer" target="_blank">make a tax-deductible donation here</a>.
+            </p>
+        </div>
+        <div class="trending-guides" data-test-label="trending-guides">
+            <h2 id="trending-guides" class="col-header">Trending Books and Handbooks</h2>
+            <ul class="trending-guides-articles" aria-labelledby="trending-guides">
+                <li>
+                    <a href="https://www.freecodecamp.org/news/build-consume-and-document-a-rest-api/" rel="noopener noreferrer" target="_blank">REST APIs
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.freecodecamp.org/news/how-to-write-clean-code/" rel="noopener noreferrer" target="_blank">Clean Code
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.freecodecamp.org/news/learn-typescript-with-react-handbook/" rel="noopener noreferrer" target="_blank">TypeScript
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.freecodecamp.org/news/learn-javascript-for-beginners/" rel="noopener noreferrer" target="_blank">JavaScript
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.freecodecamp.org/news/how-to-build-an-ai-chatbot-with-redis-python-and-gpt/" rel="noopener noreferrer" target="_blank">AI Chatbots
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.freecodecamp.org/news/command-line-for-beginners/" rel="noopener noreferrer" target="_blank">Command Line
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.freecodecamp.org/news/building-consuming-and-documenting-a-graphql-api/" rel="noopener noreferrer" target="_blank">GraphQL APIs
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.freecodecamp.org/news/complete-guide-to-css-transform-functions-and-properties/" rel="noopener noreferrer" target="_blank">CSS Transforms
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.freecodecamp.org/news/how-to-build-scalable-access-control-for-your-web-app/" rel="noopener noreferrer" target="_blank">Access Control
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.freecodecamp.org/news/rest-api-design-best-practices-build-a-rest-api/" rel="noopener noreferrer" target="_blank">REST API Design
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.freecodecamp.org/news/the-php-handbook/" rel="noopener noreferrer" target="_blank">PHP
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.freecodecamp.org/news/the-java-handbook/" rel="noopener noreferrer" target="_blank">Java
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.freecodecamp.org/news/learn-linux-for-beginners-book-basic-to-advanced/" rel="noopener noreferrer" target="_blank">Linux
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.freecodecamp.org/news/react-for-beginners-handbook/" rel="noopener noreferrer" target="_blank">React
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.freecodecamp.org/news/learn-continuous-integration-delivery-and-deployment/" rel="noopener noreferrer" target="_blank">CI/CD
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.freecodecamp.org/news/the-docker-handbook/" rel="noopener noreferrer" target="_blank">Docker
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.freecodecamp.org/news/learn-golang-handbook/" rel="noopener noreferrer" target="_blank">Golang
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.freecodecamp.org/news/the-python-handbook/" rel="noopener noreferrer" target="_blank">Python
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.freecodecamp.org/news/get-started-with-nodejs/" rel="noopener noreferrer" target="_blank">Node.js
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.freecodecamp.org/news/build-crud-operations-with-dotnet-core-handbook/" rel="noopener noreferrer" target="_blank">Todo APIs
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.freecodecamp.org/news/how-to-use-classes-in-javascript-handbook/" rel="noopener noreferrer" target="_blank">JavaScript Classes
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.freecodecamp.org/news/front-end-javascript-development-react-angular-vue-compared/" rel="noopener noreferrer" target="_blank">Front-End Libraries
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.freecodecamp.org/news/the-express-handbook/" rel="noopener noreferrer" target="_blank">Express and Node.js
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.freecodecamp.org/news/python-code-examples-sample-script-coding-tutorial-for-beginners/" rel="noopener noreferrer" target="_blank">Python Code Examples
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.freecodecamp.org/news/clustering-in-python-a-machine-learning-handbook/" rel="noopener noreferrer" target="_blank">Clustering in Python
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.freecodecamp.org/news/an-introduction-to-software-architecture-patterns/" rel="noopener noreferrer" target="_blank">Software Architecture
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.freecodecamp.org/news/what-is-programming-tutorial-for-beginners/" rel="noopener noreferrer" target="_blank">Programming Fundamentals
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.freecodecamp.org/news/learn-to-code-book/" rel="noopener noreferrer" target="_blank">Coding Career Preparation
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.freecodecamp.org/news/become-a-full-stack-developer-and-get-a-job/" rel="noopener noreferrer" target="_blank">Full-Stack Developer Guide
+                    </a>
+                </li>
+                <li>
+                    <a href="https://www.freecodecamp.org/news/learn-python-for-javascript-developers-handbook/" rel="noopener noreferrer" target="_blank">Python for JavaScript Devs
+                    </a>
+                </li>
+            </ul>
+            <div class="spacer" style="padding: 15px 0;"></div>
+            <div>
+                <h2 id="mobile-app" class="col-header">
+                    Mobile App
+                </h2>
+                <div class="min-h-[1px] px-[15px] md:w-2/3 md:ml-[16.6%]">
+                    <ul aria-labelledby="mobile-app" class="mobile-app-container">
+                        <li>
+                            <a href="https://apps.apple.com/us/app/freecodecamp/id6446908151?itsct=apps_box_link&itscg=30200" rel="noopener noreferrer" target="_blank">
+                                <img src="https://cdn.freecodecamp.org/platform/universal/apple-store-badge.svg" lang="en" alt="Download on the App Store">
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://play.google.com/store/apps/details?id=org.freecodecamp" rel="noopener noreferrer" target="_blank">
+                                <img src="https://cdn.freecodecamp.org/platform/universal/google-play-badge.svg" lang="en" alt="Get it on Google Play">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <h2 class="col-header" data-test-label="our-nonprofit">Our Charity</h2>
+        <div class="our-nonprofit">
+             
+                <span data-test-label="powered-by">
+                    Publication powered by Hashnode
+                </span>
+            
+            <a href="https://www.freecodecamp.org/news/about/" rel="noopener noreferrer" target="_blank" data-test-label="about">
+                About
+            </a>
+            <a href="https://www.linkedin.com/school/free-code-camp/people/" rel="noopener noreferrer" target="_blank" data-test-label="alumni">
+                Alumni Network
+            </a>
+            <a href="https://github.com/freeCodeCamp/" rel="noopener noreferrer" target="_blank" data-test-label="open-source">
+                Open Source
+            </a>
+            <a href="https://www.freecodecamp.org/news/shop/" rel="noopener noreferrer" target="_blank" data-test-label="shop">
+                Shop
+            </a>
+            <a href="https://www.freecodecamp.org/news/support/" rel="noopener noreferrer" target="_blank" data-test-label="support">
+                Support
+            </a>
+            <a href="https://www.freecodecamp.org/news/sponsors/" rel="noopener noreferrer" target="_blank" data-test-label="sponsors">
+                Sponsors
+            </a>
+            <a href="https://www.freecodecamp.org/news/academic-honesty-policy/" rel="noopener noreferrer" target="_blank" data-test-label="honesty">
+                Academic Honesty
+            </a>
+            <a href="https://www.freecodecamp.org/news/code-of-conduct/" rel="noopener noreferrer" target="_blank" data-test-label="coc">
+                Code of Conduct
+            </a>
+            <a href="https://www.freecodecamp.org/news/privacy-policy/" rel="noopener noreferrer" target="_blank" data-test-label="privacy">
+                Privacy Policy
+            </a>
+            <a href="https://www.freecodecamp.org/news/terms-of-service/" rel="noopener noreferrer" target="_blank" data-test-label="tos">
+                Terms of Service
+            </a>
+            <a href="https://www.freecodecamp.org/news/copyright-policy/" rel="noopener noreferrer" target="_blank" data-test-label="copyright">
+                Copyright Policy
+            </a>
+        </div>
+    </div>
+</footer>
+
+        </div>
+
+        
+        
+        
+
+        
+        
+    <script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"bdb993c6dde44e178aabd9555e75e4f4","server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+</html>

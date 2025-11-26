@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Strategy Pattern | Object Oriented Design</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="title" content="Strategy Pattern" />
+    <meta name="author" content="oodesign" />
+    <meta name="description"
+        content="Strategy pattern aims to save an object's state without breaking its privacy, allowing the object to be reset to its original state when necessary." />
+    <meta name="keywords"
+        content="Strategy Pattern, Strategy Design Pattern, Strategy Pattern Examples, Design Patterns, Design Principles, Object Oriented Design, Java, C#" />
+
+    <meta name="Generator" content="Joomla! - Copyright (C) 2005 - 2006 Open Source Matters. All rights reserved." />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:title" content="Strategy Pattern">
+
+    <meta property="og:description"
+        content="Strategy pattern aims to save an object's state without breaking its privacy, allowing the object to be reset to its original state when necessary.">
+    <meta property="og:url" content="https://www.oodesign.com/strategy-pattern/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:article:section" content="Behavioral Design Patterns" />
+    <meta property="og:article:tag"
+        content="Strategy Pattern, Strategy Design Pattern, Strategy Pattern Example, Design Patterns, Design Principles, Object Oriented Design, Java, C#" />
+    <meta property="og:image"
+        content="https://www.oodesign.com/images/design_patterns/behavioral/strategy_implementation_-_uml_class_diagram.gif">
+    <meta property="og:image:type" content="image/png">
+    <meta property="og:image:width" content="506">
+    <meta property="og:image:height" content="245">
+    <meta property="og:image:alt" content="UML Diagram of Strategy Pattern Pattern(High Level)">
+    <meta property="og:site_name" content="OODesign.com: Object Oriented Design ">
+
+    <base href="https://www.oodesign.com/" />
+    <link rel="canonical" href="https://www.oodesign.com/strategy-pattern/" />
+
+
+    <link rel="shortcut icon" href="https://www.oodesign.com/images/favicon.ico" />
+    <link rel="amphtml" href="https://www.oodesign.com/amp/strategy-pattern/">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"
+        as="style" onload="this.rel='stylesheet'">
+
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"
+        onload="hljs.initHighlightingOnLoad();"></script>
+
+    <link rel="preload" href="static/style.css" as="style" onload="this.rel='stylesheet'">
+    <style type="text/css">
+        body {
+            font-size: 1rem;
+            font-family: Tahoma, Helvetica, Verdana;
+            color: #222;
+            margin: 0;
+            background: #D9E2D7;
+        }
+
+        .header {
+
+            background-image: url(https://www.oodesign.com/templates/oodesign7/images/oo-design-header.jpg);
+            height: 80px;
+        }
+
+        .container {
+            margin: 0 auto;
+        }
+
+        .column-left {
+            float: left;
+            width: 178px;
+            padding-right: 5px;
+
+        }
+
+        .column-center {
+            float: left;
+
+        }
+
+        .column-right {
+            float: left;
+            width: 172px;
+            padding-left: 5px;
+        }
+
+        /* Clear floats after the columns */
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        .container {
+            width: 1297px;
+        }
+
+        .column-center {
+            width: 850px;
+        }
+
+        .column-left {
+            width: 254px;
+        }
+
+
+        .tbl {
+            margin-top: 5px;
+            padding: 5px;
+            border: 1px solid #73786B;
+            background: #D9DBD2;
+            color: #000000;
+        }
+
+        .column-module {
+            margin-top: 5px;
+            margin-bottom: 5px;
+            padding-bottom: 3px;
+            border: 1px solid #73786B;
+            background: #B7CBD5;
+            line-height: 1.5;
+        }
+
+
+        .column-module-header {
+            background-color: #007a98;
+            border-bottom: 1px solid #000000;
+            color: #ffffff;
+            font-weight: bold;
+            padding-top: 3px;
+            vertical-align: middle;
+            text-align: left;
+            padding-left: 15px;
+            min-height: 18px;
+        }
+
+        a:link,
+        a:visited {
+            color: #000000;
+        }
+
+        @media only screen and (max-width : 990px),
+        only screen and (max-device-width : 990px) {
+            .container {
+                width: 100%;
+            }
+
+            .column-center {
+                width: 100%;
+            }
+
+            .column-left {
+                display: none;
+                position: fixed;
+            }
+
+            .column-right {
+                width: 100%;
+                padding-left: 0;
+            }
+
+            .column-module-header {
+                min-height: 30px;
+            }
+
+            .menu-button {
+                display: inline-block;
+            }
+
+            .closebtn {
+                display: block;
+            }
+
+
+        }
+
+        @media only screen and (max-width : 720px),
+        only screen and (max-device-width : 720px) {
+            .container {
+                width: 100%;
+            }
+
+            .column-center {
+                width: 100%;
+            }
+
+            .column-left {
+                display: none;
+                position: fixed;
+            }
+
+            .column-right {
+                width: 100%;
+                padding-left: 0;
+            }
+
+            .column-module-header {
+                min-height: 30px;
+            }
+
+            .menu-button {
+                display: inline-block;
+            }
+
+            .closebtn {
+                display: block;
+            }
+        }
+
+
+
+        pre {
+            overflow-x: auto;
+        }
+    </style>
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({
+            google_ad_client: "ca-pub-4452501840155972",
+            enable_page_level_ads: true
+        });
+    </script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+        </div>
+        <div class="row">
+            <div class="column-left" id="column-left">
+                <div class="column-module">
+                    <div class="column-module-header">
+                        Main Menu
+                        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+                    </div>
+                    <ul>
+                        <li><a href="https://www.oodesign.com/" class="mainlevel">Home</a></li>
+                        <li><a href="https://www.oodesign.com/design-principles/"><b>Design Principles</b></a></li>
+                        <li>
+                            <ul>
+                                <li><a href="https://www.oodesign.com/single-responsibility-principle/"><b>S</b>ingle
+                                        Responsibility Principle</a></li>
+                                <li><a href="https://www.oodesign.com/open-closed-principle/"><b>O</b>pen Closed
+                                        Principle</a></li>
+                                <li><a href="https://www.oodesign.com/liskov-s-substitution-principle/"><b>L</b>iskov's
+                                        Substitution Principle</a></li>
+                                <li><a href="https://www.oodesign.com/interface-segregation-principle/"><b>I</b>nterface
+                                        Segregation Principle</a></li>
+                                <li><a href="https://www.oodesign.com/dependency-inversion-principle/"><b>D</b>ependency
+                                        Inversion Principle</a></li>
+                            </ul>
+                        </li>
+                        <li class="subselected"><a href="https://www.oodesign.com/"><b>Design Patterns</b></a></li>
+                        <li>
+                            <ul>
+                                <li><a
+                                        href="https://www.oodesign.com/creational-patterns/"><b>Creational
+                                            Patterns</b></a></li>
+                                <li>
+                                    <ul>
+                                        <li><a href="https://www.oodesign.com/singleton-pattern/">Singleton</a></li>
+                                        <li><a href="https://www.oodesign.com/factory-pattern/">Factory</a></li>
+                                        <li><a href="https://www.oodesign.com/factory-method-pattern/">Factory Method</a></li>
+                                        <li><a href="https://www.oodesign.com/abstract-factory-pattern/">Abstract Factory</a></li>
+                                        <li><a href="https://www.oodesign.com/builder-pattern/">Builder</a></li>
+                                        <li><a href="https://www.oodesign.com/prototype-pattern/">Prototype</a></li>
+                                        <li><a href="https://www.oodesign.com/object-pool-pattern/">Object Pool</a></li>
+                                    </ul>
+                                </li>
+                                <li class="subselected"><a href="https://www.oodesign.com/behavioral-patterns/"><b>Behavioral Patterns</b></a></li>
+                                <li>
+                                    <ul>
+                                        <li><a href="https://www.oodesign.com/chain-of-responsibility-pattern/">Chain of Responsibility</a></li>
+                                        <li><a href="https://www.oodesign.com/command-pattern/">Command</a></li>
+                                        <li><a href="https://www.oodesign.com/interpreter-pattern/">Interpreter</a></li>
+                                        <li><a href="https://www.oodesign.com/iterator-pattern/">Iterator</a></li>
+                                        <li><a href="https://www.oodesign.com/mediator-pattern/">Mediator</a></li>
+                                        <li><a href="https://www.oodesign.com/memento-pattern/">Memento</a></li>
+                                        <li><a href="https://www.oodesign.com/observer-pattern/">Observer</a></li>
+                                        <li class="selected"><a href="https://www.oodesign.com/strategy-pattern/">Strategy</a></li>
+                                        <li><a href="https://www.oodesign.com/template-method-pattern/">Template Method</a></li>
+                                        <li><a href="https://www.oodesign.com/visitor-pattern/">Visitor</a></li>
+                                        <li><a href="https://www.oodesign.com/null-object-pattern/">Null Object</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="https://www.oodesign.com/structural-patterns/"
+                                        class="mainlevel"><b>Structural Patterns</b></a></li>
+                                <li>
+                                    <ul>
+                                        <li><a href="https://www.oodesign.com/adapter-pattern/">Adapter</a></li>
+                                        <li><a href="https://www.oodesign.com/bridge-pattern/">Bridge</a></li>
+                                        <li><a href="https://www.oodesign.com/composite-pattern/">Composite</a></li>
+                                        <li><a href="https://www.oodesign.com/decorator-pattern/">Decorator</a></li>
+                                        <li><a href="https://www.oodesign.com/flyweight-pattern/">Flyweight</a></li>
+                                        <li><a href="https://www.oodesign.com/proxy-pattern/">Proxy</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="column-center">
+                <div class="tbl">
+                    <span class="menu-button" style="cursor:pointer;background-color:#007a98;color:white;"
+                        onclick="openNav()"> &nbsp; &#9776; Menu &nbsp; </span> &nbsp;
+                    <a href="https://www.oodesign.com/">Home: Design Patterns</a>
+                        <span style="color:#85a49e">&raquo;</span>
+                    <a href="https://www.oodesign.com/behavioral-patterns/">Behavioral Patterns</a>
+                        <span style="color:#85a49e">&raquo;</span>
+                    Strategy Pattern
+                </div>
+				<div class="tbl">
+					<div
+						style="float:right;padding:4px;margin:4px;border:1px solid #555;background-color:#B7CBD5;width:308px;min-height:250px;">
+						<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+						<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-4452501840155972"
+							data-ad-slot="1137021394" data-ad-format="auto"></ins>
+						<script>
+							(adsbygoogle = window.adsbygoogle || []).push({});
+						</script>
+					</div>
+					<h1>Strategy Pattern</h1>
+					<div style="width:275px;height:20px;padding-bottom:15px;margin-left:3px;">
+						<div style="width:80px;height:20px;float:left;margin-right:15px;">
+							<iframe
+								src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Fwww.oodesign.com%2Fstrategy-pattern%2F&amp;layout=standard&amp;show_faces=false&amp;width=80&amp;action=like&amp;font&amp;colorscheme=light&amp;height=20&amp;layout=button_count"
+								scrolling="no" frameborder="0"
+								style="border:none; overflow:hidden; width:80px; height:20px;"
+								allowTransparency="true"></iframe>
+						</div>
+					</div>
+
+
+
+
+
+					<h2>Motivation</h2>
+
+					<p>There are common situations when classes differ only in their behavior. For this cases is a good idea to 
+					isolate the algorithms in separate classes in order to have the ability to select different algorithms at runtime.</p>
+					
+					<h2>Intent</h2>
+					
+					<p>Define a family of algorithms, encapsulate each one, and make them interchangeable. Strategy lets the algorithm 
+					vary independently from clients that use it.</p>
+					
+					<h2>Implementation</h2>
+
+                    <p>The implementation of the strategy design pattern consists of 2 type of classes: the  <strong>Strategy</strong>, 
+                        which encapsulates interchangeable algorithms and the <strong>Context</strong> which acts as the orchestrator
+                        that delegates to the strategy, allowing behaviors to be switched dynamically without 
+                        altering the clients that rely on them.</p>                    
+					
+					<p>&nbsp;<img src="/images/design_patterns/behavioral/strategy_implementation_-_uml_class_diagram.gif"
+								alt="Strategy Implementation UML Class Diagram" 
+								title="Strategy Implementation UML Class Diagram" width="506" height="245" /></p>
+
+
+						
+                    <h3>Strategy</h3>
+                    
+					<p><strong>IStrategy</strong> defines an interface common to all supported algorithms. Each algorithm/behavior is defined in concrete 
+                        implementation of the strategy interface: ConcreteStrategyA, ConcreteStrategyB, ConcreteStrategyC. The Context uses this interface 
+                        to call the implemented algorithms.</p>
+					
+					<p><strong>ConcreteStrategy</strong> - each concrete strategy implements an algorithm/behavior.</p>
+										
+					<h3>Context</h3>
+					
+					<ul>
+						<li>contains a reference to a strategy object.</li>
+						<li>may define an interface that lets strategy accessing its data.</li>
+					</ul>
+					
+					<p>The <strong>Context</strong> objects contains a reference to the <strong>ConcreteStrategy</strong> that should be 
+                        used. When an operation is required then the algorithm is run from the strategy object. The <strong>Context</strong> is 
+                        not aware of the strategy implementation. If necessary, addition objects can be defined to pass data from context 
+                        object to strategy.</p>
+					
+                    <div class="content">
+                        <img src="/images/behavioral/strategy-pattern-implementation-sequence-diagram.png" 
+                            alt="Strategy Pattern Implementation - UML Sequence Diagram" 
+                            title="Strategy Pattern Implementation - UML Sequence Diagram" style="width:100%;max-width:953px;height:auto;aspect-ratio:953/589"/>
+                            
+                    </div>
+
+					<p>The context object receives requests from the client and delegates them to the strategy object. Usually the 
+					ConcreteStartegy is created by the client and passed to the context. From this point the clients interact 
+					only with the context.</p>
+					
+					<h2>Applicability &amp; Examples</h2>
+					
+					<h3>Example - Robots Application</h3>
+
+                    Check the interactive example here:
+                    <p><a href="https://www.oodesign.com/strategy-pattern/robot-behavior-switching-example/">
+                        <img width="800" height="600" style="border:0;" src="/strategy-pattern/robot-behavior-switching-example/interactive-strategy-pattern-example-with-robot-behavior-switching.png">
+                    </a></p>
+					
+                    <p>Let's consider the following class diagram:</p>
+					<div class="content">
+						<img src="/images/design_patterns/behavioral/strategy_example_robot_-_uml_class_diagram.gif" 
+							alt="Strategy Example Robot UML Class Diagram" 
+							title="Strategy Example Robot UML Class Diagram" width="489" height="244" />
+							
+					</div>
+
+    
+					
+
+						<p>Let&#39;s consider an application used to simulate and study robots interaction. For the beginning a 
+						simple application is created to simulate an arena where robots are interacting. We have the 
+						following classes:</p>
+						
+						<p><strong>IBehaviour</strong> (<strong>Strategy</strong>) - an interface that defines the behavior of a robot</p>
+						
+						<p><strong>Concrete Strategies</strong>: <strong>AggressiveBehaviour</strong>, <strong>DefensiveBehaviour</strong>, 
+                            <strong>NormalBehaviour</strong>; each of them defines a specific behavior. In order to decide 
+                            the action this class needs information that is passed from robot sensors like position, close obstacles, etc.</p>
+						
+						<p><strong>Robot</strong> - The robot is the <strong>context</strong> class. It keeps or gets context information such as position, close obstacles
+						, etc, and passes necessary information to the Strategy class.</p>
+						
+						<p>In the main section of the application the several robots are created and several different behaviors are 
+						created. Each robot has a different behavior assigned: &#39;Big Robot&#39; is an aggressive one and
+						attacks any other robot found, &#39;George v.2.1&#39; is really scared and run away in the opposite 
+						direction when it encounter another robot and &#39;R2&#39; is pretty calm and ignore any other 
+						robot. At some point the behaviors are changed for each robot. </p>
+
+                        <div class="expanded">
+						<pre><code>
+public interface IBehaviour {
+	public int moveCommand();
+}
+
+public class AgressiveBehaviour implements IBehaviour{
+	public int moveCommand()
+	{
+		System.out.println("\tAgressive Behaviour: if find another robot attack it");
+		return 1;
+	}
+}
+
+public class DefensiveBehaviour implements IBehaviour{
+	public int moveCommand()
+	{
+		System.out.println("\tDefensive Behaviour: if find another robot run from it");
+		return -1;
+	}
+}
+
+public class NormalBehaviour implements IBehaviour{
+	public int moveCommand()
+	{
+		System.out.println("\tNormal Behaviour: if find another robot ignore it");
+		return 0;
+	}
+}
+
+public class Robot {
+	IBehaviour behaviour;
+	String name;
+
+	public Robot(String name)
+	{
+		this.name = name;
+	}
+
+	public void setBehaviour(IBehaviour behaviour)
+	{
+		this.behaviour = behaviour;
+	}
+
+	public IBehaviour getBehaviour()
+	{
+		return behaviour;
+	}
+
+	public void move()
+	{
+		System.out.println(this.name + ": Based on current position" +
+						"the behaviour object decide the next move:");
+		int command = behaviour.moveCommand();
+		// ... send the command to mechanisms
+		System.out.println("\tThe result returned by behaviour object " +
+					"is sent to the movement mechanisms " + 
+					" for the robot '"  + this.name + "'");
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+}
+
+
+public class Main {
+
+	public static void main(String[] args) {
+
+		Robot r1 = new Robot("Big Robot");
+		Robot r2 = new Robot("George v.2.1");
+		Robot r3 = new Robot("R2");
+
+		r1.setBehaviour(new AgressiveBehaviour());
+		r2.setBehaviour(new DefensiveBehaviour());
+		r3.setBehaviour(new NormalBehaviour());
+
+		r1.move();
+		r2.move();
+		r3.move();
+
+		System.out.println("\r\nNew behaviours: " +
+				"\r\n\t'Big Robot' gets really scared" +
+				"\r\n\t, 'George v.2.1' becomes really mad because" +
+				"it's always attacked by other robots" +
+				"\r\n\t and R2 keeps its calm\r\n");
+
+		r1.setBehaviour(new DefensiveBehaviour());
+		r2.setBehaviour(new AgressiveBehaviour());
+
+		r1.move();
+		r2.move();
+		r3.move();
+	}
+}
+					</code></pre>
+                    </div>
+
+						
+						
+					<h2>Specific problems and implementation</h2>
+					
+					<h3>Passing data to/from Strategy object</h3>
+					
+					<p>Usually each strategy need data from the context have to return some processed data to the context. 
+					This can be achieved in 2 ways.</p>
+					
+					<ul>
+						<li>creating some additional classes to encapsulate the specific data.</li>
+						<li>passing the context object itself to the strategy objects. The strategy object can set returning data directly in the context.</li>
+					</ul>
+					
+					<p>When data should be passed the drawbacks of each method should be analyzed. For example, if some classes are created to 
+					encapsulate additional data, a special care should be paid to what fields are included in the classes. Maybe in the 
+					current implementation all required fields are added, but maybe in the future some new strategy concrete classes require 
+					data from context which are not include in additional classes. Another fact should be specified at this point: it&#39;s very 
+					likely that some of the strategy concrete classes will not use field passed to the in the additional classes.</p>
+					
+					<p>On the other side, if the context object is passed to the strategy then we have a tighter coupling between strategy and context.</p>
+					
+					<h3>Families of related algorithms.</h3>
+					
+					<p>The strategies can be defined as a hierarchy of classes offering the ability to 
+					extend and customize the existing algorithms from an application. At this point the composite design pattern can be used 
+					with a special care.</p>
+					
+					<h3>Optionally Concrete Strategy Objects</h3>
+					
+					<p>It&#39;s possible to implement a context object that carries an implementation for default or a basic algorithm. While 
+					running it, it checks if it contains a strategy object. If not it will run the default code and that&#39;s it. If a 
+					strategy object is found, it is called instead (or in addition) of the default code. This is an elegant solution to 
+					exposing some customization points to be used only when they are required. Otherwise the clients don&#39;t have 
+					to deal with Strategy objects.</p>
+					
+					<h3>Strategy and Creational Patterns</h3>
+					
+					<p>In the classic implementation of the pattern the client should be aware of the strategy concrete classes. In 
+					order to decouple the client class from strategy classes is possible to use a factory class inside the context 
+					object to create the strategy object to be used. By doing so the client has only to send a parameter (like a string) to 
+					the context asking to use a specific algorithm, being totally decoupled of strategy classes.</p>
+					
+					<h3>Strategy and Bridge</h3>
+					
+					<p>Both of the patterns have the same UML diagram. But they differ in their intent since the strategy is related 
+					with the behavior and bridge is for structure. Further more, the coupling between the context and strategies is 
+					tighter than the coupling between the abstraction and implementation in the bridge pattern.</p>
+					
+					<h2>Hot points</h2>
+					
+					<p>The strategy design pattern splits the behavior (there are many behaviors) of a class from the class 
+					itself. This has some advantages, but the main draw back is that a client must understand how the S
+					trategies differ. Since clients get exposed to implementation issues the strategy design pattern should be 
+					used only when the variation in behavior is relevant to them.</p>
+
+
+
+
+
+
+
+
+
+						<div style="max-width:1050px;margin:0 auto;">
+							<script type="text/javascript">
+								google_ad_client = "ca-pub-4452501840155972";
+								google_ad_slot = "6030003693";
+								google_ad_width = 728;
+								google_ad_height = 90;
+							</script>
+							<script type="text/javascript" src="https://pagead2.googlesyndication.com/pagead/show_ads.js">
+							</script>
+						</div>
+						<div class="pagenav-container">
+							<span class="pagenav-left"><a href="https://www.oodesign.com/observer-pattern/">&lt; Observer Pattern</a></span>
+							<span class="pagenav-right"><a href="https://www.oodesign.com/template-method-pattern/">Template Method Pattern &gt;</a></span>
+							<div style="clear:both;"></div>
+						</div>
+				</div>
+            </div>
+			<div class="column-right">
+				<div class="column-module">
+				</div>
+			</div>
+		</div>
+
+    </div>
+    </div>
+    <script>
+        function openNav() { document.getElementById("column-left").style.display = "block"; }
+        function closeNav() { document.getElementById("column-left").style.display = "none"; }
+    </script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-648925-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-648925-1');
+    </script>
+
+    <script async src="/static/code-expander.js"></script>
+    <script async src="/static/custom-loader.js"></script>
+
+<script defer src="https://static.cloudflareinsights.com/beacon.min.js/vcd15cbe7772f49c399c6a5babf22c1241717689176015" integrity="sha512-ZpsOmlRQV6y907TI0dKBHq9Md29nnaEIPlkf84rnaERnq6zvWvPUqr2ft8M1aS28oN72PdrCzSjY4U6VaAw1EQ==" data-cf-beacon='{"version":"2024.11.0","token":"9212a8e60aad4cb3bd0f81be4bc467d7","r":1,"server_timing":{"name":{"cfCacheStatus":true,"cfEdge":true,"cfExtPri":true,"cfL4":true,"cfOrigin":true,"cfSpeedBrain":true},"location_startswith":null}}' crossorigin="anonymous"></script>
+</body>
+
+</html>

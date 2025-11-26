@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en-US">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="profile" href="http://gmpg.org/xfn/11">
+	<link rel="pingback" href="https://tutorials.visual-paradigm.com/xmlrpc.php">
+	<!--[if lt IE 9]>
+		<script src="https://tutorials.visual-paradigm.com/wp-content/themes/wpex-elegant/js/html5.js"></script>
+	<![endif]-->
+	<meta name='robots' content='index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1' />
+
+	<!-- This site is optimized with the Yoast SEO plugin v19.6 - https://yoast.com/wordpress/plugins/seo/ -->
+	<title>Strategy Pattern Tutorial - Visual Paradigm Tutorials</title>
+	<meta name="description" content="Learn strategy design pattern free, with step-by-step design pattern tutorial. Know how to apply the pattern. Download free resources and try it yourself!" />
+	<link rel="canonical" href="https://tutorials.visual-paradigm.com/strategy-pattern-tutorial/" />
+	<meta property="og:locale" content="en_US" />
+	<meta property="og:type" content="article" />
+	<meta property="og:title" content="Strategy Pattern Tutorial - Visual Paradigm Tutorials" />
+	<meta property="og:description" content="Learn strategy design pattern free, with step-by-step design pattern tutorial. Know how to apply the pattern. Download free resources and try it yourself!" />
+	<meta property="og:url" content="https://tutorials.visual-paradigm.com/strategy-pattern-tutorial/" />
+	<meta property="og:site_name" content="Visual Paradigm Tutorials" />
+	<meta property="article:published_time" content="2023-04-24T15:10:19+00:00" />
+	<meta property="og:image" content="https://tutorials.visual-paradigm.com/wp-content/uploads/2023/02/19_select_strategy.png" />
+	<meta property="og:image:width" content="720" />
+	<meta property="og:image:height" content="600" />
+	<meta property="og:image:type" content="image/png" />
+	<meta name="author" content="vpjick" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:label1" content="Written by" />
+	<meta name="twitter:data1" content="vpjick" />
+	<meta name="twitter:label2" content="Est. reading time" />
+	<meta name="twitter:data2" content="8 minutes" />
+	<script type="application/ld+json" class="yoast-schema-graph">{"@context":"https://schema.org","@graph":[{"@type":"WebPage","@id":"https://tutorials.visual-paradigm.com/strategy-pattern-tutorial/","url":"https://tutorials.visual-paradigm.com/strategy-pattern-tutorial/","name":"Strategy Pattern Tutorial - Visual Paradigm Tutorials","isPartOf":{"@id":"https://tutorials.visual-paradigm.com/#website"},"primaryImageOfPage":{"@id":"https://tutorials.visual-paradigm.com/strategy-pattern-tutorial/#primaryimage"},"image":{"@id":"https://tutorials.visual-paradigm.com/strategy-pattern-tutorial/#primaryimage"},"thumbnailUrl":"https://tutorials.visual-paradigm.com/wp-content/uploads/2023/02/19_select_strategy.png","datePublished":"2023-04-24T15:10:19+00:00","dateModified":"2023-04-24T15:10:19+00:00","author":{"@id":"https://tutorials.visual-paradigm.com/#/schema/person/9e8246dba56f313b310659845684da62"},"description":"Learn strategy design pattern free, with step-by-step design pattern tutorial. Know how to apply the pattern. Download free resources and try it yourself!","breadcrumb":{"@id":"https://tutorials.visual-paradigm.com/strategy-pattern-tutorial/#breadcrumb"},"inLanguage":"en-US","potentialAction":[{"@type":"ReadAction","target":["https://tutorials.visual-paradigm.com/strategy-pattern-tutorial/"]}]},{"@type":"ImageObject","inLanguage":"en-US","@id":"https://tutorials.visual-paradigm.com/strategy-pattern-tutorial/#primaryimage","url":"https://tutorials.visual-paradigm.com/wp-content/uploads/2023/02/19_select_strategy.png","contentUrl":"https://tutorials.visual-paradigm.com/wp-content/uploads/2023/02/19_select_strategy.png","width":720,"height":600},{"@type":"BreadcrumbList","@id":"https://tutorials.visual-paradigm.com/strategy-pattern-tutorial/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://tutorials.visual-paradigm.com/"},{"@type":"ListItem","position":2,"name":"Strategy Pattern Tutorial"}]},{"@type":"WebSite","@id":"https://tutorials.visual-paradigm.com/#website","url":"https://tutorials.visual-paradigm.com/","name":"Visual Paradigm Tutorials","description":"Just another WordPress site","potentialAction":[{"@type":"SearchAction","target":{"@type":"EntryPoint","urlTemplate":"https://tutorials.visual-paradigm.com/?s={search_term_string}"},"query-input":"required name=search_term_string"}],"inLanguage":"en-US"},{"@type":"Person","@id":"https://tutorials.visual-paradigm.com/#/schema/person/9e8246dba56f313b310659845684da62","name":"vpjick","image":{"@type":"ImageObject","inLanguage":"en-US","@id":"https://tutorials.visual-paradigm.com/#/schema/person/image/","url":"https://secure.gravatar.com/avatar/0f1f22197f82f0d653371943271ad668?s=96&d=mm&r=g","contentUrl":"https://secure.gravatar.com/avatar/0f1f22197f82f0d653371943271ad668?s=96&d=mm&r=g","caption":"vpjick"},"url":"https://tutorials.visual-paradigm.com/author/vpjick/"}]}</script>
+	<!-- / Yoast SEO plugin. -->
+
+
+<link rel='dns-prefetch' href='//fonts.googleapis.com' />
+<link rel='dns-prefetch' href='//use.fontawesome.com' />
+<link rel='dns-prefetch' href='//s.w.org' />
+<link href='https://fonts.gstatic.com' crossorigin rel='preconnect' />
+<link rel="alternate" type="application/rss+xml" title="Visual Paradigm Tutorials &raquo; Feed" href="https://tutorials.visual-paradigm.com/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Visual Paradigm Tutorials &raquo; Comments Feed" href="https://tutorials.visual-paradigm.com/comments/feed/" />
+<link rel="alternate" type="application/rss+xml" title="Visual Paradigm Tutorials &raquo; Strategy Pattern Tutorial Comments Feed" href="https://tutorials.visual-paradigm.com/strategy-pattern-tutorial/feed/" />
+<script type="text/javascript">
+window._wpemojiSettings = {"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/72x72\/","ext":".png","svgUrl":"https:\/\/s.w.org\/images\/core\/emoji\/13.1.0\/svg\/","svgExt":".svg","source":{"concatemoji":"https:\/\/tutorials.visual-paradigm.com\/wp-includes\/js\/wp-emoji-release.min.js?ver=5.9.12"}};
+/*! This file is auto-generated */
+!function(e,a,t){var n,r,o,i=a.createElement("canvas"),p=i.getContext&&i.getContext("2d");function s(e,t){var a=String.fromCharCode;p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,e),0,0);e=i.toDataURL();return p.clearRect(0,0,i.width,i.height),p.fillText(a.apply(this,t),0,0),e===i.toDataURL()}function c(e){var t=a.createElement("script");t.src=e,t.defer=t.type="text/javascript",a.getElementsByTagName("head")[0].appendChild(t)}for(o=Array("flag","emoji"),t.supports={everything:!0,everythingExceptFlag:!0},r=0;r<o.length;r++)t.supports[o[r]]=function(e){if(!p||!p.fillText)return!1;switch(p.textBaseline="top",p.font="600 32px Arial",e){case"flag":return s([127987,65039,8205,9895,65039],[127987,65039,8203,9895,65039])?!1:!s([55356,56826,55356,56819],[55356,56826,8203,55356,56819])&&!s([55356,57332,56128,56423,56128,56418,56128,56421,56128,56430,56128,56423,56128,56447],[55356,57332,8203,56128,56423,8203,56128,56418,8203,56128,56421,8203,56128,56430,8203,56128,56423,8203,56128,56447]);case"emoji":return!s([10084,65039,8205,55357,56613],[10084,65039,8203,55357,56613])}return!1}(o[r]),t.supports.everything=t.supports.everything&&t.supports[o[r]],"flag"!==o[r]&&(t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&t.supports[o[r]]);t.supports.everythingExceptFlag=t.supports.everythingExceptFlag&&!t.supports.flag,t.DOMReady=!1,t.readyCallback=function(){t.DOMReady=!0},t.supports.everything||(n=function(){t.readyCallback()},a.addEventListener?(a.addEventListener("DOMContentLoaded",n,!1),e.addEventListener("load",n,!1)):(e.attachEvent("onload",n),a.attachEvent("onreadystatechange",function(){"complete"===a.readyState&&t.readyCallback()})),(n=t.source||{}).concatemoji?c(n.concatemoji):n.wpemoji&&n.twemoji&&(c(n.twemoji),c(n.wpemoji)))}(window,document,window._wpemojiSettings);
+</script>
+<style type="text/css">
+img.wp-smiley,
+img.emoji {
+	display: inline !important;
+	border: none !important;
+	box-shadow: none !important;
+	height: 1em !important;
+	width: 1em !important;
+	margin: 0 0.07em !important;
+	vertical-align: -0.1em !important;
+	background: none !important;
+	padding: 0 !important;
+}
+</style>
+	<link rel='stylesheet' id='gtranslate-style-css'  href='https://tutorials.visual-paradigm.com/wp-content/plugins/gtranslate/gtranslate-style24.css?ver=5.9.12' type='text/css' media='all' />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://tutorials.visual-paradigm.com/wp-includes/css/dist/block-library/style.min.css?ver=5.9.12' type='text/css' media='all' />
+<link rel='stylesheet' id='banner-list-block-css'  href='https://tutorials.visual-paradigm.com/wp-content/plugins/custom-banners/blocks/banner-list/style.css?ver=1661485203' type='text/css' media='all' />
+<link rel='stylesheet' id='rotating-banner-block-css'  href='https://tutorials.visual-paradigm.com/wp-content/plugins/custom-banners/blocks/rotating-banner/style.css?ver=1661485203' type='text/css' media='all' />
+<link rel='stylesheet' id='single-banner-block-css'  href='https://tutorials.visual-paradigm.com/wp-content/plugins/custom-banners/blocks/single-banner/style.css?ver=1661485203' type='text/css' media='all' />
+<style id='global-styles-inline-css' type='text/css'>
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+</style>
+<link rel='stylesheet' id='wp-banners-css-css'  href='https://tutorials.visual-paradigm.com/wp-content/plugins/custom-banners/assets/css/wp-banners.css?ver=5.9.12' type='text/css' media='all' />
+<link rel='stylesheet' id='layerslider-css'  href='https://tutorials.visual-paradigm.com/wp-content/plugins/LayerSlider/static/css/layerslider.css?ver=5.6.2' type='text/css' media='all' />
+<link rel='stylesheet' id='ls-google-fonts-css'  href='https://fonts.googleapis.com/css?family=Lato:100,300,regular,700,900%7COpen+Sans:300%7CIndie+Flower:regular%7COswald:300,regular,700&#038;subset=latin%2Clatin-ext' type='text/css' media='all' />
+<link rel='stylesheet' id='megamenu-css'  href='https://tutorials.visual-paradigm.com/wp-content/uploads/maxmegamenu/style.css?ver=bde9f0' type='text/css' media='all' />
+<link rel='stylesheet' id='dashicons-css'  href='https://tutorials.visual-paradigm.com/wp-includes/css/dashicons.min.css?ver=5.9.12' type='text/css' media='all' />
+<link rel='stylesheet' id='wpex-style-css'  href='https://tutorials.visual-paradigm.com/wp-content/themes/wpex-elegant/style.css?ver=2.4' type='text/css' media='all' />
+<link rel='stylesheet' id='wpex-responsive-css'  href='https://tutorials.visual-paradigm.com/wp-content/themes/wpex-elegant/css/responsive.css?ver=2.4' type='text/css' media='all' />
+<link rel='stylesheet' id='wpex-font-awesome-css'  href='https://tutorials.visual-paradigm.com/wp-content/themes/wpex-elegant/css/font-awesome.min.css?ver=4.5.0' type='text/css' media='all' />
+<link rel='stylesheet' id='open-sans-css'  href='https://fonts.googleapis.com/css?family=Open+Sans%3A300italic%2C400italic%2C600italic%2C300%2C400%2C600&#038;subset=latin%2Clatin-ext&#038;display=fallback&#038;ver=5.9.12' type='text/css' media='all' />
+<link rel='stylesheet' id='googlefont-gudea-css'  href='//fonts.googleapis.com/css?family=Gudea%3A300italic%2C400italic%2C600italic%2C700italic%2C800italic%2C700%2C300%2C600%2C800%2C400&#038;subset=latin%2Ccyrillic-ext%2Cgreek-ext%2Cvietnamese%2Clatin-ext&#038;ver=5.9.12' type='text/css' media='all' />
+<link rel='stylesheet' id='font-awesome-official-css'  href='https://use.fontawesome.com/releases/v5.15.4/css/all.css' type='text/css' media='all' integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous" />
+<link rel='stylesheet' id='__EPYT__style-css'  href='https://tutorials.visual-paradigm.com/wp-content/plugins/youtube-embed-plus/styles/ytprefs.min.css?ver=14.1.4.1' type='text/css' media='all' />
+<style id='__EPYT__style-inline-css' type='text/css'>
+
+                .epyt-gallery-thumb {
+                        width: 33.333%;
+                }
+                
+</style>
+<link rel='stylesheet' id='wp-add-custom-css-css'  href='https://tutorials.visual-paradigm.com?display_custom_css=css&#038;ver=5.9.12' type='text/css' media='all' />
+<link rel='stylesheet' id='font-awesome-official-v4shim-css'  href='https://use.fontawesome.com/releases/v5.15.4/css/v4-shims.css' type='text/css' media='all' integrity="sha384-Vq76wejb3QJM4nDatBa5rUOve+9gkegsjCebvV/9fvXlGWo4HCMR4cJZjjcF6Viv" crossorigin="anonymous" />
+<style id='font-awesome-official-v4shim-inline-css' type='text/css'>
+@font-face {
+font-family: "FontAwesome";
+font-display: block;
+src: url("https://use.fontawesome.com/releases/v5.15.4/webfonts/fa-brands-400.eot"),
+		url("https://use.fontawesome.com/releases/v5.15.4/webfonts/fa-brands-400.eot?#iefix") format("embedded-opentype"),
+		url("https://use.fontawesome.com/releases/v5.15.4/webfonts/fa-brands-400.woff2") format("woff2"),
+		url("https://use.fontawesome.com/releases/v5.15.4/webfonts/fa-brands-400.woff") format("woff"),
+		url("https://use.fontawesome.com/releases/v5.15.4/webfonts/fa-brands-400.ttf") format("truetype"),
+		url("https://use.fontawesome.com/releases/v5.15.4/webfonts/fa-brands-400.svg#fontawesome") format("svg");
+}
+
+@font-face {
+font-family: "FontAwesome";
+font-display: block;
+src: url("https://use.fontawesome.com/releases/v5.15.4/webfonts/fa-solid-900.eot"),
+		url("https://use.fontawesome.com/releases/v5.15.4/webfonts/fa-solid-900.eot?#iefix") format("embedded-opentype"),
+		url("https://use.fontawesome.com/releases/v5.15.4/webfonts/fa-solid-900.woff2") format("woff2"),
+		url("https://use.fontawesome.com/releases/v5.15.4/webfonts/fa-solid-900.woff") format("woff"),
+		url("https://use.fontawesome.com/releases/v5.15.4/webfonts/fa-solid-900.ttf") format("truetype"),
+		url("https://use.fontawesome.com/releases/v5.15.4/webfonts/fa-solid-900.svg#fontawesome") format("svg");
+}
+
+@font-face {
+font-family: "FontAwesome";
+font-display: block;
+src: url("https://use.fontawesome.com/releases/v5.15.4/webfonts/fa-regular-400.eot"),
+		url("https://use.fontawesome.com/releases/v5.15.4/webfonts/fa-regular-400.eot?#iefix") format("embedded-opentype"),
+		url("https://use.fontawesome.com/releases/v5.15.4/webfonts/fa-regular-400.woff2") format("woff2"),
+		url("https://use.fontawesome.com/releases/v5.15.4/webfonts/fa-regular-400.woff") format("woff"),
+		url("https://use.fontawesome.com/releases/v5.15.4/webfonts/fa-regular-400.ttf") format("truetype"),
+		url("https://use.fontawesome.com/releases/v5.15.4/webfonts/fa-regular-400.svg#fontawesome") format("svg");
+unicode-range: U+F004-F005,U+F007,U+F017,U+F022,U+F024,U+F02E,U+F03E,U+F044,U+F057-F059,U+F06E,U+F070,U+F075,U+F07B-F07C,U+F080,U+F086,U+F089,U+F094,U+F09D,U+F0A0,U+F0A4-F0A7,U+F0C5,U+F0C7-F0C8,U+F0E0,U+F0EB,U+F0F3,U+F0F8,U+F0FE,U+F111,U+F118-F11A,U+F11C,U+F133,U+F144,U+F146,U+F14A,U+F14D-F14E,U+F150-F152,U+F15B-F15C,U+F164-F165,U+F185-F186,U+F191-F192,U+F1AD,U+F1C1-F1C9,U+F1CD,U+F1D8,U+F1E3,U+F1EA,U+F1F6,U+F1F9,U+F20A,U+F247-F249,U+F24D,U+F254-F25B,U+F25D,U+F267,U+F271-F274,U+F279,U+F28B,U+F28D,U+F2B5-F2B6,U+F2B9,U+F2BB,U+F2BD,U+F2C1-F2C2,U+F2D0,U+F2D2,U+F2DC,U+F2ED,U+F328,U+F358-F35B,U+F3A5,U+F3D1,U+F410,U+F4AD;
+}
+</style>
+<script type='text/javascript' src='https://tutorials.visual-paradigm.com/wp-includes/js/jquery/jquery.min.js?ver=3.6.0' id='jquery-core-js'></script>
+<script type='text/javascript' src='https://tutorials.visual-paradigm.com/wp-includes/js/jquery/jquery-migrate.min.js?ver=3.3.2' id='jquery-migrate-js'></script>
+<script type='text/javascript' src='https://tutorials.visual-paradigm.com/wp-content/plugins/LayerSlider/static/js/greensock.js?ver=1.11.8' id='greensock-js'></script>
+<script type='text/javascript' src='https://tutorials.visual-paradigm.com/wp-content/plugins/LayerSlider/static/js/layerslider.kreaturamedia.jquery.js?ver=5.6.2' id='layerslider-js'></script>
+<script type='text/javascript' src='https://tutorials.visual-paradigm.com/wp-content/plugins/LayerSlider/static/js/layerslider.transitions.js?ver=5.6.2' id='layerslider-transitions-js'></script>
+<script type='text/javascript' id='__ytprefs__-js-extra'>
+/* <![CDATA[ */
+var _EPYT_ = {"ajaxurl":"https:\/\/tutorials.visual-paradigm.com\/wp-admin\/admin-ajax.php","security":"340a49a694","gallery_scrolloffset":"20","eppathtoscripts":"https:\/\/tutorials.visual-paradigm.com\/wp-content\/plugins\/youtube-embed-plus\/scripts\/","eppath":"https:\/\/tutorials.visual-paradigm.com\/wp-content\/plugins\/youtube-embed-plus\/","epresponsiveselector":"[\"iframe.__youtube_prefs_widget__\"]","epdovol":"1","version":"14.1.4.1","evselector":"iframe.__youtube_prefs__[src], iframe[src*=\"youtube.com\/embed\/\"], iframe[src*=\"youtube-nocookie.com\/embed\/\"]","ajax_compat":"","ytapi_load":"light","pause_others":"","stopMobileBuffer":"1","facade_mode":"","not_live_on_channel":"","vi_active":"","vi_js_posttypes":[]};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://tutorials.visual-paradigm.com/wp-content/plugins/youtube-embed-plus/scripts/ytprefs.min.js?ver=14.1.4.1' id='__ytprefs__-js'></script>
+<link rel="https://api.w.org/" href="https://tutorials.visual-paradigm.com/wp-json/" /><link rel="alternate" type="application/json" href="https://tutorials.visual-paradigm.com/wp-json/wp/v2/posts/1259" /><link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://tutorials.visual-paradigm.com/xmlrpc.php?rsd" />
+<link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://tutorials.visual-paradigm.com/wp-includes/wlwmanifest.xml" /> 
+<meta name="generator" content="WordPress 5.9.12" />
+<link rel='shortlink' href='https://tutorials.visual-paradigm.com/?p=1259' />
+<link rel="alternate" type="application/json+oembed" href="https://tutorials.visual-paradigm.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Ftutorials.visual-paradigm.com%2Fstrategy-pattern-tutorial%2F" />
+<link rel="alternate" type="text/xml+oembed" href="https://tutorials.visual-paradigm.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Ftutorials.visual-paradigm.com%2Fstrategy-pattern-tutorial%2F&#038;format=xml" />
+<style type="text/css" media="screen"></style>	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="preconnect" href="https://cdnjs.cloudflare.com">
+		<!-- GA Google Analytics @ https://m0n.co/ga -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=G-116HDKFV5V"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+			gtag('config', 'G-116HDKFV5V');
+		</script>
+
+	<link rel="alternate" hreflang="x-default" href="https://tutorials.visual-paradigm.com/strategy-pattern-tutorial/" title="English" />
+<style id="mystickymenu" type="text/css">#mysticky-nav { width:100%; position: static; }#mysticky-nav.wrapfixed { position:fixed; left: 0px; margin-top:0px;  z-index: 99990; -webkit-transition: 0.3s; -moz-transition: 0.3s; -o-transition: 0.3s; transition: 0.3s; -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=90)"; filter: alpha(opacity=90); opacity:0.9; background-color: #ffffff;}#mysticky-nav.wrapfixed .myfixed{ background-color: #ffffff; position: relative;top: auto;left: auto;right: auto;}#mysticky-nav .myfixed { margin:0 auto; float:none; border:0px; background:none; max-width:100%; }</style>			<style type="text/css">
+																															</style>
+			<!-- Typography CSS --><style type="text/css">body{font-family:Gudea;font-weight:400;font-style:normal;font-size:16px;color:#242424;line-height:26px;}</style><style type="text/css" id="custom-background-css">
+body.custom-background { background-color: #ffffff; }
+</style>
+			<style type="text/css" id="wp-custom-css">
+			body {
+    -webkit-font-smoothing: auto;
+}
+h2 a {
+	color: #242424 !important;
+}
+h1 a:hover, h2 a:hover, h3 a:hover, h4 a:hover {
+	color: #54add5;
+}
+body a {
+		color: #54add5;
+}
+p {
+  margin: 0 0 10px;
+}
+.entry ul li, .entry ol li {
+    margin: 0 0 24px;
+}
+h1 {
+  font-size: 36px;
+}
+h2 {
+	font-size: 28px;
+	margin-bottom: 10px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  
+}
+h5 {
+      font-size: 1.167em;
+	    margin: 0 0 10px;
+    font-weight: 600;
+
+}
+.entry h2, .entry h3, .entry h4, .entry h5, .entry h6 {
+  margin: 35px 0 5px;
+}
+#comments {
+  padding: 20px;
+}
+.loop-entry {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 30px;
+    background: #fff;
+    padding: 10px;
+}
+.site-content {
+    border-right: 1px solid #e6e6e6;
+}
+.sidebar-container .sidebar-widget {
+    border-bottom: 1px solid #e7e8e9;
+}
+.container {
+    width: 1200px;
+}
+.left-content {
+    float: left;
+    width: 74%;
+}
+.sidebar{
+	width: 30%;
+	
+}
+.sidebar-container {
+       	width: 23%;
+    padding: 12px;
+    background: #fff;
+
+}
+@media only screen and (max-width: 767px){
+.sidebar-container, .left-content {
+    width: 100% !important;
+	}}
+
+@media only screen and (min-width: 768px) and (max-width: 959px) {
+.sidebar-container {
+        width: 97%;
+    float: left;
+ margin-left: 0px;
+	}}
+
+@media only screen and (min-width: 768px) and (max-width: 961px) {
+.left-content {
+    width: 100% !important;
+	}}
+
+@media only screen and (max-width: 1155px) {
+.left-content {
+    width: 73%;
+	}}
+
+
+@media only screen and (max-width: 959px) {
+#mega-menu-wrap-main_menu {
+	display: none;
+	}}
+
+
+
+#header {
+	padding: 20px 0; }
+#mysticky-nav.wrapfixed .myfixed {
+
+    padding: 15px 0px;
+
+}
+#mysticky-nav.wrapfixed {
+    border-bottom: 2px solid #e5e5e5;
+}
+.loop-entry-text .post-meta .meta-comments {
+	display: none;
+	
+}
+#footer-wrap {
+    background: #1d2533;
+}
+.footer-widget h4 {
+    border-bottom: 1px solid #919191;
+    color: #919191;
+    font-size: 1em;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding-bottom: 10px;
+    text-align: left;
+}
+.footer-widget ul {
+    margin-left: 0;
+    list-style-type: none;
+}
+.footer-links li {
+    margin-top: 0.5em;
+}
+
+.footer-widget > ul > li:first-child {
+    border-top: 0px solid #333;
+}
+.footer-widget > ul > li {
+    border-bottom: 0px solid #333;
+}
+#sidr-main a {
+    color: #fff;
+}
+#sidr-main a:hover {
+    color: #707070;
+}
+#sidr-main .sidr-class-mega-toggle-blocks-right {
+	display: none;
+}
+.wp-block-search__input {
+
+    padding: 0px 9px !important;
+
+}
+.wp-block-search__button {
+  padding: 0 10px;
+  color: #32373c;
+
+  font-size: 14px;
+}
+.single-post-content-bg {
+    background: white;
+}
+article {
+	padding: 20px !important;
+}
+ul ul {
+	margin: 5px 0 30px 0px !important;
+list-style-type: disclosure-closed !important;
+}
+.sidebar-menu-bullets {
+	list-style: inside !important;
+}
+.single-post .page-header-title {
+  font-size: 38px;
+}
+button, input[type="button"], input[type="submit"] {
+
+  font-size: 14px;
+
+  font-family: inherit;
+}
+.lwptoc_i {
+  padding: 14px 18px 18px;
+  text-align: left;
+  max-width: 300px;
+}
+.sidebar-widget {
+	padding-bottom: 15px;
+}
+.sidebar-container .sidebar-widget:last-child {
+	 border: 0px solid #e6e6e6;
+}
+
+table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+}
+td, th {
+    border: 1px solid #ccc;
+    padding: 5px 10px;
+}
+th {
+    font-weight: bold;
+}		</style>
+			<style id="egf-frontend-styles" type="text/css">
+		p {} h1 {} h2 {} h3 {} h4 {} h5 {} h6 {} 	</style>
+		<!-- Fonts Plugin CSS - https://fontsplugin.com/ -->
+	<style>
+		/* Cached: October 8, 2025 at 10:28am */
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 100;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiAyp8kv8JHgFVrJJLmE0tDMPKzSQ.woff2) format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B09;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 100;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiAyp8kv8JHgFVrJJLmE0tMMPKzSQ.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 100;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiAyp8kv8JHgFVrJJLmE0tCMPI.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 200;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiDyp8kv8JHgFVrJJLmv1pVFteOcEg.woff2) format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B09;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 200;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiDyp8kv8JHgFVrJJLmv1pVGdeOcEg.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 200;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiDyp8kv8JHgFVrJJLmv1pVF9eO.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiDyp8kv8JHgFVrJJLm21lVFteOcEg.woff2) format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B09;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiDyp8kv8JHgFVrJJLm21lVGdeOcEg.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiDyp8kv8JHgFVrJJLm21lVF9eO.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiGyp8kv8JHgFVrJJLucXtAKPY.woff2) format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B09;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiGyp8kv8JHgFVrJJLufntAKPY.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiGyp8kv8JHgFVrJJLucHtA.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiDyp8kv8JHgFVrJJLmg1hVFteOcEg.woff2) format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B09;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiDyp8kv8JHgFVrJJLmg1hVGdeOcEg.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiDyp8kv8JHgFVrJJLmg1hVF9eO.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiDyp8kv8JHgFVrJJLmr19VFteOcEg.woff2) format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B09;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiDyp8kv8JHgFVrJJLmr19VGdeOcEg.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiDyp8kv8JHgFVrJJLmr19VF9eO.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiDyp8kv8JHgFVrJJLmy15VFteOcEg.woff2) format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B09;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiDyp8kv8JHgFVrJJLmy15VGdeOcEg.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiDyp8kv8JHgFVrJJLmy15VF9eO.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 800;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiDyp8kv8JHgFVrJJLm111VFteOcEg.woff2) format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B09;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 800;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiDyp8kv8JHgFVrJJLm111VGdeOcEg.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 800;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiDyp8kv8JHgFVrJJLm111VF9eO.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiDyp8kv8JHgFVrJJLm81xVFteOcEg.woff2) format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B09;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiDyp8kv8JHgFVrJJLm81xVGdeOcEg.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: italic;
+  font-weight: 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiDyp8kv8JHgFVrJJLm81xVF9eO.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiGyp8kv8JHgFVrLPTucXtAKPY.woff2) format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B09;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiGyp8kv8JHgFVrLPTufntAKPY.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiGyp8kv8JHgFVrLPTucHtA.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLFj_Z11lFc-K.woff2) format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B09;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLFj_Z1JlFc-K.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLFj_Z1xlFQ.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLDz8Z11lFc-K.woff2) format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B09;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLDz8Z1JlFc-K.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLDz8Z1xlFQ.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiEyp8kv8JHgFVrJJbecmNE.woff2) format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B09;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiEyp8kv8JHgFVrJJnecmNE.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiEyp8kv8JHgFVrJJfecg.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLGT9Z11lFc-K.woff2) format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B09;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLGT9Z1JlFc-K.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLGT9Z1xlFQ.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLEj6Z11lFc-K.woff2) format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B09;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLEj6Z1JlFc-K.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLEj6Z1xlFQ.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLCz7Z11lFc-K.woff2) format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B09;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLCz7Z1JlFc-K.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLCz7Z1xlFQ.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLDD4Z11lFc-K.woff2) format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B09;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLDD4Z1JlFc-K.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLDD4Z1xlFQ.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* devanagari */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLBT5Z11lFc-K.woff2) format('woff2');
+  unicode-range: U+0900-097F, U+1CD0-1CF9, U+200C-200D, U+20A8, U+20B9, U+20F0, U+25CC, U+A830-A839, U+A8E0-A8FF, U+11B00-11B09;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLBT5Z1JlFc-K.woff2) format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/poppins/v24/pxiByp8kv8JHgFVrLBT5Z1xlFQ.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+:root {
+--font-base: Poppins;
+--font-headings: Poppins;
+--font-input: Poppins;
+}
+body, #content, .entry-content, .post-content, .page-content, .post-excerpt, .entry-summary, .entry-excerpt, .widget-area, .widget, .sidebar, #sidebar, footer, .footer, #footer, .site-footer {
+font-family: "Poppins";
+ }
+#site-title, .site-title, #site-title a, .site-title a, .entry-title, .entry-title a, h1, h2, h3, h4, h5, h6, .widget-title, .elementor-heading-title {
+font-family: "Poppins";
+ }
+button, .button, input, select, textarea, .wp-block-button, .wp-block-button__link {
+font-family: "Poppins";
+ }
+	</style>
+	<!-- Fonts Plugin CSS -->
+	<style type="text/css">/** Mega Menu CSS: fs **/</style>
+</head>
+
+<body class="post-template-default single single-post postid-1259 single-format-standard custom-background mega-menu-main-menu">
+
+	<div id="wrap" class="clr">
+
+		
+<div id="header-wrap" class="fixed-header clr">
+
+    <header id="header" class="site-header container clr" role="banner">
+
+        
+<div class="site-branding clr">
+
+	<div id="logo" class="clr">
+
+		
+			<a href="https://www.visual-paradigm.com/" title="Visual Paradigm Tutorials" rel="home">
+				<img src="https://tutorials.visual-paradigm.com/wp-content/uploads/2023/02/vp_logo_header.png" alt="Visual Paradigm Tutorials" height="" width="" />
+			</a>
+
+		
+	</div><!-- #logo -->
+
+</div><!-- .site-branding -->        
+        
+<div id="sidr-close"><a href="#sidr-close" class="toggle-sidr-close"></a></div>
+<div id="site-navigation-wrap">
+	<a href="#sidr-main" id="navigation-toggle"><span class="fa fa-bars"></span>Menu</a>
+	<nav id="site-navigation" class="navigation main-navigation clr" role="navigation">
+		<div id="mega-menu-wrap-main_menu" class="mega-menu-wrap"><div class="mega-menu-toggle"><div class="mega-toggle-blocks-left"></div><div class="mega-toggle-blocks-center"></div><div class="mega-toggle-blocks-right"><div class='mega-toggle-block mega-menu-toggle-animated-block mega-toggle-block-0' id='mega-toggle-block-0'><button aria-label="Toggle Menu" class="mega-toggle-animated mega-toggle-animated-slider" type="button" aria-expanded="false">
+                  <span class="mega-toggle-animated-box">
+                    <span class="mega-toggle-animated-inner"></span>
+                  </span>
+                </button></div></div></div><ul id="mega-menu-main_menu" class="mega-menu max-mega-menu mega-menu-horizontal mega-no-js" data-event="hover_intent" data-effect="fade_up" data-effect-speed="200" data-effect-mobile="disabled" data-effect-speed-mobile="0" data-mobile-force-width="false" data-second-click="go" data-document-click="collapse" data-vertical-behaviour="standard" data-breakpoint="959" data-unbind="true" data-mobile-state="collapse_all" data-hover-intent-timeout="300" data-hover-intent-interval="100"><li class='mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-align-bottom-left mega-menu-flyout mega-menu-item-119' id='mega-menu-item-119'><a class="mega-menu-link" href="https://www.visual-paradigm.com/whats-new/" tabindex="0">What's New</a></li><li class='mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-has-children mega-align-bottom-left mega-menu-flyout mega-menu-item-121' id='mega-menu-item-121'><a class="mega-menu-link" href="https://www.visual-paradigm.com/features/" aria-haspopup="true" aria-expanded="false" tabindex="0">Features<span class="mega-indicator"></span></a>
+<ul class="mega-sub-menu">
+<li class='mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-122' id='mega-menu-item-122'><a class="mega-menu-link" href="https://www.visual-paradigm.com/editions/">Editions</a></li><li class='mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-123' id='mega-menu-item-123'><a class="mega-menu-link" href="https://www.visual-paradigm.com/features/demo/">Demo Videos</a></li><li class='mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-124' id='mega-menu-item-124'><a class="mega-menu-link" href="https://www.visual-paradigm.com/tour/">Interactive Product Tour</a></li><li class='mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-menu-item-125' id='mega-menu-item-125'><a class="mega-menu-link" href="https://www.visual-paradigm.com/solution/">Solutions</a></li></ul>
+</li><li class='mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-align-bottom-left mega-menu-flyout mega-menu-item-126' id='mega-menu-item-126'><a class="mega-menu-link" href="https://www.visual-paradigm.com/tutorials/" tabindex="0">Tutorials</a></li><li class='mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-align-bottom-left mega-menu-flyout mega-menu-item-127' id='mega-menu-item-127'><a class="mega-menu-link" href="https://www.visual-paradigm.com/support/" tabindex="0">Support</a></li><li class='mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-align-bottom-left mega-menu-flyout mega-menu-item-128' id='mega-menu-item-128'><a class="mega-menu-link" href="https://www.visual-paradigm.com/shop/" tabindex="0">Pricing</a></li><li class='mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-align-bottom-left mega-menu-flyout mega-menu-item-129' id='mega-menu-item-129'><a class="mega-menu-link" href="https://www.visual-paradigm.com/download/" tabindex="0">Try Now</a></li><li class='mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-align-bottom-left mega-menu-flyout mega-menu-item-130' id='mega-menu-item-130'><a class="mega-menu-link" href="https://www.visual-paradigm.com/demo/request.jsp" tabindex="0">Request Demo</a></li><li class='mega-menu-item mega-menu-item-type-custom mega-menu-item-object-custom mega-align-bottom-left mega-menu-flyout mega-menu-item-131' id='mega-menu-item-131'><a class="mega-menu-link" href="https://online.visual-paradigm.com/" tabindex="0">VP Online</a></li></ul></div>	</nav><!-- #site-navigation -->
+</div><!-- #site-navigation-wrap -->
+    </header><!-- #header -->
+
+</div><!-- #header-wrap -->
+				
+		<div id="main" class="site-main container clr">
+
+	<div id="primary" class="content-area clr">
+
+		<main id="content" class="site-content left-content single-post-content-bg clr" role="main">
+
+			
+
+<article>
+		
+<header class="page-header clr">
+
+	<h1 class="page-header-title">Strategy Pattern Tutorial</h1>
+
+	
+<ul class="post-meta clr">
+
+	<li class="meta-date">
+		Posted on		<span class="meta-date-text">April 24, 2023</span>
+	</li>
+
+			<li class="meta-category">
+			<span class="meta-seperator">/</span>Under			<a href="https://tutorials.visual-paradigm.com/category/uml/" title="UML">UML</a>		</li>
+	
+	
+</ul><!-- .post-meta -->	
+</header><!-- #page-header -->	
+<div class="entry clr">
+	<div class="lwptoc lwptoc-autoWidth lwptoc-baseItems lwptoc-light lwptoc-notInherit" data-smooth-scroll="1" data-smooth-scroll-offset="24"><div class="lwptoc_i">    <div class="lwptoc_header">
+        <b class="lwptoc_title">Table of Contents</b>                    <span class="lwptoc_toggle">
+                <a href="#" class="lwptoc_toggle_label" data-label="show">hide</a>
+            </span>
+            </div>
+<div class="lwptoc_items lwptoc_items-visible">
+    <div class="lwptoc_itemWrap"><div class="lwptoc_item">    <a href="#What_is_Strategy_Design_Pattern">
+                    <span class="lwptoc_item_number">1</span>
+                <span class="lwptoc_item_label">What is Strategy Design Pattern?</span>
+    </a>
+    </div><div class="lwptoc_item">    <a href="#Modeling_Design_Pattern_with_Class_Diagram">
+                    <span class="lwptoc_item_number">2</span>
+                <span class="lwptoc_item_label">Modeling Design Pattern with Class Diagram</span>
+    </a>
+    </div><div class="lwptoc_item">    <a href="#Saving_the_Defining_Pattern">
+                    <span class="lwptoc_item_number">3</span>
+                <span class="lwptoc_item_label">Saving the Defining Pattern</span>
+    </a>
+    </div><div class="lwptoc_item">    <a href="#Applying_Design_Pattern_on_Class_Diagram">
+                    <span class="lwptoc_item_number">4</span>
+                <span class="lwptoc_item_label">Applying Design Pattern on Class Diagram</span>
+    </a>
+    </div><div class="lwptoc_item">    <a href="#Resources">
+                    <span class="lwptoc_item_number">5</span>
+                <span class="lwptoc_item_label">Resources</span>
+    </a>
+    </div><div class="lwptoc_item">    <a href="#Related_Links">
+                    <span class="lwptoc_item_number">6</span>
+                <span class="lwptoc_item_label">Related Links</span>
+    </a>
+    </div></div></div>
+</div></div><p>This tutorial aims to guide you in understanding and applying the <a href="http://wiki.c2.com/?GangOfFour" target="_blank" rel="noopener">Gang of Four (GoF)</a> Strategy <a href="https://en.wikipedia.org/wiki/Design_Patterns" target="_blank" rel="noopener">design pattern</a>. Through this tutorial, you will learn how to create a UML class diagram for the Strategy pattern and save it as a design pattern file that can be reused in the future.</p>
+<p><span id="more-1259"></span></p>
+<h2><span id="What_is_Strategy_Design_Pattern">What is Strategy Design Pattern?</span></h2>
+<p>The Strategy Design Pattern is a behavioral design pattern that allows you to encapsulate a family of algorithms and make them interchangeable at runtime. It defines a set of algorithms that can be used to perform a specific task, and allows the client to choose which algorithm to use without depending on the concrete implementation of the algorithm.</p>
+<p>In this pattern, a context class is created that contains a reference to a strategy interface. The strategy interface defines the contract for the interchangeable algorithms, while concrete strategy classes implement the algorithm according to the defined contract.</p>
+<p>This pattern provides an alternative to implementing conditional statements in code by allowing the client to select a strategy to use at runtime. It promotes open-closed principle by allowing the addition of new strategies without modifying the existing code.</p>
+<p>Some real-world examples of the Strategy Design Pattern include sorting algorithms, encryption algorithms, and compression algorithms.</p>
+<p>&nbsp;</p>
+<h2 class="h2"><span id="Modeling_Design_Pattern_with_Class_Diagram">Modeling Design Pattern with Class Diagram</span></h2>
+<ol class="contentList">
+<li>Create a new project <i>Design Patterns</i>.</li>
+<li>Create a class diagram <i>Strategy</i>.<br>
+<img src="https://tutorials.visual-paradigm.com/wp-content/uploads/2023/02/2_01_new_class_diagram.png" alt="new class diagram" width="524" height="192"></li>
+<li>Select <b>Class</b> from diagram toolbar. Click on the diagram to create a class. Name it as <i>Context</i>.<br>
+<img loading="lazy" src="https://tutorials.visual-paradigm.com/wp-content/uploads/2023/02/02_new_context_class.png" alt="new context class" width="388" height="265"></li>
+<li>Right-click on the <i>Context</i> class, and select <b>Add</b> &gt; <b>Operation</b> from the popup menu.<br>
+<img loading="lazy" src="https://tutorials.visual-paradigm.com/wp-content/uploads/2023/02/03_add_oper_to_context.png" alt="add oper to context" width="620" height="178"></li>
+<li>Name the operation <i>ContextInterface()</i>.<br>
+<img loading="lazy" src="https://tutorials.visual-paradigm.com/wp-content/uploads/2023/02/04_new_context_interface.png" alt="new context interface" width="102" height="41"></li>
+<li>Move the mouse cursor over the <i>Context</i> class, and drag out <b>Aggregation</b> &gt; <b>Class</b> to create an associated class <i>Strategy</i>.<br>
+<img loading="lazy" src="https://tutorials.visual-paradigm.com/wp-content/uploads/2023/02/05_create_strategy_class.png" alt="create strategy class" width="271" height="41"></li>
+<li>Right-click on <i>Strategy</i>, and select <b>Model Element Properties</b> &gt; <b>Abstract</b> to set it as abstract.<br>
+<img loading="lazy" src="https://tutorials.visual-paradigm.com/wp-content/uploads/2023/02/06_set_strategy_abstract.png" alt="set strategy abstract" width="589" height="199"></li>
+<li>Right-click on the <i>Strategy</i> class, and select <b>Add</b> &gt; <b>Operation</b> from the popup menu.<br>
+<img loading="lazy" src="https://tutorials.visual-paradigm.com/wp-content/uploads/2023/02/07_add_oper_to_strategy.png" alt="add oper to strategy" width="720" height="167"></li>
+<li>Name the operation <i>AlgorithmInterface()</i>.<br>
+<img loading="lazy" src="https://tutorials.visual-paradigm.com/wp-content/uploads/2023/02/08_algorithm_interface_added.png" alt="algorithm interface added" width="301" height="41"></li>
+<li>Right-click on <i>AlgorithmInterface</i>, and select <b>Model Element Properties</b> &gt; <b>Abstract</b> to set it as abstract.<br>
+<img loading="lazy" src="https://tutorials.visual-paradigm.com/wp-content/uploads/2023/02/09_set_algorithm_interface_abstract.png" alt="set algorithm interface abstract" width="496" height="326"></li>
+<li>Move the mouse cursor over the <i>Strategy</i> class, and drag out <b>Generalization</b> &gt; <b>Class</b> to create subclasses <i>ConcreteStrategy</i>.<br>
+<img loading="lazy" src="https://tutorials.visual-paradigm.com/wp-content/uploads/2023/02/10_create_concrete_strategy.png" alt="create concrete strategy" width="302" height="153"></li>
+<li>We need to make the concrete strategies inherit operations from the strategy class. Right-click on <i>ConcreteStrategy</i> and select <b>Related Elements</b> &gt; <b>Realize all Interfaces</b> from the popup menu.<br>
+<img loading="lazy" src="https://tutorials.visual-paradigm.com/wp-content/uploads/2023/02/11_realize_interface.png" alt="realize interface" width="596" height="633"></li>
+<li>In practice, there may be multiple concrete strategies. To represent this, stereotype the class <i>ConcreteStrategy</i> as <b>PTN Cloneable</b>. Right right on <i>ConcreteStrategy</i> and select <b>Stereotypes</b> &gt; <b>Stereotypes…</b> from the popup menu.<br>
+<img loading="lazy" src="https://tutorials.visual-paradigm.com/wp-content/uploads/2023/02/12_stereotype_concrete_strategy.png" alt="stereotype concrete strategy" width="480" height="366"></li>
+<li>In the <b>Stereotypes</b> tab of the <b>Class Specification</b> dialog box, select <b>PTN Cloneable</b> and click &gt; to assign it to <i>ConcreteStrategy</i> class. Click <b>OK</b> to confirm.<br>
+<img loading="lazy" src="https://tutorials.visual-paradigm.com/wp-content/uploads/2023/02/13_set_class_ptn_cloneable.png" alt="set class ptn cloneable" width="533" height="600"><br>
+Up to now, the diagram should look like:<br>
+<img loading="lazy" src="https://tutorials.visual-paradigm.com/wp-content/uploads/2023/02/14_pattern_modeled.png" alt="pattern modeled" width="311" height="161"></li>
+</ol>
+<h2 class="h2"><span id="Saving_the_Defining_Pattern">Saving the Defining Pattern</span></h2>
+<ol class="contentList">
+<li>Select all classes on the class diagram.<br>
+<img loading="lazy" src="https://tutorials.visual-paradigm.com/wp-content/uploads/2023/02/1_15_select_all_classes.png" alt="select all classes" width="355" height="213"></li>
+<li>Right-click on the selection and select <b>Define Design Pattern…</b> from the popup menu.<br>
+<img loading="lazy" src="https://tutorials.visual-paradigm.com/wp-content/uploads/2023/02/16_define_pattern.png" alt="define pattern" width="541" height="629"></li>
+<li>In the <b>Define Design Pattern</b> dialog box, specify the pattern name <i>Strategy</i>. Keep the file name as is. Click <b>OK</b> to proceed.<br>
+<img loading="lazy" src="https://tutorials.visual-paradigm.com/wp-content/uploads/2023/02/1_17_name_pattern.png" alt="name pattern" width="700" height="270"></li>
+</ol>
+<h2 class="h2"><span id="Applying_Design_Pattern_on_Class_Diagram">Applying Design Pattern on Class Diagram</span></h2>
+<p>In this section, we are going to apply the strategy pattern in modeling a video game.</p>
+<ol class="contentList">
+<li>Create a new project <i>Game</i>.</li>
+<li>Create a class diagram <i>Domain Model</i>.</li>
+<li>Right-click on the class diagram and select <b>Utilities</b> &gt; <b>Apply Design Pattern…</b> from the popup menu.<br>
+<img loading="lazy" src="https://tutorials.visual-paradigm.com/wp-content/uploads/2023/02/1_18_apply_design_pattern.png" alt="apply design pattern" width="623" height="555"></li>
+<li>In the <b>Design Pattern</b> dialog box, select <i>Strategy</i> from the list of patterns.<br>
+<img loading="lazy" src="https://tutorials.visual-paradigm.com/wp-content/uploads/2023/02/19_select_strategy.png" alt="select strategy" width="720" height="600"></li>
+<li>At the bottom pane, rename <i>Context</i>, <i>Strategy</i> and <i>ConcreteStrategy</i> to <i>Game</i>, <i>Sprite</i> and <i>Warrior</i>.<br>
+<img loading="lazy" src="https://tutorials.visual-paradigm.com/wp-content/uploads/2023/02/20_rename_classes.png" alt="rename classes" width="514" height="514"></li>
+<li>Rename operations <i>AlgorithmInterface</i> to display.<br>
+<img loading="lazy" src="https://tutorials.visual-paradigm.com/wp-content/uploads/2023/02/21_rename_opers.png" alt="rename opers" width="514" height="205"></li>
+<li>We need 2 more concrete strategy for <i>Monster</i> and <i>NPC</i>. Click on the + button at the <i>ConcreteStrategy</i> row and select <b>Clone…</b> from the popup menu.<br>
+<img loading="lazy" src="https://tutorials.visual-paradigm.com/wp-content/uploads/2023/02/1_22_clone.png" alt="clone" width="515" height="88"></li>
+<li>Enter 2 to be the number of classes to clone. Click <b>OK</b> to confirm.<br>
+<img loading="lazy" src="https://tutorials.visual-paradigm.com/wp-content/uploads/2023/02/1_23_clone_count.png" alt="clone count" width="313" height="143"></li>
+<li>Rename <i>ConcreteStrategy2</i> and <i>ConcreteStrategy3</i> to <i>Monster</i> and <i>NPC</i>, and operations <i>AlgorithmInterface</i> to <i>display</i>.<br>
+<img loading="lazy" src="https://tutorials.visual-paradigm.com/wp-content/uploads/2023/02/1_24_rename_classes.png" alt="rename classes" width="514" height="245"></li>
+<li>Click <b>OK</b> to apply the pattern to diagram.</li>
+<li>Tidy up the diagram. Here is the result:<br>
+<img loading="lazy" src="https://tutorials.visual-paradigm.com/wp-content/uploads/2023/02/25_pattern_modeled.png" alt="pattern modeled" width="475" height="166"></li>
+</ol>
+<h2><span id="Resources">Resources</span></h2>
+<ol>
+<li><a href="https://cdn-images.visual-paradigm.com/vpuml/tutorials/strategydesignpattern_screenshots/resources/Design%20Patterns.vpp">Design Patterns.vpp</a></li>
+<li><a href="https://cdn-images.visual-paradigm.com/vpuml/tutorials/strategydesignpattern_screenshots/resources/Strategy.pat">Strategy.pat</a></li>
+</ol>
+<h2><span id="Related_Links">Related Links</span></h2>
+<ul>
+<li><a href="https://www.visual-paradigm.com/features/uml-tool/">Full set of UML tools and UML diagrams</a></li>
+</ul>
+</div><!-- .entry -->		
+<footer class="entry-footer">
+	</footer><!-- .entry-footer --></article>
+
+
+ 
+<div id="comments" class="comments-area">
+			<div id="respond" class="comment-respond">
+		<h3 id="reply-title" class="comment-reply-title"><div class="heading"><span>Leave a Comment</span></div> <small><a rel="nofollow" id="cancel-comment-reply-link" href="/strategy-pattern-tutorial/#respond" style="display:none;">Cancel reply</a></small></h3><form action="https://tutorials.visual-paradigm.com/wp-comments-post.php" method="post" id="commentform" class="comment-form"><p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> <span class="required-field-message" aria-hidden="true">Required fields are marked <span class="required" aria-hidden="true">*</span></span></p><p class="comment-form-comment"><label for="comment">Comment <span class="required" aria-hidden="true">*</span></label> <textarea id="comment" name="comment" cols="45" rows="8" maxlength="65525" required="required"></textarea></p><p class="comment-form-author"><label for="author">Name <span class="required" aria-hidden="true">*</span></label> <input id="author" name="author" type="text" value="" size="30" maxlength="245" required="required" /></p>
+<p class="comment-form-email"><label for="email">Email <span class="required" aria-hidden="true">*</span></label> <input id="email" name="email" type="text" value="" size="30" maxlength="100" aria-describedby="email-notes" required="required" /></p>
+<p class="comment-form-url"><label for="url">Website</label> <input id="url" name="url" type="text" value="" size="30" maxlength="200" /></p>
+<p class="comment-form-cookies-consent"><input id="wp-comment-cookies-consent" name="wp-comment-cookies-consent" type="checkbox" value="yes" /> <label for="wp-comment-cookies-consent">Save my name, email, and website in this browser for the next time I comment.</label></p>
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="submit" value="Post Comment" /> <input type='hidden' name='comment_post_ID' value='1259' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p></form>	</div><!-- #respond -->
+	</div><!-- #comments -->			
+		</main><!-- #content -->
+
+		
+	<aside id="secondary" class="sidebar-container" role="complementary">
+
+		<div class="sidebar-inner">
+			<div class="widget-area">
+				<div d="block-16" class="sidebar-widget widget_block clr"><p><div class="banner_wrapper" style=""><div class="banner  banner-433 bottom vert custom-banners-theme-default_style" style=""><a class="custom_banners_big_link"  href="https://online.visual-paradigm.com/online-pdf-editor/"></a></div></div></p>
+</div><div d="block-2" class="sidebar-widget widget_block widget_search clr"><form role="search" method="get" action="https://tutorials.visual-paradigm.com/" class="wp-block-search__button-outside wp-block-search__text-button side-bar-searchbox wp-block-search"><label for="wp-block-search__input-1" class="wp-block-search__label">Search</label><div class="wp-block-search__inside-wrapper " ><input type="search" id="wp-block-search__input-1" class="wp-block-search__input " name="s" value="" placeholder=""  required /><button type="submit" class="wp-block-search__button  "  >Search</button></div></form></div><div d="block-3" class="sidebar-widget widget_block clr">
+<div class="wp-container-2 wp-block-group"><div class="wp-block-group__inner-container">
+<div class="wp-container-1 wp-block-group"><div class="wp-block-group__inner-container">
+<h5>Categories</h5>
+
+
+<ul class="wp-block-categories-list sidebar-menu-bullets wp-block-categories">	<li class="cat-item cat-item-13"><a href="https://tutorials.visual-paradigm.com/category/agile-scrum/">Agile &amp; Scrum</a>
+</li>
+	<li class="cat-item cat-item-10"><a href="https://tutorials.visual-paradigm.com/category/business-process-mapping/">Business Process Mapping</a>
+</li>
+	<li class="cat-item cat-item-5"><a href="https://tutorials.visual-paradigm.com/category/enterprise-architecture/">Enterprise Architecture</a>
+</li>
+	<li class="cat-item cat-item-7"><a href="https://tutorials.visual-paradigm.com/category/uml/">UML</a>
+</li>
+</ul></div></div>
+
+
+
+<div style="height:25px" aria-hidden="true" class="wp-block-spacer"></div>
+
+
+
+<h5>Recent Posts</h5>
+
+
+<ul class="wp-block-latest-posts__list sidebar-menu-bullets wp-block-latest-posts"><li><a href="https://tutorials.visual-paradigm.com/bpmn-process-simulation-example/">BPMN Process Simulation Example</a></li>
+<li><a href="https://tutorials.visual-paradigm.com/how-to-draw-bpmn-conversation-diagram/">How to Draw BPMN Conversation Diagram?</a></li>
+<li><a href="https://tutorials.visual-paradigm.com/bpmn-tutorial-with-example-the-leave-application-process/">BPMN Tutorial with Example &#8211; The Leave Application Process</a></li>
+<li><a href="https://tutorials.visual-paradigm.com/how-to-develop-as-is-and-to-be-business-process/">How to Develop As-Is and To-Be Business Process?</a></li>
+<li><a href="https://tutorials.visual-paradigm.com/observer-pattern-tutorial/">Observer Pattern Tutorial</a></li>
+</ul></div></div>
+</div><div d="block-5" class="sidebar-widget widget_block clr">
+<div class="wp-container-3 wp-block-group"><div class="wp-block-group__inner-container">
+<h5>Archives</h5>
+
+
+<ul class=" wp-block-archives-list sidebar-menu-bullets wp-block-archives">	<li><a href='https://tutorials.visual-paradigm.com/2023/04/'>April 2023</a></li>
+	<li><a href='https://tutorials.visual-paradigm.com/2023/02/'>February 2023</a></li>
+</ul></div></div>
+</div><div d="block-4" class="sidebar-widget widget_block clr">
+<div class="wp-container-4 wp-block-group"><div class="wp-block-group__inner-container"></div></div>
+</div>			</div>
+		</div>
+		
+	</aside><!-- #secondary -->
+
+
+	</div><!-- #primary -->
+
+
+
+	</div><!-- #main-content -->
+
+	
+<div id="footer-wrap" class="site-footer clr">
+
+	
+	<div id="footer" class="clr container">
+
+		<div id="footer-widgets" class="wpex-row clr">
+
+			<div class="footer-box span_1_of_5 col col-1">
+				<div d="block-13" class="footer-widget widget_block widget_media_image clr">
+<figure class="wp-block-image size-full is-style-rounded"><img src="https://guides.visual-paradigm.com/wp-content/uploads/2022/02/vp-white-logo.png" alt="" class="wp-image-157"/></figure>
+</div>			</div><!-- .footer-box -->
+
+			<div class="footer-box span_1_of_5 col col-2">
+				<div d="block-8" class="footer-widget widget_block clr"><h4>Product</h4>
+<ul class="footer-links">
+<li><a href="/features/">Features</a></li>
+<li><a href="/editions/">Editions</a></li>
+<li><a href="/download/">Try Now</a></li>
+<li><a href="/shop/">Pricing</a></li>
+<li><a href="https://online.visual-paradigm.com/" target="_blank">Visual Paradigm Online</a></li>
+</ul></div>			</div><!-- .footer-box -->
+
+			<div class="footer-box span_1_of_5 col col-3">
+				<div d="block-10" class="footer-widget widget_block clr"><h4>Support</h4>
+<ul class="footer-links">
+<li><a href="http://forums.visual-paradigm.com/" target="_blank">Forums</a></li>
+<li><a href="/support/#support-form">Request Help</a></li>
+<li><a href="https://cs.visual-paradigm.com/" target="_blank">Customer Service</a></li>
+</ul></div>			</div><!-- .footer-box -->
+            
+            <div class="footer-box span_1_of_5 col col-3">
+				<div d="block-14" class="footer-widget widget_block clr"><h4>Learn</h4>
+				<ul class="footer-links">
+					<li><a href="https://circle.visual-paradigm.com/" target="_blank">Community Circle</a></li>
+					<li><a href="https://knowhow.visual-paradigm.com/" target="_blank">Know-how</a></li>
+					<li><a href="/features/demo/">Demo Videos</a></li>
+					<li><a href="/tutorials/">Tutorials</a></li>
+					<li><a href="/support/documents/">Documents</a></li>
+				</ul></div>			</div><!-- .footer-box -->
+            
+            <div class="footer-box span_1_of_5 col col-3">
+				<div d="block-15" class="footer-widget widget_block clr"><h4>About Us</h4>
+				<ul class="footer-links">
+					<li><a href="/aboutus/">Visual Paradigm</a></li>
+					<li><a href="/aboutus/newsreleases/">Newsroom</a></li>
+					<li><a href="https://www.youtube.com/user/VisualParadigm/" target="_blank">YouTube Channel</a></li>
+					<li><a href="/partner/academic/">Academic Partnership</a></li>
+				</ul></div>			</div><!-- .footer-box -->
+			
+		</div><!-- #footer-widgets -->
+
+	</div><!-- #footer -->
+
+
+	
+<footer id="copyright-wrap" class="clr">
+	<div id="copyright" role="contentinfo" class="clr">
+		@2025 by Visual Paradigm. All rights reserved.	</div><!-- #copyright -->
+</footer><!-- #footer-wrap -->
+</div><!-- #footer-wrap -->
+</div><!-- #wrap -->
+
+
+<div id="mobile-search">
+	<form method="get" action="https://tutorials.visual-paradigm.com/" role="search" id="mobile-search-form">
+		<input type="search" class="field" name="s" value="" placeholder="To search type and hit enter" />
+	</form>
+</div>
+<div style="position:fixed;top:0px;right:8%;z-index:999999;" id="gtranslate_wrapper"><!-- GTranslate: https://gtranslate.io/ -->
+<style>
+.switcher {font-family:Arial;font-size:12pt;text-align:left;cursor:pointer;overflow:hidden;width:173px;line-height:17px;}
+.switcher a {text-decoration:none;display:block;font-size:12pt;-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box;}
+.switcher a img {vertical-align:middle;display:inline;border:0;padding:0;margin:0;opacity:0.8;}
+.switcher a:hover img {opacity:1;}
+.switcher .selected {background:#fff linear-gradient(180deg, #ffffff 0%, #fff 70%);position:relative;z-index:9999;}
+.switcher .selected a {border:1px solid #ccc;color:#666;padding:3px 5px;width:161px;}
+.switcher .selected a:after {height:24px;display:inline-block;position:absolute;right:10px;width:15px;background-position:50%;background-size:11px;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 285 285'><path d='M282 76.5l-14.2-14.3a9 9 0 0 0-13.1 0L142.5 174.4 30.3 62.2a9 9 0 0 0-13.2 0L3 76.5a9 9 0 0 0 0 13.1l133 133a9 9 0 0 0 13.1 0l133-133a9 9 0 0 0 0-13z' style='fill:%23666'/></svg>");background-repeat:no-repeat;content:""!important;transition:all .2s;}
+.switcher .selected a.open:after {-webkit-transform: rotate(-180deg);transform:rotate(-180deg);}
+.switcher .selected a:hover {background:#fff}
+.switcher .option {position:relative;z-index:9998;border-left:1px solid #ccc;border-right:1px solid #ccc;border-bottom:1px solid #ccc;background-color:#ffffff;display:none;width:171px;max-height:198px;-webkit-box-sizing:content-box;-moz-box-sizing:content-box;box-sizing:content-box;overflow-y:auto;overflow-x:hidden;}
+.switcher .option a {color:#5b5b5b;padding:3px 5px;}
+.switcher .option a:hover {background:#f2f2f2;}
+.switcher .option a.selected {background:#f2f2f2;}
+#selected_lang_name {float: none;}
+.l_name {float: none !important;margin: 0;}
+.switcher .option::-webkit-scrollbar-track{-webkit-box-shadow:inset 0 0 3px rgba(0,0,0,0.3);border-radius:5px;background-color:#f5f5f5;}
+.switcher .option::-webkit-scrollbar {width:5px;}
+.switcher .option::-webkit-scrollbar-thumb {border-radius:5px;-webkit-box-shadow: inset 0 0 3px rgba(0,0,0,.3);background-color:#888;}
+</style>
+<div class="switcher notranslate">
+<div class="selected">
+<a href="#" onclick="return false;"><img src="//guides.visual-paradigm.com/wp-content/plugins/gtranslate/flags/svg/en.svg" height="24" width="24" alt="en" /> English</a>
+</div>
+<div class="option">
+<a href="#" onclick="doGTranslate('en|ar');jQuery('div.switcher div.selected a').html(jQuery(this).html());return false;" title="Arabic" class="nturl"><img data-gt-lazy-src="//guides.visual-paradigm.com/wp-content/plugins/gtranslate/flags/svg/ar.svg" height="24" width="24" alt="ar" /> Arabic</a><a href="#" onclick="doGTranslate('en|zh-CN');jQuery('div.switcher div.selected a').html(jQuery(this).html());return false;" title="Chinese (Simplified)" class="nturl"><img data-gt-lazy-src="//guides.visual-paradigm.com/wp-content/plugins/gtranslate/flags/svg/zh-CN.svg" height="24" width="24" alt="zh-CN" /> Chinese (Simplified)</a><a href="#" onclick="doGTranslate('en|nl');jQuery('div.switcher div.selected a').html(jQuery(this).html());return false;" title="Dutch" class="nturl"><img data-gt-lazy-src="//guides.visual-paradigm.com/wp-content/plugins/gtranslate/flags/svg/nl.svg" height="24" width="24" alt="nl" /> Dutch</a><a href="#" onclick="doGTranslate('en|en');jQuery('div.switcher div.selected a').html(jQuery(this).html());return false;" title="English" class="nturl selected"><img data-gt-lazy-src="//guides.visual-paradigm.com/wp-content/plugins/gtranslate/flags/svg/en.svg" height="24" width="24" alt="en" /> English</a><a href="#" onclick="doGTranslate('en|fr');jQuery('div.switcher div.selected a').html(jQuery(this).html());return false;" title="French" class="nturl"><img data-gt-lazy-src="//guides.visual-paradigm.com/wp-content/plugins/gtranslate/flags/svg/fr.svg" height="24" width="24" alt="fr" /> French</a><a href="#" onclick="doGTranslate('en|de');jQuery('div.switcher div.selected a').html(jQuery(this).html());return false;" title="German" class="nturl"><img data-gt-lazy-src="//guides.visual-paradigm.com/wp-content/plugins/gtranslate/flags/svg/de.svg" height="24" width="24" alt="de" /> German</a><a href="#" onclick="doGTranslate('en|it');jQuery('div.switcher div.selected a').html(jQuery(this).html());return false;" title="Italian" class="nturl"><img data-gt-lazy-src="//guides.visual-paradigm.com/wp-content/plugins/gtranslate/flags/svg/it.svg" height="24" width="24" alt="it" /> Italian</a><a href="#" onclick="doGTranslate('en|pt');jQuery('div.switcher div.selected a').html(jQuery(this).html());return false;" title="Portuguese" class="nturl"><img data-gt-lazy-src="//guides.visual-paradigm.com/wp-content/plugins/gtranslate/flags/svg/pt.svg" height="24" width="24" alt="pt" /> Portuguese</a><a href="#" onclick="doGTranslate('en|ru');jQuery('div.switcher div.selected a').html(jQuery(this).html());return false;" title="Russian" class="nturl"><img data-gt-lazy-src="//guides.visual-paradigm.com/wp-content/plugins/gtranslate/flags/svg/ru.svg" height="24" width="24" alt="ru" /> Russian</a><a href="#" onclick="doGTranslate('en|es');jQuery('div.switcher div.selected a').html(jQuery(this).html());return false;" title="Spanish" class="nturl"><img data-gt-lazy-src="//guides.visual-paradigm.com/wp-content/plugins/gtranslate/flags/svg/es.svg" height="24" width="24" alt="es" /> Spanish</a></div>
+</div>
+<script>
+jQuery('.switcher .selected').click(function() {jQuery('.switcher .option a img').each(function() {if(!jQuery(this)[0].hasAttribute('src'))jQuery(this).attr('src', jQuery(this).attr('data-gt-lazy-src'))});if(!(jQuery('.switcher .option').is(':visible'))) {jQuery('.switcher .option').stop(true,true).delay(100).slideDown(500);jQuery('.switcher .selected a').toggleClass('open')}});
+jQuery('.switcher .option').bind('mousewheel', function(e) {var options = jQuery('.switcher .option');if(options.is(':visible'))options.scrollTop(options.scrollTop() - e.originalEvent.wheelDelta/10);return false;});
+jQuery('body').not('.switcher').click(function(e) {if(jQuery('.switcher .option').is(':visible') && e.target != jQuery('.switcher .option').get(0)) {jQuery('.switcher .option').stop(true,true).delay(100).slideUp(500);jQuery('.switcher .selected a').toggleClass('open')}});
+</script>
+<style>#goog-gt-tt{display:none!important;}.goog-te-banner-frame{display:none!important;}.goog-te-menu-value:hover{text-decoration:none!important;}.goog-text-highlight{background-color:transparent!important;box-shadow:none!important;}body{top:0!important;}#google_translate_element2{display:none!important;}</style>
+<div id="google_translate_element2"></div>
+<script>function googleTranslateElementInit2() {new google.translate.TranslateElement({pageLanguage: 'en',autoDisplay: false}, 'google_translate_element2');}if(!window.gt_translate_script){window.gt_translate_script=document.createElement('script');gt_translate_script.src='https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit2';document.body.appendChild(gt_translate_script);}</script>
+
+<script>
+function GTranslateGetCurrentLang() {var keyValue = document['cookie'].match('(^|;) ?googtrans=([^;]*)(;|$)');return keyValue ? keyValue[2].split('/')[2] : null;}
+function GTranslateFireEvent(element,event){try{if(document.createEventObject){var evt=document.createEventObject();element.fireEvent('on'+event,evt)}else{var evt=document.createEvent('HTMLEvents');evt.initEvent(event,true,true);element.dispatchEvent(evt)}}catch(e){}}
+function doGTranslate(lang_pair){if(lang_pair.value)lang_pair=lang_pair.value;if(lang_pair=='')return;var lang=lang_pair.split('|')[1];if(GTranslateGetCurrentLang() == null && lang == lang_pair.split('|')[0])return;if(typeof ga=='function'){ga('send', 'event', 'GTranslate', lang, location.hostname+location.pathname+location.search);}var teCombo;var sel=document.getElementsByTagName('select');for(var i=0;i<sel.length;i++)if(sel[i].className.indexOf('goog-te-combo')!=-1){teCombo=sel[i];break;}if(document.getElementById('google_translate_element2')==null||document.getElementById('google_translate_element2').innerHTML.length==0||teCombo.length==0||teCombo.innerHTML.length==0){setTimeout(function(){doGTranslate(lang_pair)},500)}else{teCombo.value=lang;GTranslateFireEvent(teCombo,'change');GTranslateFireEvent(teCombo,'change')}}
+if(GTranslateGetCurrentLang() != null)jQuery(document).ready(function() {var lang_html = jQuery('div.switcher div.option').find('img[alt="'+GTranslateGetCurrentLang()+'"]').parent().html();if(typeof lang_html != 'undefined')jQuery('div.switcher div.selected a').html(lang_html.replace('data-gt-lazy-', ''));});
+</script>
+</div><style>.wp-container-1 .alignleft { float: left; margin-right: 2em; }.wp-container-1 .alignright { float: right; margin-left: 2em; }</style>
+<style>.wp-container-2 .alignleft { float: left; margin-right: 2em; }.wp-container-2 .alignright { float: right; margin-left: 2em; }</style>
+<style>.wp-container-3 .alignleft { float: left; margin-right: 2em; }.wp-container-3 .alignright { float: right; margin-left: 2em; }</style>
+<style>.wp-container-4 .alignleft { float: left; margin-right: 2em; }.wp-container-4 .alignright { float: right; margin-left: 2em; }</style>
+<link rel='stylesheet' id='lwptoc-main-css'  href='https://tutorials.visual-paradigm.com/wp-content/plugins/luckywp-table-of-contents/front/assets/main.min.css?ver=2.1.4' type='text/css' media='all' />
+<script type='text/javascript' src='https://tutorials.visual-paradigm.com/wp-content/plugins/custom-banners/assets/js/jquery.cycle2.min.js?ver=5.9.12' id='gp_cycle2-js'></script>
+<script type='text/javascript' src='https://tutorials.visual-paradigm.com/wp-content/plugins/custom-banners/assets/js/custom-banners.js?ver=5.9.12' id='custom-banners-js-js'></script>
+<script type='text/javascript' src='https://tutorials.visual-paradigm.com/wp-includes/js/comment-reply.min.js?ver=5.9.12' id='comment-reply-js'></script>
+<script type='text/javascript' src='https://tutorials.visual-paradigm.com/wp-content/themes/wpex-elegant/js/plugins.js?ver=2.4' id='wpex-plugins-js'></script>
+<script type='text/javascript' src='https://tutorials.visual-paradigm.com/wp-content/themes/wpex-elegant/js/global.js?ver=2.4' id='wpex-global-js'></script>
+<script type='text/javascript' src='https://tutorials.visual-paradigm.com/wp-content/plugins/youtube-embed-plus/scripts/fitvids.min.js?ver=14.1.4.1' id='__ytprefsfitvids__-js'></script>
+<script type='text/javascript' src='https://tutorials.visual-paradigm.com/wp-includes/js/hoverIntent.min.js?ver=1.10.2' id='hoverIntent-js'></script>
+<script type='text/javascript' id='megamenu-js-extra'>
+/* <![CDATA[ */
+var megamenu = {"timeout":"300","interval":"100"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://tutorials.visual-paradigm.com/wp-content/plugins/megamenu/js/maxmegamenu.js?ver=2.9.8' id='megamenu-js'></script>
+<script type='text/javascript' id='fifu-image-js-js-extra'>
+/* <![CDATA[ */
+var fifuImageVars = {"fifu_lazy":"","fifu_woo_lbox_enabled":"1","fifu_woo_zoom":"inline","fifu_is_product":"","fifu_is_flatsome_active":"","fifu_rest_url":"https:\/\/tutorials.visual-paradigm.com\/wp-json\/","fifu_nonce":"12476b8b47"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://tutorials.visual-paradigm.com/wp-content/plugins/featured-image-from-url/includes/html/js/image.js?ver=4.0.8' id='fifu-image-js-js'></script>
+<script type='text/javascript' src='https://tutorials.visual-paradigm.com/wp-content/plugins/luckywp-table-of-contents/front/assets/main.min.js?ver=2.1.4' id='lwptoc-main-js'></script>
+</body>
+</html>

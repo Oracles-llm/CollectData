@@ -15,7 +15,7 @@ except ModuleNotFoundError:  # pragma: no cover - optional dependency
 BASE_DIR = Path(__file__).resolve().parent
 INPUT_FILE = BASE_DIR / "inputs.txt"
 LOCAL_INPUT_DIR = BASE_DIR / "Inputs"
-RAW_DATA_DIR = BASE_DIR / "RawData"
+EXTRACTED_TEXT_DIR = BASE_DIR / "ExtractedTextFolder"
 
 def sanitize_for_filename(url: str) -> str:
     """Create a filesystem-safe stem from the given URL."""
@@ -77,7 +77,7 @@ def extract_text_from_file(path: Path) -> str:
     return path.read_text(encoding="utf-8", errors="ignore")
 
 def write_text_output(stem: str, text: str) -> None:
-    destination = RAW_DATA_DIR / f"{stem}.txt"
+    destination = EXTRACTED_TEXT_DIR / f"{stem}.txt"
     destination.write_text(text, encoding="utf-8")
 
 def main() -> None:
@@ -92,7 +92,7 @@ def main() -> None:
         print("No inputs found in inputs.txt or Inputs folder.", file=sys.stderr)
         return
 
-    RAW_DATA_DIR.mkdir(parents=True, exist_ok=True)
+    EXTRACTED_TEXT_DIR.mkdir(parents=True, exist_ok=True)
 
     total = len(tasks)
     for index, (task_type, payload) in enumerate(tasks, start=1):

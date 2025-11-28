@@ -203,7 +203,9 @@ def process_file(path: Path) -> Path:
 def gather_text_files() -> list[Path]:
     if not EXTRACTED_TEXT_DIR.exists():
         return []
-    return sorted(EXTRACTED_TEXT_DIR.glob("*.txt"))
+    files = list(EXTRACTED_TEXT_DIR.glob("*.md"))
+    files.extend(EXTRACTED_TEXT_DIR.glob("*.txt"))
+    return sorted(files)
 
 
 def main() -> int:
@@ -213,7 +215,7 @@ def main() -> int:
 
     text_files = gather_text_files()
     if not text_files:
-        print(f"No text files found in {EXTRACTED_TEXT_DIR}", file=sys.stderr)
+        print(f"No markdown or text files found in {EXTRACTED_TEXT_DIR}", file=sys.stderr)
         return 1
 
     print("=== Stage 2: Generating QA datasets via formatter.py ===")

@@ -143,16 +143,26 @@ def coerce_to_qa_list(model_text: str) -> list[dict[str, str]]:
         raise ValueError("Model output must be a JSON array of QA objects.")
 
     qa_pairs: list[dict[str, str]] = []
+    skipped_items = 0
     for item in payload:
         if not isinstance(item, dict):
+            skipped_items += 1
             continue
         question = str(item.get("question", "")).strip()
         answer = str(item.get("answer", "")).strip()
         if question and answer:
             qa_pairs.append({"question": question, "answer": answer})
+        else:
+            skipped_items += 1
 
     if not qa_pairs:
-        raise ValueError("No valid QA pairs were found in the model response.")
+        preview = cleaned_text[:200] if len(cleaned_text) > 200 else cleaned_text
+        error_msg = (
+            f"No valid QA pairs were found in the model response. "
+            f"Found {len(payload)} items in payload, but none had valid question/answer pairs. "
+            f"Response preview: {preview}..."
+        )
+        raise ValueError(error_msg)
 
     return qa_pairs
 
@@ -272,36 +282,72 @@ def main() -> int:
     print(f"Running up to {MAX_PARALLEL_REQUESTS} concurrent API calls...")
     print(f"Rate limit: {RATE_LIMIT_BATCH_SIZE} requests per {RATE_LIMIT_WINDOW_SECONDS} seconds")
 
-    results: list[TaskResult] = []
-    completed = 0
+    def process_files_batch(files_to_process: list[Path], batch_label: str) -> list[TaskResult]:
+        """Process a batch of files and return results."""
+        results: list[TaskResult] = []
+        completed = 0
+        
+        with ThreadPoolExecutor(max_workers=MAX_PARALLEL_REQUESTS) as executor:
+            future_map = {executor.submit(process_file, path): path for path in files_to_process}
+            total = len(future_map)
+            for future in as_completed(future_map):
+                path = future_map[future]
+                try:
+                    output_path = future.result()
+                except Exception as exc:
+                    detail = str(exc)
+                    results.append(TaskResult(path, False, detail))
+                    completed += 1
+                    print(f"[{batch_label}] [{completed}/{total}] FAIL {path.name} -> {detail}")
+                    continue
 
-    with ThreadPoolExecutor(max_workers=MAX_PARALLEL_REQUESTS) as executor:
-        future_map = {executor.submit(process_file, path): path for path in text_files}
-        total = len(future_map)
-        for future in as_completed(future_map):
-            path = future_map[future]
-            try:
-                output_path = future.result()
-            except Exception as exc:
-                detail = str(exc)
-                results.append(TaskResult(path, False, detail))
+                results.append(TaskResult(path, True, output_path.name))
                 completed += 1
-                print(f"[{completed}/{total}] FAIL {path.name} -> {detail}")
-                continue
+                print(f"[{batch_label}] [{completed}/{total}] OK   {path.name} -> {output_path}")
+        
+        return results
 
-            results.append(TaskResult(path, True, output_path.name))
-            completed += 1
-            print(f"[{completed}/{total}] OK   {path.name} -> {output_path}")
-
-    failures = [result for result in results if not result.succeeded]
-    if failures:
-        print("\nThe following files could not be processed:", file=sys.stderr)
-        for result in failures:
-            print(f"- {result.source.name}: {result.detail}", file=sys.stderr)
+    print("\n--- First Pass: Processing all files ---")
+    all_results = process_files_batch(text_files, "PASS 1")
+    
+    first_pass_failures = [result for result in all_results if not result.succeeded]
+    first_pass_successes = [result for result in all_results if result.succeeded]
+    
+    if first_pass_failures:
+        failed_files = [result.source for result in first_pass_failures]
+        print(f"\n--- Retry Pass: {len(failed_files)} file(s) failed, waiting 60 seconds before retry ---")
+        print("Waiting for rate limit window to reset and retrying failed files...")
+        time.sleep(60) 
+        
+        print(f"\n--- Retrying {len(failed_files)} failed file(s) ---")
+        retry_results = process_files_batch(failed_files, "RETRY")
+        
+        retry_successes = [result for result in retry_results if result.succeeded]
+        retry_failures = [result for result in retry_results if not result.succeeded]
+        
+        all_results = first_pass_successes + retry_successes + retry_failures
+        
+        if retry_successes:
+            print(f"\n✓ Retry successful: {len(retry_successes)} file(s) processed after retry")
+        if retry_failures:
+            print(f"\n✗ Retry failed: {len(retry_failures)} file(s) still could not be processed")
+    
+    final_failures = [result for result in all_results if not result.succeeded]
+    final_successes = [result for result in all_results if result.succeeded]
+    
+    if final_failures:
+        print(f"\nThe following {len(final_failures)} file(s) could not be processed after retry:", file=sys.stderr)
+        for result in final_failures:
+            print(f"  - {result.source.name}: {result.detail}", file=sys.stderr)
+    
+    if final_successes:
+        print(f"\nStage 2 complete: Successfully saved {len(final_successes)} JSON file(s) to {OUTPUT_DIR}.")
+        if final_failures:
+            print(f"Note: {len(final_failures)} file(s) failed after retry, but workflow continues with successful files.")
+        return 0
+    else:
+        print("\nERROR: All files failed to process, even after retry.", file=sys.stderr)
         return 1
-
-    print(f"\nStage 2 complete: Saved {len(text_files)} JSON file(s) to {OUTPUT_DIR}.")
-    return 0
 
 
 if __name__ == "__main__":

@@ -38,15 +38,24 @@ def collect_local_inputs(directory: Path) -> list[Path]:
         return []
     return sorted([path for path in directory.iterdir() if path.is_file()])
 
-def extract_text_from_html(html: str, *, url: str | None = None) -> str | None:
+def ensure_markdown(text: str) -> str:
+    """Normalize whitespace so the output is valid Markdown."""
+    stripped = text.replace("\r\n", "\n").strip()
+    if not stripped:
+        return ""
+    normalized = re.sub(r"\n{3,}", "\n\n", stripped)
+    return f"{normalized}\n"
+
+
+def extract_markdown_from_html(html: str, *, url: str | None = None) -> str | None:
     return trafilatura.extract(
         html,
         url=url,
-        output_format="txt",
+        output_format="markdown",
         include_comments=False,
-        include_formatting=False,
+        include_formatting=True,
         include_tables=True,
-        include_links=False,
+        include_links=True,
         include_images=False,
     )
 
@@ -62,22 +71,35 @@ def extract_text_from_pdf(path: Path) -> str:
         text_chunks.append(text)
     return "\n".join(text_chunks).strip()
 
-def extract_text_from_file(path: Path) -> str:
+def extract_markdown_from_file(path: Path) -> str:
     suffix = path.suffix.lower()
     if suffix in {".html", ".htm"}:
         html = path.read_text(encoding="utf-8", errors="ignore")
-        extracted = extract_text_from_html(html)
+        extracted = extract_markdown_from_html(html)
         if extracted:
             return extracted
-        return html
-    if suffix in {".txt", ".md"}:
+        fallback_text = trafilatura.extract(
+            html,
+            output_format="txt",
+            include_comments=False,
+            include_formatting=False,
+            include_tables=True,
+            include_links=False,
+            include_images=False,
+        )
+        if fallback_text:
+            return ensure_markdown(fallback_text)
+        return ensure_markdown(html)
+    if suffix == ".md":
         return path.read_text(encoding="utf-8", errors="ignore")
+    if suffix == ".txt":
+        return ensure_markdown(path.read_text(encoding="utf-8", errors="ignore"))
     if suffix == ".pdf":
-        return extract_text_from_pdf(path)
-    return path.read_text(encoding="utf-8", errors="ignore")
+        return ensure_markdown(extract_text_from_pdf(path))
+    return ensure_markdown(path.read_text(encoding="utf-8", errors="ignore"))
 
-def write_text_output(stem: str, text: str) -> None:
-    destination = EXTRACTED_TEXT_DIR / f"{stem}.txt"
+def write_markdown_output(stem: str, text: str) -> None:
+    destination = EXTRACTED_TEXT_DIR / f"{stem}.md"
     destination.write_text(text, encoding="utf-8")
 
 def main() -> None:
@@ -111,36 +133,36 @@ def main() -> None:
                 print("  ! No HTML retrieved.", file=sys.stderr)
                 continue
 
-            extracted_text = extract_text_from_html(downloaded_html, url=url)
-            if not extracted_text:
+            extracted_markdown = extract_markdown_from_html(downloaded_html, url=url)
+            if not extracted_markdown:
                 print(
                     "  ! Failed to extract clean article content. Storing fallback text.",
                     file=sys.stderr,
                 )
-                extracted_text = (
+                extracted_markdown = ensure_markdown(
                     f"Extraction failed. The downloaded HTML for {url} could not be parsed."
                 )
 
             stem = f"{index:03d}_{sanitize_for_filename(url)}"
-            write_text_output(stem, extracted_text)
+            write_markdown_output(stem, extracted_markdown)
         else:
             path = Path(payload)
             print(f"[{index}/{total}] Reading local file {path.name}")
             try:
-                extracted_text = extract_text_from_file(path)
+                extracted_markdown = extract_markdown_from_file(path)
             except Exception as exc:
                 print(f"  ! Failed to process {path.name}: {exc}", file=sys.stderr)
                 continue
 
-            if not extracted_text:
+            if not extracted_markdown:
                 print("  ! No text extracted. Skipping file.", file=sys.stderr)
                 continue
 
             stem = f"{index:03d}_{sanitize_for_filename(path.stem)}"
-            write_text_output(stem, extracted_text)
+            write_markdown_output(stem, extracted_markdown)
 
     print(
-        f"Stage 1 complete: Extracted {total} file(s) into {EXTRACTED_TEXT_DIR}."
+        f"Stage 1 complete: Extracted {total} Markdown file(s) into {EXTRACTED_TEXT_DIR}."
     )
 
 

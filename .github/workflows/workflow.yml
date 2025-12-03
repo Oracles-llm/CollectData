@@ -12,6 +12,9 @@ jobs:
       group: run-json-workflow
       cancel-in-progress: true
 
+    env:
+      GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+
     steps:
       # 1. Checkout source repository
       - name: Checkout Source Repository
@@ -53,6 +56,8 @@ jobs:
       # 6. List JSON files for logging
       - name: List generated JSON files
         run: |
+          echo "Generated MD files:"
+          ls -lh ExtractedTextFolder/
           echo "Generated JSON files:"
           ls -lh Outputs/
 
@@ -68,7 +73,13 @@ jobs:
       # 8. Copy JSON files to target repo
       - name: Copy JSON files
         run: |
-          cp -r Outputs/* data-repo/design-pattern/
+          echo "Creating directories if they don't exist..."
+          mkdir -p data-repo/design-pattern/md/
+          mkdir -p data-repo/design-pattern/json/
+          echo "Copying MD files to target repository (skipping existing files)..."
+          cp -rn ExtractedTextFolder/* data-repo/design-pattern/md/
+          echo "Copying JSON files to target repository (skipping existing files)..."
+          cp -rn Outputs/* data-repo/design-pattern/json/
 
       # 9. Commit and push JSON files if there are changes
       - name: Commit and Push JSON

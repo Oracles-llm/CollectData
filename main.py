@@ -13,7 +13,7 @@ EXTRACTED_TEXT_DIR = BASE_DIR / "ExtractedTextFolder"
 
 # Toggle whether the ExtractedTextFolder should be removed after formatting runs.
 # Keep intermediates by default so the data can be inspected or reused.
-DELETE_INTERMEDIATE_TEXT = True
+DELETE_INTERMEDIATE_TEXT = False
 
 
 def run_script(script_path: Path, label: str) -> None:

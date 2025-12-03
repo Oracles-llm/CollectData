@@ -20,10 +20,7 @@ OUTPUT_DIR = BASE_DIR / "Outputs"
 MODEL_NAME = "gemini-2.5-flash"
 API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/{MODEL_NAME}:generateContent"
 
-GOOGLE_API_KEY = os.environ.get(
-    "GOOGLE_API_KEY",
-    "AIzaSyDoZ0W0GqiYeN3yAyJXQ7P5KghuwlaGzv8",
-)
+GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY")
 
 MAX_PARALLEL_REQUESTS = max(2, min(8, (os.cpu_count() or 2) * 2))
 MAX_RETRIES = 3
@@ -203,7 +200,9 @@ def process_file(path: Path) -> Path:
 def gather_text_files() -> list[Path]:
     if not EXTRACTED_TEXT_DIR.exists():
         return []
-    return sorted(EXTRACTED_TEXT_DIR.glob("*.txt"))
+    files = list(EXTRACTED_TEXT_DIR.glob("*.md"))
+    files.extend(EXTRACTED_TEXT_DIR.glob("*.txt"))
+    return sorted(files)
 
 
 def main() -> int:
@@ -213,7 +212,7 @@ def main() -> int:
 
     text_files = gather_text_files()
     if not text_files:
-        print(f"No text files found in {EXTRACTED_TEXT_DIR}", file=sys.stderr)
+        print(f"No markdown or text files found in {EXTRACTED_TEXT_DIR}", file=sys.stderr)
         return 1
 
     print("=== Stage 2: Generating QA datasets via formatter.py ===")

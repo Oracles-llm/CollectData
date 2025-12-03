@@ -3,7 +3,7 @@ name: Run Python & Push JSON
 on:
   push:
     branches:
-      - main
+      - neranjan-new
 
 jobs:
   run-python-and-push-json:
@@ -20,7 +20,7 @@ jobs:
       - name: Checkout Source Repository
         uses: actions/checkout@v6
         with:
-          ref: main
+          ref: neranjan-new
 
 
       # 2. Setup Python environment

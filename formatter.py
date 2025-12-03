@@ -5,6 +5,7 @@ import os
 import re
 import sys
 import textwrap
+import threading
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
@@ -27,6 +28,11 @@ MAX_RETRIES = 3
 RETRY_BACKOFF_SECONDS = 5
 REQUEST_TIMEOUT = 120
 MAX_CHAR_PER_REQUEST = 60_000
+
+# Rate limiting: 10 RPM, but we'll use 9 per batch to be safe
+RATE_LIMIT_RPM = 10
+RATE_LIMIT_BATCH_SIZE = 9  
+RATE_LIMIT_WINDOW_SECONDS = 60
 
 SYSTEM_INSTRUCTION = (
     "You are an expert educational content curator. Given raw extracted text from "
@@ -58,6 +64,40 @@ PROMPT_TEMPLATE = textwrap.dedent(
     \"\"\"
     """
 ).strip()
+
+
+class RateLimiter:
+    """Thread-safe rate limiter for API requests."""
+    
+    def __init__(self, batch_size: int = RATE_LIMIT_BATCH_SIZE, window_seconds: int = RATE_LIMIT_WINDOW_SECONDS):
+        self.batch_size = batch_size
+        self.window_seconds = window_seconds
+        self.lock = threading.Lock()
+        self.request_count = 0
+        self.window_start = time.time()
+    
+    def wait_if_needed(self) -> None:
+        """Wait if we've reached the batch limit, then reset the window."""
+        with self.lock:
+            current_time = time.time()
+            elapsed = current_time - self.window_start
+            
+            if self.request_count >= self.batch_size:
+                wait_time = self.window_seconds - elapsed
+                if wait_time > 0:
+                    print(f"Rate limit reached ({self.batch_size} requests). Waiting {wait_time:.1f} seconds for quota reset...")
+                    time.sleep(wait_time)
+                    self.window_start = time.time()
+                    self.request_count = 0
+                else:
+                    self.window_start = current_time
+                    self.request_count = 0
+            elif elapsed >= self.window_seconds:
+                self.window_start = current_time
+                self.request_count = 0
+            self.request_count += 1
+
+_rate_limiter = RateLimiter()
 
 
 @dataclass
@@ -139,6 +179,9 @@ def request_dataset(document_text: str, file_name: str) -> list[dict[str, str]]:
     }
 
     for attempt in range(1, MAX_RETRIES + 1):
+        # Apply rate limiting before making the request
+        _rate_limiter.wait_if_needed()
+        
         try:
             response = requests.post(
                 API_URL,

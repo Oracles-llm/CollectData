@@ -20,10 +20,7 @@ OUTPUT_DIR = BASE_DIR / "Outputs"
 MODEL_NAME = "gemini-2.5-flash"
 API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/{MODEL_NAME}:generateContent"
 
-GOOGLE_API_KEY = os.environ.get(
-    "GOOGLE_API_KEY",
-    "AIzaSyDoZ0W0GqiYeN3yAyJXQ7P5KghuwlaGzv8",
-)
+GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY")
 
 MAX_PARALLEL_REQUESTS = max(2, min(8, (os.cpu_count() or 2) * 2))
 MAX_RETRIES = 3

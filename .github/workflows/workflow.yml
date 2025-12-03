@@ -12,6 +12,9 @@ jobs:
       group: run-json-workflow
       cancel-in-progress: true
 
+    env:
+      GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+
     steps:
       # 1. Checkout source repository
       - name: Checkout Source Repository

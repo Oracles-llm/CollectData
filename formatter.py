@@ -197,10 +197,10 @@ def request_dataset(document_text: str, file_name: str) -> list[dict[str, str]]:
 
         if response.status_code != 200:
             message = response.text[:500]
+            error_msg = f"API responded with status {response.status_code}: {message}"
+            print(f"WARNING: {error_msg} (attempt {attempt}/{MAX_RETRIES})", file=sys.stderr)
             if attempt == MAX_RETRIES:
-                raise RuntimeError(
-                    f"API responded with status {response.status_code}: {message}"
-                )
+                raise RuntimeError(error_msg)
             time.sleep(RETRY_BACKOFF_SECONDS * attempt)
             continue
 
@@ -250,18 +250,27 @@ def gather_text_files() -> list[Path]:
 
 def main() -> int:
     if not GOOGLE_API_KEY:
-        print("Missing GOOGLE_API_KEY. Set an environment variable or update formatter.py.", file=sys.stderr)
+        print("ERROR: Missing GOOGLE_API_KEY. Set an environment variable or update formatter.py.", file=sys.stderr)
+        print("DEBUG: GOOGLE_API_KEY environment variable is not set.", file=sys.stderr)
         return 1
+
+    print(f"DEBUG: GOOGLE_API_KEY is set (length: {len(GOOGLE_API_KEY) if GOOGLE_API_KEY else 0})")
 
     text_files = gather_text_files()
     if not text_files:
-        print(f"No markdown or text files found in {EXTRACTED_TEXT_DIR}", file=sys.stderr)
+        print(f"ERROR: No markdown or text files found in {EXTRACTED_TEXT_DIR}", file=sys.stderr)
+        print(f"DEBUG: Directory exists: {EXTRACTED_TEXT_DIR.exists()}", file=sys.stderr)
+        if EXTRACTED_TEXT_DIR.exists():
+            all_files = list(EXTRACTED_TEXT_DIR.glob("*"))
+            print(f"DEBUG: Files in directory: {[f.name for f in all_files]}", file=sys.stderr)
         return 1
 
     print("=== Stage 2: Generating QA datasets via formatter.py ===")
-    print(
-        f"Preparing {len(text_files)} file(s). Running up to {MAX_PARALLEL_REQUESTS} concurrent API calls..."
-    )
+    print(f"Found {len(text_files)} file(s) to process:")
+    for f in text_files:
+        print(f"  - {f.name}")
+    print(f"Running up to {MAX_PARALLEL_REQUESTS} concurrent API calls...")
+    print(f"Rate limit: {RATE_LIMIT_BATCH_SIZE} requests per {RATE_LIMIT_WINDOW_SECONDS} seconds")
 
     results: list[TaskResult] = []
     completed = 0

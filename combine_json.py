@@ -5,6 +5,7 @@ import json
 import re
 import sys
 import unicodedata
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
@@ -16,7 +17,13 @@ except ImportError:
 
 BASE_DIR = Path(__file__).resolve().parent
 OUTPUT_DIR = BASE_DIR / "Outputs"
-COMBINED_OUTPUT_FILE = OUTPUT_DIR / "combined_dataset.json"
+
+
+def get_combined_filename() -> Path:
+    """Generate a unique timestamped filename for the combined dataset."""
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    filename = f"{timestamp}_combined.json"
+    return OUTPUT_DIR / filename
 
 # Configuration
 EXACT_MATCH_THRESHOLD = 1.0  # 100% match
@@ -163,27 +170,20 @@ def validate_qa_pair(qa_pair: dict[str, Any]) -> tuple[str, str] | None:
         return None
 
 
-def write_combined_file(qa_pairs: list[dict[str, str]]) -> bool:
+def write_combined_file(qa_pairs: list[dict[str, str]], output_file: Path) -> bool:
     """Safely write the combined JSON file."""
     try:
         OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
         
-        if COMBINED_OUTPUT_FILE.exists():
-            backup_file = COMBINED_OUTPUT_FILE.with_suffix('.json.bak')
-            try:
-                COMBINED_OUTPUT_FILE.rename(backup_file)
-            except Exception:
-                pass
-        
         json_content = json.dumps(qa_pairs, ensure_ascii=False, indent=2)
-        COMBINED_OUTPUT_FILE.write_text(json_content, encoding="utf-8")
+        output_file.write_text(json_content, encoding="utf-8")
         
-        if not COMBINED_OUTPUT_FILE.exists():
+        if not output_file.exists():
             print("  ! Error: Combined file was not created", file=sys.stderr)
             return False
         
         try:
-            verify_content = json.loads(COMBINED_OUTPUT_FILE.read_text(encoding="utf-8"))
+            verify_content = json.loads(output_file.read_text(encoding="utf-8"))
             if len(verify_content) != len(qa_pairs):
                 print("  ! Warning: Written file size mismatch", file=sys.stderr)
         except Exception as exc:
@@ -192,10 +192,10 @@ def write_combined_file(qa_pairs: list[dict[str, str]]) -> bool:
         
         return True
     except PermissionError as exc:
-        print(f"  ! Permission denied writing to {COMBINED_OUTPUT_FILE}: {exc}", file=sys.stderr)
+        print(f"  ! Permission denied writing to {output_file}: {exc}", file=sys.stderr)
         return False
     except OSError as exc:
-        print(f"  ! I/O error writing to {COMBINED_OUTPUT_FILE}: {exc}", file=sys.stderr)
+        print(f"  ! I/O error writing to {output_file}: {exc}", file=sys.stderr)
         return False
     except Exception as exc:
         print(f"  ! Unexpected error writing combined file: {exc}", file=sys.stderr)
@@ -211,7 +211,7 @@ def combine_json_files() -> int:
 
         json_files = sorted(OUTPUT_DIR.glob("*.json"))
         
-        json_files = [f for f in json_files if f.name != COMBINED_OUTPUT_FILE.name]
+        json_files = [f for f in json_files if not f.name.endswith("_combined.json")]
         
         if not json_files:
             print(f"Error: No JSON files found in {OUTPUT_DIR}", file=sys.stderr)
@@ -305,7 +305,9 @@ def combine_json_files() -> int:
             print("Error: No valid QA pairs found to combine.", file=sys.stderr)
             return 1
 
-        if not write_combined_file(all_qa_pairs):
+        combined_output_file = get_combined_filename()
+        
+        if not write_combined_file(all_qa_pairs, combined_output_file):
             print("Error: Failed to write combined file.", file=sys.stderr)
             return 1
 
@@ -321,7 +323,7 @@ def combine_json_files() -> int:
         if total_pairs > 0:
             dup_rate = ((exact_duplicates + fuzzy_duplicates) / total_pairs * 100)
             print(f"  Deduplication rate: {dup_rate:.1f}%")
-        print(f"  Saved to: {COMBINED_OUTPUT_FILE}")
+        print(f"  Saved to: {combined_output_file}")
         return 0
         
     except KeyboardInterrupt:

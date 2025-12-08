@@ -86,11 +86,13 @@ jobs:
             fi
           done
           echo "Copying combined JSON file to final folder..."
-          if [ -f Outputs/combined_dataset.json ]; then
-            cp Outputs/combined_dataset.json data-repo/design-pattern/final/combined_dataset.json
-            echo "✓ Combined JSON file copied to final folder successfully"
+          COMBINED_FILE=$(ls -t Outputs/*_combined.json 2>/dev/null | head -n 1)
+          if [ -n "$COMBINED_FILE" ] && [ -f "$COMBINED_FILE" ]; then
+            FILENAME=$(basename "$COMBINED_FILE")
+            cp "$COMBINED_FILE" "data-repo/design-pattern/final/$FILENAME"
+            echo "✓ Combined JSON file ($FILENAME) copied to final folder successfully"
           else
-            echo "! Error: combined_dataset.json not found"
+            echo "! Error: No combined JSON file found (pattern: *_combined.json)"
             exit 1
           fi
 

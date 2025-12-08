@@ -18,7 +18,7 @@ BASE_DIR = Path(__file__).resolve().parent
 EXTRACTED_TEXT_DIR = BASE_DIR / "ExtractedTextFolder"
 OUTPUT_DIR = BASE_DIR / "Outputs"
 
-MODEL_NAME = "gemini-2.5-flash-live"
+MODEL_NAME = "gemma-3-12b"
 API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/{MODEL_NAME}:generateContent"
 
 GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY")

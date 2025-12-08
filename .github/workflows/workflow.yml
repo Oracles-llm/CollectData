@@ -76,10 +76,23 @@ jobs:
           echo "Creating directories if they don't exist..."
           mkdir -p data-repo/design-pattern/md/
           mkdir -p data-repo/design-pattern/json/
+          mkdir -p data-repo/design-pattern/final/
           echo "Copying MD files to target repository (skipping existing files)..."
-          cp -rn ExtractedTextFolder/* data-repo/design-pattern/md/
-          echo "Copying JSON files to target repository (skipping existing files)..."
-          cp -rn Outputs/* data-repo/design-pattern/json/
+          cp -rn ExtractedTextFolder/* data-repo/design-pattern/md/ 2>/dev/null || echo "No MD files to copy"
+          echo "Copying individual JSON files to target repository (excluding combined file)..."
+          for file in Outputs/*.json; do
+            if [ -f "$file" ] && [ "$(basename "$file")" != "combined_dataset.json" ]; then
+              cp -rn "$file" data-repo/design-pattern/json/
+            fi
+          done
+          echo "Copying combined JSON file to final folder..."
+          if [ -f Outputs/combined_dataset.json ]; then
+            cp Outputs/combined_dataset.json data-repo/design-pattern/final/combined_dataset.json
+            echo "✓ Combined JSON file copied to final folder successfully"
+          else
+            echo "! Error: combined_dataset.json not found"
+            exit 1
+          fi
 
       # 9. Commit and push JSON files if there are changes
       - name: Commit and Push JSON

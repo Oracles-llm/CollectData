@@ -3,7 +3,7 @@ name: Run Python & Push JSON
 on:
   push:
     branches:
-      - main
+      - neranjan-new
 
 jobs:
   run-python-and-push-json:
@@ -12,12 +12,15 @@ jobs:
       group: run-json-workflow
       cancel-in-progress: true
 
+    env:
+      GOOGLE_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+
     steps:
       # 1. Checkout source repository
       - name: Checkout Source Repository
         uses: actions/checkout@v6
         with:
-          ref: main
+          ref: neranjan-new
 
 
       # 2. Setup Python environment
@@ -53,6 +56,8 @@ jobs:
       # 6. List JSON files for logging
       - name: List generated JSON files
         run: |
+          echo "Generated MD files:"
+          ls -lh ExtractedTextFolder/
           echo "Generated JSON files:"
           ls -lh Outputs/
 
@@ -68,7 +73,28 @@ jobs:
       # 8. Copy JSON files to target repo
       - name: Copy JSON files
         run: |
-          cp -r Outputs/* data-repo/design-pattern/
+          echo "Creating directories if they don't exist..."
+          mkdir -p data-repo/design-pattern/md/
+          mkdir -p data-repo/design-pattern/json/
+          mkdir -p data-repo/design-pattern/final/
+          echo "Copying MD files to target repository (skipping existing files)..."
+          cp -rn ExtractedTextFolder/* data-repo/design-pattern/md/ 2>/dev/null || echo "No MD files to copy"
+          echo "Copying individual JSON files to target repository (excluding combined file)..."
+          for file in Outputs/*.json; do
+            if [ -f "$file" ] && [ "$(basename "$file")" != "combined_dataset.json" ]; then
+              cp -rn "$file" data-repo/design-pattern/json/
+            fi
+          done
+          echo "Copying combined JSON file to final folder..."
+          COMBINED_FILE=$(ls -t Outputs/*_combined.json 2>/dev/null | head -n 1)
+          if [ -n "$COMBINED_FILE" ] && [ -f "$COMBINED_FILE" ]; then
+            FILENAME=$(basename "$COMBINED_FILE")
+            cp "$COMBINED_FILE" "data-repo/design-pattern/final/$FILENAME"
+            echo "✓ Combined JSON file ($FILENAME) copied to final folder successfully"
+          else
+            echo "! Error: No combined JSON file found (pattern: *_combined.json)"
+            exit 1
+          fi
 
       # 9. Commit and push JSON files if there are changes
       - name: Commit and Push JSON

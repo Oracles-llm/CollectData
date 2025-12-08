@@ -9,11 +9,12 @@ from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent
 FILTER_SCRIPT = BASE_DIR / "filter.py"
 FORMATTER_SCRIPT = BASE_DIR / "formatter.py"
+COMBINE_SCRIPT = BASE_DIR / "combine_json.py"
 EXTRACTED_TEXT_DIR = BASE_DIR / "ExtractedTextFolder"
 
 # Toggle whether the ExtractedTextFolder should be removed after formatting runs.
 # Keep intermediates by default so the data can be inspected or reused.
-DELETE_INTERMEDIATE_TEXT = True
+DELETE_INTERMEDIATE_TEXT = False
 
 
 def run_script(script_path: Path, label: str) -> None:
@@ -43,8 +44,9 @@ def maybe_cleanup() -> None:
 
 def main() -> int:
     try:
-        run_script(FILTER_SCRIPT, "Stage 1/2")
-        run_script(FORMATTER_SCRIPT, "Stage 2/2")
+        run_script(FILTER_SCRIPT, "Stage 1/3")
+        run_script(FORMATTER_SCRIPT, "Stage 2/3")
+        run_script(COMBINE_SCRIPT, "Stage 3/3")
     except subprocess.CalledProcessError as exc:
         print(f"\nWorkflow halted: {exc}", file=sys.stderr)
         return exc.returncode

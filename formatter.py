@@ -5,6 +5,7 @@ import os
 import re
 import sys
 import textwrap
+import threading
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
@@ -17,19 +18,21 @@ BASE_DIR = Path(__file__).resolve().parent
 EXTRACTED_TEXT_DIR = BASE_DIR / "ExtractedTextFolder"
 OUTPUT_DIR = BASE_DIR / "Outputs"
 
-MODEL_NAME = "gemini-2.5-flash"
+MODEL_NAME = "gemma-3-12b"
 API_URL = f"https://generativelanguage.googleapis.com/v1beta/models/{MODEL_NAME}:generateContent"
 
-GOOGLE_API_KEY = os.environ.get(
-    "GOOGLE_API_KEY",
-    "AIzaSyDoZ0W0GqiYeN3yAyJXQ7P5KghuwlaGzv8",
-)
+GOOGLE_API_KEY = os.environ.get("GOOGLE_API_KEY")
 
 MAX_PARALLEL_REQUESTS = max(2, min(8, (os.cpu_count() or 2) * 2))
 MAX_RETRIES = 3
 RETRY_BACKOFF_SECONDS = 5
 REQUEST_TIMEOUT = 120
 MAX_CHAR_PER_REQUEST = 60_000
+
+# Rate limiting: 10 RPM, but we'll use 9 per batch to be safe
+RATE_LIMIT_RPM = 10
+RATE_LIMIT_BATCH_SIZE = 9  
+RATE_LIMIT_WINDOW_SECONDS = 60
 
 SYSTEM_INSTRUCTION = (
     "You are an expert educational content curator. Given raw extracted text from "
@@ -61,6 +64,40 @@ PROMPT_TEMPLATE = textwrap.dedent(
     \"\"\"
     """
 ).strip()
+
+
+class RateLimiter:
+    """Thread-safe rate limiter for API requests."""
+    
+    def __init__(self, batch_size: int = RATE_LIMIT_BATCH_SIZE, window_seconds: int = RATE_LIMIT_WINDOW_SECONDS):
+        self.batch_size = batch_size
+        self.window_seconds = window_seconds
+        self.lock = threading.Lock()
+        self.request_count = 0
+        self.window_start = time.time()
+    
+    def wait_if_needed(self) -> None:
+        """Wait if we've reached the batch limit, then reset the window."""
+        with self.lock:
+            current_time = time.time()
+            elapsed = current_time - self.window_start
+            
+            if self.request_count >= self.batch_size:
+                wait_time = self.window_seconds - elapsed
+                if wait_time > 0:
+                    print(f"Rate limit reached ({self.batch_size} requests). Waiting {wait_time:.1f} seconds for quota reset...")
+                    time.sleep(wait_time)
+                    self.window_start = time.time()
+                    self.request_count = 0
+                else:
+                    self.window_start = current_time
+                    self.request_count = 0
+            elif elapsed >= self.window_seconds:
+                self.window_start = current_time
+                self.request_count = 0
+            self.request_count += 1
+
+_rate_limiter = RateLimiter()
 
 
 @dataclass
@@ -106,16 +143,26 @@ def coerce_to_qa_list(model_text: str) -> list[dict[str, str]]:
         raise ValueError("Model output must be a JSON array of QA objects.")
 
     qa_pairs: list[dict[str, str]] = []
+    skipped_items = 0
     for item in payload:
         if not isinstance(item, dict):
+            skipped_items += 1
             continue
         question = str(item.get("question", "")).strip()
         answer = str(item.get("answer", "")).strip()
         if question and answer:
             qa_pairs.append({"question": question, "answer": answer})
+        else:
+            skipped_items += 1
 
     if not qa_pairs:
-        raise ValueError("No valid QA pairs were found in the model response.")
+        preview = cleaned_text[:200] if len(cleaned_text) > 200 else cleaned_text
+        error_msg = (
+            f"No valid QA pairs were found in the model response. "
+            f"Found {len(payload)} items in payload, but none had valid question/answer pairs. "
+            f"Response preview: {preview}..."
+        )
+        raise ValueError(error_msg)
 
     return qa_pairs
 
@@ -142,6 +189,9 @@ def request_dataset(document_text: str, file_name: str) -> list[dict[str, str]]:
     }
 
     for attempt in range(1, MAX_RETRIES + 1):
+        # Apply rate limiting before making the request
+        _rate_limiter.wait_if_needed()
+        
         try:
             response = requests.post(
                 API_URL,
@@ -157,10 +207,10 @@ def request_dataset(document_text: str, file_name: str) -> list[dict[str, str]]:
 
         if response.status_code != 200:
             message = response.text[:500]
+            error_msg = f"API responded with status {response.status_code}: {message}"
+            print(f"WARNING: {error_msg} (attempt {attempt}/{MAX_RETRIES})", file=sys.stderr)
             if attempt == MAX_RETRIES:
-                raise RuntimeError(
-                    f"API responded with status {response.status_code}: {message}"
-                )
+                raise RuntimeError(error_msg)
             time.sleep(RETRY_BACKOFF_SECONDS * attempt)
             continue
 
@@ -203,54 +253,101 @@ def process_file(path: Path) -> Path:
 def gather_text_files() -> list[Path]:
     if not EXTRACTED_TEXT_DIR.exists():
         return []
-    return sorted(EXTRACTED_TEXT_DIR.glob("*.txt"))
+    files = list(EXTRACTED_TEXT_DIR.glob("*.md"))
+    files.extend(EXTRACTED_TEXT_DIR.glob("*.txt"))
+    return sorted(files)
 
 
 def main() -> int:
     if not GOOGLE_API_KEY:
-        print("Missing GOOGLE_API_KEY. Set an environment variable or update formatter.py.", file=sys.stderr)
+        print("ERROR: Missing GOOGLE_API_KEY. Set an environment variable or update formatter.py.", file=sys.stderr)
+        print("DEBUG: GOOGLE_API_KEY environment variable is not set.", file=sys.stderr)
         return 1
+
+    print(f"DEBUG: GOOGLE_API_KEY is set (length: {len(GOOGLE_API_KEY) if GOOGLE_API_KEY else 0})")
 
     text_files = gather_text_files()
     if not text_files:
-        print(f"No text files found in {EXTRACTED_TEXT_DIR}", file=sys.stderr)
+        print(f"ERROR: No markdown or text files found in {EXTRACTED_TEXT_DIR}", file=sys.stderr)
+        print(f"DEBUG: Directory exists: {EXTRACTED_TEXT_DIR.exists()}", file=sys.stderr)
+        if EXTRACTED_TEXT_DIR.exists():
+            all_files = list(EXTRACTED_TEXT_DIR.glob("*"))
+            print(f"DEBUG: Files in directory: {[f.name for f in all_files]}", file=sys.stderr)
         return 1
 
     print("=== Stage 2: Generating QA datasets via formatter.py ===")
-    print(
-        f"Preparing {len(text_files)} file(s). Running up to {MAX_PARALLEL_REQUESTS} concurrent API calls..."
-    )
+    print(f"Found {len(text_files)} file(s) to process:")
+    for f in text_files:
+        print(f"  - {f.name}")
+    print(f"Running up to {MAX_PARALLEL_REQUESTS} concurrent API calls...")
+    print(f"Rate limit: {RATE_LIMIT_BATCH_SIZE} requests per {RATE_LIMIT_WINDOW_SECONDS} seconds")
 
-    results: list[TaskResult] = []
-    completed = 0
+    def process_files_batch(files_to_process: list[Path], batch_label: str) -> list[TaskResult]:
+        """Process a batch of files and return results."""
+        results: list[TaskResult] = []
+        completed = 0
+        
+        with ThreadPoolExecutor(max_workers=MAX_PARALLEL_REQUESTS) as executor:
+            future_map = {executor.submit(process_file, path): path for path in files_to_process}
+            total = len(future_map)
+            for future in as_completed(future_map):
+                path = future_map[future]
+                try:
+                    output_path = future.result()
+                except Exception as exc:
+                    detail = str(exc)
+                    results.append(TaskResult(path, False, detail))
+                    completed += 1
+                    print(f"[{batch_label}] [{completed}/{total}] FAIL {path.name} -> {detail}")
+                    continue
 
-    with ThreadPoolExecutor(max_workers=MAX_PARALLEL_REQUESTS) as executor:
-        future_map = {executor.submit(process_file, path): path for path in text_files}
-        total = len(future_map)
-        for future in as_completed(future_map):
-            path = future_map[future]
-            try:
-                output_path = future.result()
-            except Exception as exc:
-                detail = str(exc)
-                results.append(TaskResult(path, False, detail))
+                results.append(TaskResult(path, True, output_path.name))
                 completed += 1
-                print(f"[{completed}/{total}] FAIL {path.name} -> {detail}")
-                continue
+                print(f"[{batch_label}] [{completed}/{total}] OK   {path.name} -> {output_path}")
+        
+        return results
 
-            results.append(TaskResult(path, True, output_path.name))
-            completed += 1
-            print(f"[{completed}/{total}] OK   {path.name} -> {output_path}")
-
-    failures = [result for result in results if not result.succeeded]
-    if failures:
-        print("\nThe following files could not be processed:", file=sys.stderr)
-        for result in failures:
-            print(f"- {result.source.name}: {result.detail}", file=sys.stderr)
+    print("\n--- First Pass: Processing all files ---")
+    all_results = process_files_batch(text_files, "PASS 1")
+    
+    first_pass_failures = [result for result in all_results if not result.succeeded]
+    first_pass_successes = [result for result in all_results if result.succeeded]
+    
+    if first_pass_failures:
+        failed_files = [result.source for result in first_pass_failures]
+        print(f"\n--- Retry Pass: {len(failed_files)} file(s) failed, waiting 60 seconds before retry ---")
+        print("Waiting for rate limit window to reset and retrying failed files...")
+        time.sleep(60) 
+        
+        print(f"\n--- Retrying {len(failed_files)} failed file(s) ---")
+        retry_results = process_files_batch(failed_files, "RETRY")
+        
+        retry_successes = [result for result in retry_results if result.succeeded]
+        retry_failures = [result for result in retry_results if not result.succeeded]
+        
+        all_results = first_pass_successes + retry_successes + retry_failures
+        
+        if retry_successes:
+            print(f"\n✓ Retry successful: {len(retry_successes)} file(s) processed after retry")
+        if retry_failures:
+            print(f"\n✗ Retry failed: {len(retry_failures)} file(s) still could not be processed")
+    
+    final_failures = [result for result in all_results if not result.succeeded]
+    final_successes = [result for result in all_results if result.succeeded]
+    
+    if final_failures:
+        print(f"\nThe following {len(final_failures)} file(s) could not be processed after retry:", file=sys.stderr)
+        for result in final_failures:
+            print(f"  - {result.source.name}: {result.detail}", file=sys.stderr)
+    
+    if final_successes:
+        print(f"\nStage 2 complete: Successfully saved {len(final_successes)} JSON file(s) to {OUTPUT_DIR}.")
+        if final_failures:
+            print(f"Note: {len(final_failures)} file(s) failed after retry, but workflow continues with successful files.")
+        return 0
+    else:
+        print("\nERROR: All files failed to process, even after retry.", file=sys.stderr)
         return 1
-
-    print(f"\nStage 2 complete: Saved {len(text_files)} JSON file(s) to {OUTPUT_DIR}.")
-    return 0
 
 
 if __name__ == "__main__":
